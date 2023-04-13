@@ -1,0 +1,1 @@
+utilidades compartidas, como por ejemplo regex entre otros.

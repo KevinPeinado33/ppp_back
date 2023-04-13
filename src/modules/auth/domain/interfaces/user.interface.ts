@@ -1,0 +1,10 @@
+export interface IUser {
+    _id        : string
+    email      : string
+    userName   : string
+    password?  : string
+    role       : string
+
+    createdAt? : string
+    updatedAt? : string
+}
