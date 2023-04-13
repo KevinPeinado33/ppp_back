@@ -1,4 +1,4 @@
-import { User } from '../entities'
+import { User } from '../models'
 
 export class UserRepository {
 
