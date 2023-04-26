@@ -1,9 +1,9 @@
 import { Response } from 'express'
 
-import { UserRepository } from '../../domain/repositories'
+import { UserRepository } from '../repositories'
 import { NotFoundException } from '../../../../common/responses/errors'
 import { message } from '../../../../common/responses/msg.response'
-import { LoginDto } from '../dtos'
+import { LoginDto } from '../entities'
 
 export class LoginUseCase {
     

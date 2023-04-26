@@ -1,9 +1,7 @@
-import { User } from '../models'
+import { IUser } from '../../data/interfaces'
 
-export class UserRepository {
+export interface UserRepository {
 
-    async findUserByEmail(email: string) {
-        return await User.findOne({ email })
-    }
-
+    findUserByEmail(email: string): Promise< IUser | null >
+    
 }

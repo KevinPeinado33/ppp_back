@@ -1,7 +1,8 @@
 import { Request, Response } from 'express'
 
-import { LoginUseCase } from '../../app/usecases'
-import { LoginDto } from '../../app/dtos'
+import { LoginUseCase } from '../../domain/usecases'
+import { LoginDto } from '../../domain/entities'
+import { UserImplRepository } from '../../data/repositories'
 import { UserRepository } from '../../domain/repositories'
 
 export class AuthController {
@@ -10,7 +11,7 @@ export class AuthController {
  
     constructor() {
 
-        this.userRepository = new UserRepository()
+        this.userRepository = new UserImplRepository()
 
         this.postLogin    = this.postLogin.bind( this )
         this.postRegister = this.postRegister.bind( this )

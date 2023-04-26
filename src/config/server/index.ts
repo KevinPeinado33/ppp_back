@@ -1,7 +1,8 @@
 import express, { Application } from 'express'
 import cors from 'cors'
 
-import authRouter from '../../modules/auth/infrastructure/routes/auth.route'
+import authRouter from '../../modules/auth/presentation/routes/auth.route'
+import studentRouter from '../../modules/student/presentation/routers/student.router'
 
 export class AppServer {
 
@@ -9,7 +10,8 @@ export class AppServer {
     private port: string
 
     private paths = {
-        auth: '/api/auth'
+        auth: '/api/auth',
+        student: '/api/student'
     }
 
     constructor() {
@@ -44,6 +46,7 @@ export class AppServer {
 
     routes() {
         this.app.use(this.paths.auth, authRouter)
+        this.app.use(this.paths.student, studentRouter)
     }
 
 }
