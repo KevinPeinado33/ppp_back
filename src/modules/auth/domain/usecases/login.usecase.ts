@@ -1,9 +1,9 @@
 import { Response } from 'express'
 
 import { UserRepository } from '../repositories'
-import { NotFoundException } from '../../../../common/responses/errors'
 import { message } from '../../../../common/responses/msg.response'
 import { LoginDto } from '../entities'
+import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok'
 
 export class LoginUseCase {
     
@@ -17,11 +17,12 @@ export class LoginUseCase {
 
         const userFound = await this.repository.findUserByEmail( this.loginDto.email )
 
-        if ( !userFound ) {
-
-            throw new NotFoundException(this.response, 'No existe usuario con este email.').execute()
-
-        }
+        if ( !userFound )
+            return message({
+                response: this.response,
+                code: CODE_STATUS.NOT_FOUND,
+                info: 'No se encontró el usuario.'
+            })
 
         delete userFound.password
 

@@ -1,10 +1,10 @@
 import { Response } from 'express'
+import { validate } from 'class-validator'
 
-import { InternalServerErrorException, NotFoundException } from '../../../../common/responses/errors'
 import { StudentCreateEntity } from '../entities'
 import { StudentRepository } from '../repositories'
 import { message } from '../../../../common/responses/msg.response'
-import { CODE_STATUS } from '../../../../common/responses/ok/code-status.ok'
+import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok'
 
 export class CreateStudentUseCase {
 
@@ -16,21 +16,32 @@ export class CreateStudentUseCase {
 
     async execute () {
 
+        const errors = await validate( this.studentCreateEntity )
+
+        if ( errors.length > 0 ) {
+            return message({
+                response: this.response,
+                code: CODE_STATUS.BAD_REQUEST,
+                info: errors
+            })
+        }
+
         try {
 
             const studentCreated = await this.studentRepository.create( this.studentCreateEntity )
-    
-            if ( !studentCreated ) 
-                throw new NotFoundException(this.response, 'No se pudo crear.').execute()
-    
+            
             message({
                 response: this.response,
                 code: CODE_STATUS.CREATED,
                 data: studentCreated
             })
 
-        } catch( error ) {
-            throw new InternalServerErrorException(this.response, 'Error al crear al estudiante.').execute()
+        } catch( error ) {  
+            message({
+                response: this.response,
+                code: CODE_STATUS.INTERNAL_SERVER_ERROR,
+                info: String(error)
+            })
         }
 
     }

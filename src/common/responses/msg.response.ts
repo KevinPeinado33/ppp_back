@@ -3,7 +3,7 @@ import { Response }    from 'express'
 interface MessageInterface {
     response : Response
     code     : number
-    info?    : string
+    info?    : any
     data?    : any
 }
 
