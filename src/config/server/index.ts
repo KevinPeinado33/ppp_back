@@ -3,6 +3,7 @@ import cors from 'cors'
 
 import authRouter from '../../modules/auth/presentation/routes/auth.route'
 import studentRouter from '../../modules/student/presentation/routers/student.router'
+import { dbConnection } from '../database'
 
 export class AppServer {
 
@@ -38,7 +39,8 @@ export class AppServer {
 
     async dbConnection() {
         try {
-            console.log('✅ Database is connected.')
+            await dbConnection()
+            console.log('✅ DataBase is connected.')
         } catch ( error: any ) {
             throw new Error( error )
         }

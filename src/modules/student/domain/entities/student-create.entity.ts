@@ -27,7 +27,7 @@ export class StudentCreateEntity {
     lastName!: string
 
     @IsNumber()
-    cicly!: number
+    cycle!: number
 
     @IsString()
     academySchool!: string

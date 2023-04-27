@@ -5,10 +5,12 @@ const router = Router()
 
 const { 
     postCreate,
-    getOneByCode
+    getOneByCode,
+    getAll
 } = new StudentController()
 
 router.post('/create', postCreate)
 router.get('/get-by-code', getOneByCode)
+router.get('/get-all', getAll)
 
 export default router

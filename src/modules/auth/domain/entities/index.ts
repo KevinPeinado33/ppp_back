@@ -1,1 +1,1 @@
-export * from './login.dto.ts.js'
+export * from './login.entity.js'

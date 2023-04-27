@@ -4,7 +4,7 @@ export interface IStudent {
     code          : string
     firstName     : string
     lastName      : string
-    cicly         : number
+    cycle         : number
     academySchool : string
     dni           : string
 
