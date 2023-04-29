@@ -13,7 +13,7 @@ const studentSchema = new Schema({
     timestamps: true
 })
 
-studentSchema.index({ code: 1 }, { unique: true })
+// studentSchema.index({ code: 1 }, { unique: true })
 
 const Student = mongoose.model< IStudent >('Student', studentSchema)
 

@@ -22,6 +22,7 @@ export class StudentController {
     postCreate(request: Request, response: Response) {
 
         const studentCreate = request.body as StudentCreateEntity
+        
         const usecase       = new CreateStudentUseCase(
             response,
             this.studentRepository,
@@ -35,7 +36,6 @@ export class StudentController {
     getOneByCode(request: Request, response: Response) { }
 
     getAll(request: Request, response: Response) {
-        
         const usecase = new GetAllStudentUseCase(
             response,
             this.studentRepository
