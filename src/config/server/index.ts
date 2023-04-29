@@ -1,9 +1,12 @@
 import express, { Application } from 'express'
 import cors from 'cors'
+import swaggerUI from 'swagger-ui-express'
+import swaggerJSDoc from 'swagger-jsdoc'
 
 import authRouter from '../../modules/auth/presentation/routes/auth.route'
 import studentRouter from '../../modules/student/presentation/routers/student.router'
 import { dbConnection } from '../database'
+import { PATH_SWAGGER, options } from '../swagger'
 
 export class AppServer {
 
@@ -11,8 +14,8 @@ export class AppServer {
     private port: string
 
     private paths = {
-        auth: '/api/auth',
-        student: '/api/student'
+        auth    : '/api/auth',
+        student : '/api/student'
     }
 
     constructor() {
@@ -35,6 +38,12 @@ export class AppServer {
     middlewares() {
         this.app.use(cors())
         this.app.use(express.json())
+        this.app.use(
+            PATH_SWAGGER,
+            swaggerUI.serve,
+            swaggerUI.setup(swaggerJSDoc( options ))
+        )
+        console.log(`📄 Swagger is already on http://localhost:${this.port}${PATH_SWAGGER}`)
     }
 
     async dbConnection() {
