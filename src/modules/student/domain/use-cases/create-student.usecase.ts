@@ -1,9 +1,8 @@
 import { Response } from 'express'
-import { validate } from 'class-validator'
 
 import { StudentCreateEntity } from '../entities'
 import { StudentRepository } from '../repositories'
-import { message } from '../../../../common/responses/msg.response'
+import { message } from '../../../../common/responses/msg.response';
 import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok'
 
 export class CreateStudentUseCase {
@@ -16,15 +15,14 @@ export class CreateStudentUseCase {
 
     async execute () {
 
-        const errors = await validate( this.studentCreateEntity )
+        const { error } = StudentCreateEntity.schema.validate( this.studentCreateEntity )
 
-        if ( errors.length > 0 ) {
+        if ( error )
             return message({
                 response: this.response,
                 code: CODE_STATUS.BAD_REQUEST,
-                info: errors
+                info: { error: error.message }
             })
-        }
 
         try {
 
@@ -36,12 +34,19 @@ export class CreateStudentUseCase {
                 data: studentCreated
             })
 
-        } catch( error ) {  
+        } catch( error ) {
+
+            let info = String(error)
+
+            if (String(error).includes('E11000'))
+                info = 'Ya existe un estudiante con este codigo o dni.'
+
             message({
                 response: this.response,
                 code: CODE_STATUS.INTERNAL_SERVER_ERROR,
-                info: String(error)
+                info
             })
+
         }
 
     }

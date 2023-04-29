@@ -1,42 +1,23 @@
-import { IsNumber, IsString, Matches, MaxLength, MinLength } from 'class-validator'
+import Joi from 'joi'
 
 export class StudentCreateEntity {
     
-    @IsString()
-    @MinLength(4)
-    @MaxLength(50)
-    @Matches(
-        /^\d+$/, {
-        message: 'El codigo solo debe ser numeros.'
-    })
-    code!: string
-    
-    @IsString()
-    @MinLength(3)
-    @MaxLength(100)
-    @Matches(
-        /^[a-zA-Z]+$/, {
-        message: 'No se puede tener numeros en los nombres.'
-    })
-    firstName!: string
-    
-    @Matches(
-        /^[a-zA-Z]+$/, {
-        message: 'No se puede tener numeros en los apellidos.'
-    })
-    lastName!: string
-
-    @IsNumber()
-    cycle!: number
-
-    @IsString()
+    code!         : string
+    firstName!    : string
+    lastName!     : string
+    cycle!        : number
     academySchool!: string
-    
-    @IsString()
-    @Matches(
-        /^[a-zA-Z]+$/, {
-        message: 'No se puede tener numeros en el dni.'
+    dni!          : string
+
+    constructor() { }
+
+    static schema = Joi.object({
+        code:          Joi.string().pattern(/^[0-9]+$/, 'Solo se acepta numeros').required(),
+        firstName:     Joi.string().required(),
+        lastName:      Joi.string().required(),
+        cycle:         Joi.number().required(),
+        academySchool: Joi.string().required(),
+        dni:           Joi.string().pattern(/^[0-9]+$/, 'Solo se acepta numeros').required()
     })
-    dni!: string
 
 }

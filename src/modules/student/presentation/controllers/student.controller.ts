@@ -1,5 +1,4 @@
 import { Request, Response } from 'express'
-import { plainToClass } from 'class-transformer'
 
 import { StudentRepository } from '../../domain/repositories'
 import { CreateStudentUseCase, GetAllStudentUseCase } from '../../domain/use-cases'
@@ -22,7 +21,7 @@ export class StudentController {
 
     postCreate(request: Request, response: Response) {
 
-        const studentCreate = plainToClass(StudentCreateEntity, request.body)
+        const studentCreate = request.body as StudentCreateEntity
         const usecase       = new CreateStudentUseCase(
             response,
             this.studentRepository,
