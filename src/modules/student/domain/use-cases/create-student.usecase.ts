@@ -1,15 +1,21 @@
 import { Response } from 'express'
+import bcrypt from 'bcrypt'
 
 import { StudentCreateEntity } from '../entities'
 import { StudentRepository } from '../repositories'
-import { message } from '../../../../common/responses/msg.response';
+import { message } from '../../../../common/responses/msg.response'
 import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok'
+import { UserRepository } from '../../../auth/domain/repositories/user.repository'
+import { UserCreateEntity } from '../../../auth/domain/entities'
 
 export class CreateStudentUseCase {
+
+    private HASH_SALT_MAX = 10
 
     constructor(
         private response                   : Response,
         private readonly studentRepository : StudentRepository,
+        private readonly userRepository    : UserRepository,
         private studentCreateEntity        : StudentCreateEntity
     ) { }
 
@@ -21,13 +27,22 @@ export class CreateStudentUseCase {
             return message({
                 response: this.response,
                 code: CODE_STATUS.BAD_REQUEST,
-                info: { error: error.message }
+                info: error.message
             })
 
         try {
 
-            const studentCreated = await this.studentRepository.create( this.studentCreateEntity )
-            
+            const salt     = await bcrypt.genSalt( this.HASH_SALT_MAX )
+            const password = await bcrypt.hash( this.studentCreateEntity.password, salt )
+
+            const userEntity: UserCreateEntity = { ...this.studentCreateEntity, password  }
+
+            const userCreated    = await this.userRepository.create( userEntity )
+            const studentCreated = await this.studentRepository.create({
+                ...this.studentCreateEntity,
+                user: userCreated._id
+            })
+                        
             message({
                 response: this.response,
                 code: CODE_STATUS.CREATED,

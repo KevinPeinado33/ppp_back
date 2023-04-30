@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 
-import { LoginUseCase } from '../../domain/usecases'
-import { LoginDto } from '../../domain/entities'
+import { LoginUseCase } from '../../domain/use-cases'
+import { LoginEntity } from '../../domain/entities'
 import { UserImplRepository } from '../../data/repositories'
 import { UserRepository } from '../../domain/repositories'
 
@@ -20,7 +20,7 @@ export class AuthController {
 
     postLogin(req: Request, res: Response) {
 
-        const loginDto = req.body as LoginDto
+        const loginDto = req.body as LoginEntity
         const usecase  = new LoginUseCase(
             res,
             loginDto,

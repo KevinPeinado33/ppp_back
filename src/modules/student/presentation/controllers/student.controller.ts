@@ -4,14 +4,18 @@ import { StudentRepository } from '../../domain/repositories'
 import { CreateStudentUseCase, GetAllStudentUseCase } from '../../domain/use-cases'
 import { StudentCreateEntity } from '../../domain/entities'
 import { StudentImplRepository } from '../../data/repositories'
+import { UserRepository } from '../../../auth/domain/repositories/user.repository';
+import { UserImplRepository } from '../../../auth/data/repositories'
 
 export class StudentController { 
 
-    private studentRepository: StudentRepository
+    private studentRepository : StudentRepository
+    private userRepository    : UserRepository
 
     constructor() {
 
         this.studentRepository = new StudentImplRepository()
+        this.userRepository    = new UserImplRepository()
 
         this.postCreate   = this.postCreate.bind( this )
         this.getOneByCode = this.getOneByCode.bind( this )
@@ -26,6 +30,7 @@ export class StudentController {
         const usecase       = new CreateStudentUseCase(
             response,
             this.studentRepository,
+            this.userRepository,
             studentCreate
         )
 
