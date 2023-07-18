@@ -15,7 +15,7 @@ export class GetAllStudentUseCase {
         
         try {
 
-            const students = await this.studentRepository.find()
+            const students = await { }
 
             if ( !students )
                 return message({

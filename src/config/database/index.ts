@@ -1,5 +1,8 @@
 import { DataSource } from 'typeorm'
 
+import { UserEntity } from '../../modules/auth/data/entities'
+import { StudentEntity } from '../../modules/student/data/entities'
+
 export const AppDataSource = new DataSource({
     type     : 'postgres',
     host     : process.env.DATABASE_HOST,
@@ -8,8 +11,8 @@ export const AppDataSource = new DataSource({
     password : process.env.DATABASE_PASSWORD,
     database : process.env.DATABASE_NAME,
     entities : [
-        UserModel,
-        StudentModel
+        UserEntity,
+        StudentEntity
     ],
     logging: true,
     synchronize: true

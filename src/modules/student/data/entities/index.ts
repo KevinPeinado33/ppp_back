@@ -1,1 +1,1 @@
-export { default as StudentModel } from './student.entities'
+export * from './student.entities'

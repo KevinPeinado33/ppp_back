@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryColumn } from 'typeorm'
 
 @Entity({ name: 'students' })
-export default class Student {
+export class StudentEntity {
 
     @PrimaryColumn({ type: 'varchar' })
     code!: string
