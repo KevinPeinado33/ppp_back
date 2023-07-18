@@ -1,14 +1,14 @@
 import Joi from 'joi'
 
-export class LoginEntity {
+export class LoginDto {
     
-    username! : string
+    userName! : string
     password! : string
 
     constructor() { }
 
     static schema = Joi.object({
-        username : Joi.string().required(),
+        userName : Joi.string().required(),
         password : Joi.string().required()
     })
 

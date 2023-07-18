@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import express, { Application } from 'express'
 import cors from 'cors'
 import swaggerUI from 'swagger-ui-express'
@@ -5,7 +6,7 @@ import swaggerJSDoc from 'swagger-jsdoc'
 
 import authRouter from '../../modules/auth/presentation/routes/auth.route'
 import studentRouter from '../../modules/student/presentation/routers/student.router'
-import { dbConnection } from '../database'
+import { AppDataSource } from '../database'
 import { PATH_SWAGGER, options } from '../swagger'
 
 export class AppServer {
@@ -46,9 +47,9 @@ export class AppServer {
         console.log(`📄 Swagger is already on http://localhost:${this.port}${PATH_SWAGGER}`)
     }
 
-    async dbConnection() {
+    dbConnection() {
         try {
-            await dbConnection()
+            AppDataSource.initialize
             console.log('✅ DataBase is connected.')
         } catch ( error: any ) {
             throw new Error( error )

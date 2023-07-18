@@ -6,7 +6,7 @@ import { StudentRepository } from '../repositories'
 import { message } from '../../../../common/responses/msg.response'
 import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok'
 import { UserRepository } from '../../../auth/domain/repositories/user.repository'
-import { UserCreateEntity } from '../../../auth/domain/entities'
+import { UserCreateEntity } from '../../../auth/domain/dtos'
 
 export class CreateStudentUseCase {
 

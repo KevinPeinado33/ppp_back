@@ -1,8 +1,3 @@
-import { StudentCreateEntity, StudentUpdateEntity } from '../../domain/entities'
-import { StudentRepository } from '../../domain/repositories'
-import { IStudent } from '../interfaces'
-import { StudentModel } from '../models'
-
 export class StudentImplRepository implements StudentRepository {
 
     constructor() { }

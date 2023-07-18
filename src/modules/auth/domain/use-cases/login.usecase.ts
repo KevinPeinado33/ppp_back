@@ -1,23 +1,24 @@
 import { Response } from 'express'
 import bcrypt from 'bcrypt'
 
-import { UserRepository } from '../repositories'
 import { message } from '../../../../common/responses/msg.response'
-import { LoginEntity } from '../entities'
 import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok'
 import { generateKey } from '../../../../common/utils/jwt/generate.jwt'
+
+import { UserRepository } from '../repositories'
+import { LoginDto } from '../dtos'
 
 export class LoginUseCase {
     
     constructor(
-        private readonly response    : Response,
-        private readonly loginEntity : LoginEntity,
-        private readonly repository  : UserRepository
+        private readonly response   : Response,
+        private readonly loginDto   : LoginDto,
+        private readonly repository : UserRepository
     ) { }
 
     async execute() {
 
-        const { error } = LoginEntity.schema.validate( this.loginEntity )
+        const { error } = LoginDto.schema.validate( this.loginDto )
 
         if ( error ) {
             return message({
@@ -29,17 +30,17 @@ export class LoginUseCase {
 
         try {
 
-            const userFound = await this.repository.findUserByEmail( this.loginEntity.username )
+            const userFound = await this.repository.findUserByEmail( this.loginDto.userName )
 
             if ( !userFound ) {
                 return message({
                     response: this.response,
                     code: CODE_STATUS.NOT_FOUND,
-                    info: `El usuario ${ this.loginEntity.username }, no se ha encontrado.`
+                    info: `El usuario ${ this.loginDto.userName }, no se ha encontrado.`
                 })
             }
                 
-            const isPasswordCorrect = await bcrypt.compare( this.loginEntity.password, userFound.password! )
+            const isPasswordCorrect = await bcrypt.compare( this.loginDto.password, userFound.password! )
 
             if ( !isPasswordCorrect ) {
                 return message({
@@ -49,15 +50,13 @@ export class LoginUseCase {
                 })
             }
 
-            const token = await generateKey( userFound._id! )
-
-            delete userFound.password
+            const token = await generateKey( userFound.id! )
 
             message({
                 response: this.response,
                 code: CODE_STATUS.OK,
                 data: {
-                    ...userFound.toObject(),
+                    ...userFound,
                     token
                 }
             })

@@ -1,18 +1,25 @@
-import { UserModel } from '../models'
-import { UserRepository } from '../../domain/repositories'
-import { IUser } from '../interfaces'
-import { UserCreateEntity } from '../../domain/entities'
+import { AppDataSource } from '../../../../config/database'
+import { CreateUserDto } from '../../domain/dtos'
 
-export class UserImplRepository implements UserRepository {
+import { UserRepository } from '../../domain/repositories'
+import { UserEntity } from '../entities'
+
+export class UserRepositoryImpl implements UserRepository {
+
+    private userRepository = AppDataSource.getRepository( UserEntity )
 
     constructor() { }
 
-    async findUserByEmail(username: string): Promise< IUser | null > {
-        return await UserModel.findOne({ username })
+    findUserByEmail(userName: string): Promise< UserEntity | null > {
+        return this.userRepository.findOneBy({ userName })
     }
 
-    async create(userCreate: UserCreateEntity ): Promise< IUser > {
-        return await UserModel.create( userCreate )
+    async create(userCreateDto: CreateUserDto): Promise< UserEntity > {
+        return await this.userRepository.create( userCreateDto )
+    }
+
+    save(userCreated: UserEntity): Promise< UserEntity > {
+        return this.userRepository.save( userCreated )
     }
 
 }

@@ -1,22 +1,16 @@
-import mongoose, { ConnectOptions  } from 'mongoose'
+import { DataSource } from 'typeorm'
 
-export const dbConnection = async () => {
-
-    try {
-        // await mongoose.connect( process.env.MONGODB_CNN ?? '')
-        mongoose.connect(
-            process.env.MONGODB_CNN || '',
-            {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            } as ConnectOptions 
-        );
-
-    } catch (error) {
-
-        console.log(error)
-        throw new Error(`Error on moounted db: ${error}`)
-
-    }
-
-}
+export const AppDataSource = new DataSource({
+    type     : 'postgres',
+    host     : process.env.DATABASE_HOST,
+    port     : Number(process.env.DATABASE_PORT),
+    username : process.env.DATABASE_USERNAME,
+    password : process.env.DATABASE_PASSWORD,
+    database : process.env.DATABASE_NAME,
+    entities : [
+        UserModel,
+        StudentModel
+    ],
+    logging: true,
+    synchronize: true
+})
