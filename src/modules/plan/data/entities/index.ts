@@ -1,0 +1,5 @@
+export * from './plan-ppp.entity'
+export * from './area-plan.entity'
+export * from './question-evaluation.entity'
+export * from './type-document.entity'
+export * from './plan-documents.entity'
