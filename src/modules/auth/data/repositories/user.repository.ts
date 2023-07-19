@@ -9,7 +9,7 @@ export class UserRepositoryImpl implements UserRepository {
     private userRepository = AppDataSource.getRepository( UserEntity )
 
     constructor() { }
-
+    
     findUserByEmail(userName: string): Promise< UserEntity | null > {
         return this.userRepository.findOneBy({ userName })
     }
@@ -20,6 +20,10 @@ export class UserRepositoryImpl implements UserRepository {
 
     save(userCreated: UserEntity): Promise< UserEntity > {
         return this.userRepository.save( userCreated )
+    }
+
+    findAll(): Promise< UserEntity[] > {
+        return this.userRepository.find()
     }
 
 }

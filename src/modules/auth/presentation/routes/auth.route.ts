@@ -6,10 +6,12 @@ const router = Router()
 
 const { 
     postLogin,
-    postRegister
+    postRegister,
+    getAllUsers
 } = new AuthController()
 
 router.post('/login', postLogin)
 router.post('/register', postRegister)
+router.get('/kevin-aea', getAllUsers)
 
 export default router

@@ -1,0 +1,20 @@
+data
+- ( espejo de la base de datos)
+- solo aqui se pueden hacer consultas sql
+---------------------------------------
+- entity (copia exacta a la tabla de bbddd)
+- repository (son las unicas que hacen consultas, y no tienen logica)
+
+domain
+- funcionalidades que tienen el sistema (CRUD)
+- validadores (dtos)
+
+presentation
+- controllers
+- rutas (apis)
+- una api para consumir reniec
+
+- clase Y extends clase X
+
+infrastructura
+- clase X extends clase Y
