@@ -6,10 +6,10 @@ export class StudentEntity {
     @PrimaryColumn({ type: 'varchar' })
     code!: string
 
-    @Column({ type: 'number' })
+    @Column({ type: 'integer' })
     cycle!: number
 
-    @Column({ type: 'number', name:'intership_hours' })
+    @Column({ type: 'integer', name:'intership_hours' })
     intershipHours!: number
 
     @Column({ type: 'varchar', name: 'name_cv' })
@@ -18,7 +18,7 @@ export class StudentEntity {
     @Column({ type: 'varchar', name: 'url_cv' })
     urlCv!: string
 
-    @Column({ type: 'number', name: 'final_rate' })
+    @Column({ type: 'integer', name: 'final_rate' })
     finalRate!: number
 
     @Column({ type: 'varchar', unique: true, name: 'user_id' })

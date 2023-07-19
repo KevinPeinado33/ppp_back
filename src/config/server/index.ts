@@ -1,4 +1,5 @@
 import 'reflect-metadata'
+import 'dotenv/config'
 import express, { Application } from 'express'
 import cors from 'cors'
 import swaggerUI from 'swagger-ui-express'
@@ -47,12 +48,12 @@ export class AppServer {
         console.log(`📄 Swagger is already on http://localhost:${this.port}${PATH_SWAGGER}`)
     }
 
-    dbConnection() {
+    async dbConnection() {
         try {
-            AppDataSource.initialize
+            await AppDataSource.initialize()
             console.log('✅ DataBase is connected.')
         } catch ( error: any ) {
-            throw new Error( error )
+            console.log(error)
         }
     }
 

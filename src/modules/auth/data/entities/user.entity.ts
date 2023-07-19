@@ -4,39 +4,39 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 export class UserEntity {
 
   @PrimaryGeneratedColumn('uuid')
-  id?: string;
+  id?: string
 
   @Column({ type: 'varchar', unique: true, name: 'dni' })
-  dni!: string;
+  dni!: string
 
   @Column({ type: 'varchar', unique: true, name: 'user_name' })
-  userName!: string;
+  userName!: string
 
   @Column({ type: 'varchar' })
-  password!: string;
+  password!: string
 
   @Column({ type: 'varchar', name: 'first_name' })
-  firstName!: string;
+  firstName!: string
 
   @Column({ type: 'varchar', name: 'last_name' })
-  lastName!: string;
+  lastName!: string
 
   @Column({ type: 'varchar' })
-  email!: string;
+  email!: string
 
   @Column({ type: 'varchar' })
-  cellphone!: string;
+  cellphone!: string
 
   @Column({ type: 'varchar' })
-  area!: string;
+  area!: string
 
   @Column({ type: 'integer', name: 'num_students' })
-  numStudents!: number;
+  numStudents!: number
 
   @Column({ type: 'varchar', name: 'url_profile' })
-  urlProfile!: string;
+  urlProfile!: string
 
   @Column({ type: 'boolean' })
-  status!: boolean;
+  status!: boolean
 
 }

@@ -1,4 +1,4 @@
-import { DataSource } from 'typeorm'
+import { DataSource} from 'typeorm'
 
 import { UserEntity } from '../../modules/auth/data/entities'
 import { StudentEntity } from '../../modules/student/data/entities'
@@ -14,6 +14,6 @@ export const AppDataSource = new DataSource({
         UserEntity,
         StudentEntity
     ],
-    logging: true,
+    logging: false,
     synchronize: true
 })
