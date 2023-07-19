@@ -5,10 +5,12 @@ import cors from 'cors'
 import swaggerUI from 'swagger-ui-express'
 import swaggerJSDoc from 'swagger-jsdoc'
 
-import authRouter from '../../modules/auth/presentation/routes/auth.route'
-import studentRouter from '../../modules/student/presentation/routers/student.router'
 import { AppDataSource } from '../database'
 import { PATH_SWAGGER, options } from '../swagger'
+
+import authRouter from '../../modules/auth/presentation/routes/auth.route'
+import studentRouter from '../../modules/student/presentation/routers/student.router'
+import planRouter from '../../modules/plan/presentation/routes/plan.route'
 
 export class AppServer {
 
@@ -17,7 +19,8 @@ export class AppServer {
 
     private paths = {
         auth    : '/api/auth',
-        student : '/api/student'
+        student : '/api/student',
+        plan    : '/api/plan',
     }
 
     constructor() {
@@ -60,6 +63,7 @@ export class AppServer {
     routes() {
         this.app.use(this.paths.auth, authRouter)
         this.app.use(this.paths.student, studentRouter)
+        this.app.use(this.paths.plan, planRouter)
     }
 
 }
