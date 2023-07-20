@@ -4,26 +4,26 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm"
-import { AccessRoleEntity } from "./access-role.entity"
-import { RolesUsersEntity } from "./roles-users.entity"
+
+import { AccessRoleEntity, RoleUserEntity } from "./"
 
 @Entity({ name: "roles" })
 export class RolesEntity {
   @PrimaryGeneratedColumn("uuid")
-  id!: string;
+  id!: string
 
   @Column({ type: "varchar", length: 100 })
-  name!: string;
+  name!: string
 
   @Column({ type: "varchar", length: 400 })
-  description!: string;
+  description!: string
 
   @Column({ type: "bool", default: true })
-  status!: boolean;
+  status!: boolean
 
-  @OneToMany(() => RolesUsersEntity, (rolesUser) => rolesUser.roles)
-  rolesUsers!: RolesUsersEntity[];
+  @OneToMany(() => RoleUserEntity, (rolesUser) => rolesUser.role)
+  rolesUsers!: RoleUserEntity[]
 
   @OneToMany(() => AccessRoleEntity, (accessRole) => accessRole.access)
-  accessRole!: AccessRoleEntity[];
+  accessRoles!: AccessRoleEntity[]
 }

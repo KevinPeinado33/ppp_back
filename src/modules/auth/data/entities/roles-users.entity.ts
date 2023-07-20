@@ -1,18 +1,23 @@
-import { Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm"
-import { RolesEntity } from "./roles.entity"
-import { UserEntity } from "./user.entity"
+import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 
-@Entity({ name: "roles_user" })
-export class RolesUsersEntity {
-  @PrimaryGeneratedColumn("uuid")
-  id!: string;
+import { RolesEntity, UserEntity } from './'
 
-  @ManyToOne(() => RolesEntity, (roles) => roles.rolesUsers)
-  roles!: RolesEntity;
+@Entity({ name: 'roles_user' })
+export class RoleUserEntity {
+
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
+
+  @ManyToOne(
+    () => RolesEntity, 
+    (role) => role.rolesUsers
+  )
+  role!: RolesEntity
 
   @ManyToOne(
     () => UserEntity,
-    ( users ) => users.rolesUsers
+    ( user ) => user.roleUser
   )
-  users!: UserEntity
+  user!: UserEntity
+
 }

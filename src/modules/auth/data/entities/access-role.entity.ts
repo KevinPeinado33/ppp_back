@@ -1,21 +1,20 @@
-import { Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
+import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 
-import { AccessEntity } from "./"
-import { RolesEntity } from "./roles.entity"
+import { AccessEntity, RolesEntity } from './'
 
-@Entity({ name: "access_roles" })
+@Entity({ name: 'access_roles' })
 export class AccessRoleEntity {
 
-  @PrimaryGeneratedColumn("uuid")
-  id!: string;
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
 
   /**
    * Relaciones con las tablas
    */
   @ManyToOne(() => AccessEntity, (access) => access.accessRoles)
-  access!: AccessEntity;
+  access!: AccessEntity
 
-  @ManyToOne(() => RolesEntity, (role) => role.accessRole)
-  role!: RolesEntity;
+  @ManyToOne(() => RolesEntity, (role) => role.accessRoles)
+  role!: RolesEntity
   
 }
