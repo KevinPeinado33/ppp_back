@@ -166,3 +166,32 @@
  *       500:
  *         description: Error del servidor.
  */
+/**
+ * @swagger
+ * /api/plan/get-all:
+ *   get:
+ *     summary: Crea una nueva evaluación de pregunta.
+ *     tags: [Plan PPP]
+ *     responses:
+ *       200:
+ *         description: Lista completa
+ *       404:
+ *         description: Todo vacio
+ *       500:
+ *         description: Error del servidor.
+ */
+/**
+ * @swagger
+ * /api/plan/get-all-types-documents:
+ *   get:
+ *     summary: Obtiene todos los tipos de documentos disponibles.
+ *     tags: [ Type Documents ]
+ *     responses:
+ *       200:
+ *         description: Lista de tipos de documentos obtenida exitosamente.
+ *       404:
+ *         description: Lista vacia.
+ *       500:
+ *         description: Error del servidor al obtener los tipos de documentos.
+ */
+

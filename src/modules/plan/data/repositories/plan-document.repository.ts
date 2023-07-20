@@ -9,4 +9,12 @@ export class PlanDocumentRepositoryImpl implements PlanDocumentRepository {
 
     constructor( ) { }
 
+    async create(newDocument: PlanDocumentEntity): Promise<PlanDocumentEntity> {
+        return await this.planDocumentRepository.create( newDocument )
+    }
+
+    async save(documentCreated: PlanDocumentEntity): Promise<PlanDocumentEntity> {
+        return await this.planDocumentRepository.save( documentCreated )
+    }
+
 }

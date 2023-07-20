@@ -1,26 +1,32 @@
 import { Request, Response } from 'express'
 
-import { AreaPlanRepository, PlanPPPRepository, QuestionEvaluationRepository } from '../../domain/repositories'
-import { AreaPlanRepositoryImpl, PlanPPPRepositoryImpl, QuestionEvaluationRepositoryImpl } from '../../data/repositories'
-import { CreatePlanPPPUseCase, FindAllUseCase, CreateAreaPlanUseCase, CreateQuestionEvaluationUseCase } from '../../domain/use-cases'
-import { CreatePlanPPPDto, CreateAreaPlanDto, CreateQuestionEvaluationDto } from '../../domain/dtos'
+import { AreaPlanRepository, PlanDocumentRepository, PlanPPPRepository, QuestionEvaluationRepository, TypeDocumentRepository } from '../../domain/repositories'
+import { AreaPlanRepositoryImpl, PlanDocumentRepositoryImpl, PlanPPPRepositoryImpl, QuestionEvaluationRepositoryImpl, TypeDocumentRepositoryImpl } from '../../data/repositories'
+import { CreatePlanPPPUseCase, FindAllUseCase, CreateAreaPlanUseCase, CreateQuestionEvaluationUseCase, CreatePlanDocumentUseCase, GetAllTypeDocumentsUseCase } from '../../domain/use-cases'
+import { CreatePlanPPPDto, CreateAreaPlanDto, CreateQuestionEvaluationDto, CreatePlanDocumentDto } from '../../domain/dtos'
 
 export class PlanController {
 
     private planRepository               : PlanPPPRepository
     private areaPlanRepository           : AreaPlanRepository
     private questionEvaluationRepository : QuestionEvaluationRepository
+    private planDocumentRepository       : PlanDocumentRepository
+    private typeDocumentRepository       : TypeDocumentRepository
 
     constructor() {
         
         this.planRepository               = new PlanPPPRepositoryImpl()
         this.areaPlanRepository           = new AreaPlanRepositoryImpl()
         this.questionEvaluationRepository = new QuestionEvaluationRepositoryImpl()
+        this.planDocumentRepository       = new PlanDocumentRepositoryImpl()
+        this.typeDocumentRepository       = new TypeDocumentRepositoryImpl()
 
         this.getAllPlans                  = this.getAllPlans.bind( this )
         this.postCreatePlan               = this.postCreatePlan.bind( this )
         this.postCreateAreaPlan           = this.postCreateAreaPlan.bind( this )
         this.postCreateQuestionEvaluation = this.postCreateQuestionEvaluation.bind( this )
+        this.postCreateDocument           = this.postCreateDocument.bind( this )
+        this.getTypesDocuments            = this.getTypesDocuments.bind( this )
 
     }
 
@@ -70,6 +76,32 @@ export class PlanController {
             createQuestionEvaluationDto,
             this.questionEvaluationRepository,
             this.areaPlanRepository
+        )
+
+        usecase.execute()
+
+    }
+
+    postCreateDocument(req: Request, res: Response) {
+
+        const createPlanDocumentDto = req.body as CreatePlanDocumentDto
+        const usecase               = new CreatePlanDocumentUseCase(
+            res,
+            createPlanDocumentDto,
+            this.planDocumentRepository,
+            this.typeDocumentRepository,
+            this.planRepository
+        )
+
+        usecase.execute()
+
+    }
+
+    getTypesDocuments(req: Request, res: Response) {
+        
+        const usecase = new GetAllTypeDocumentsUseCase(
+            res,
+            this.typeDocumentRepository
         )
 
         usecase.execute()
