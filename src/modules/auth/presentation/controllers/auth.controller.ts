@@ -1,4 +1,4 @@
-import { Request, Response, response } from 'express'
+import { Request, Response } from 'express'
 
 import { UserRepositoryImpl } from '../../data/repositories'
 import { CreateUserDto, LoginDto } from '../../domain/dtos'

@@ -1,0 +1,5 @@
+export * from './plan-ppp.repository'
+export * from './area-plan.repository'
+export * from './plan-document.repository'
+export * from './question-evaluation.repository'
+export * from './type-document.repository'

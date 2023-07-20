@@ -1,6 +1,6 @@
 import { Column, Entity, Index, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 
-import { PlanPPPEntity, TypeDocumentEntity } from './'
+import { PlanPPPEntity, TypeDocumentEntity } from '.'
 
 @Entity({ name: 'plan_documents' })
 export class PlanDocumentEntity {
