@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, Index, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 
 import { AreaPlanEntity, PlanDocumentEntity } from './'
 
@@ -7,6 +7,10 @@ export class PlanPPPEntity {
 
     @PrimaryGeneratedColumn('uuid')
     id!: string
+
+    @Column({ type: 'varchar', length: 150 })
+    @Index({ unique: true })
+    name!: string
 
     @Column({ type: 'integer', name:'intership_hours' })
     intershipHours!: number
@@ -27,7 +31,7 @@ export class PlanPPPEntity {
     @Column({ type: 'text', name: 'banner_url' })
     bannerUrl!: string[]
 
-    @Column({ type: 'bool' })
+    @Column({ type: 'bool', default: true })
     status!: boolean
 
     // TODO: crear la relacion con el usuario creador

@@ -1,14 +1,14 @@
 import { Response } from 'express'
 
-import { PlanRepository } from '../repositories'
 import { message } from '../../../../common/responses/msg.response'
 import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok'
+import { PlanPPPRepository } from '../repositories'
 
 export class FindAllUseCase {
 
     constructor(
         private readonly response: Response,
-        private readonly respository: PlanRepository
+        private readonly respository: PlanPPPRepository
     ) { }
 
     async exceute() {

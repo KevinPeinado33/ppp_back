@@ -1,5 +1,5 @@
 import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
-import { PlanDocumentEntity } from './plan-documents.entity'
+import { PlanDocumentEntity } from './plan-document.entity'
 
 @Entity({ name: 'type_documents' })
 export class TypeDocumentEntity {
