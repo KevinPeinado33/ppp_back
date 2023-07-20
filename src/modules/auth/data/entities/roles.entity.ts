@@ -1,7 +1,6 @@
 import {
   Column,
   Entity,
-  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm"
@@ -25,6 +24,6 @@ export class RolesEntity {
   @OneToMany(() => RolesUsersEntity, (rolesUser) => rolesUser.roles)
   rolesUsers!: RolesUsersEntity[];
 
-  @ManyToOne(() => AccessRoleEntity, (accessRole) => accessRole.access)
+  @OneToMany(() => AccessRoleEntity, (accessRole) => accessRole.access)
   accessRole!: AccessRoleEntity[];
 }

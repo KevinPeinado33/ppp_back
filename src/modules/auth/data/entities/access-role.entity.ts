@@ -5,6 +5,7 @@ import { RolesEntity } from "./roles.entity"
 
 @Entity({ name: "access_roles" })
 export class AccessRoleEntity {
+
   @PrimaryGeneratedColumn("uuid")
   id!: string;
 
@@ -16,4 +17,5 @@ export class AccessRoleEntity {
 
   @ManyToOne(() => RolesEntity, (role) => role.accessRole)
   role!: RolesEntity;
+  
 }

@@ -4,7 +4,7 @@ import {
   AccessEntity,
   AccessRoleEntity,
   UserEntity,
-} from "../../modules/auth/data/entities";
+} from "../../modules/auth/data/entities"
 import { StudentEntity } from "../../modules/student/data/entities"
 import {
   AreaPlanEntity,
@@ -40,4 +40,4 @@ export const AppDataSource = new DataSource({
   ],
   logging: false,
   synchronize: true,
-});
+})
