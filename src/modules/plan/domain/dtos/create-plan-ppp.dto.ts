@@ -15,11 +15,11 @@ export class CreatePlanPPPDto {
     static schema = Joi.object({
         name:           Joi.string().required(),
         intershipHours: Joi.number().required(),
-        startDate:      Joi.date().required(),
+        startDate:      Joi.date(),
         endDate:        Joi.date().required(),
         bannerUrl:      Joi.array< string >().required(),
         status:         Joi.boolean(),
-        commited:       Joi.string().required(),
+        commited:       Joi.string().uuid().required(),
     })
 
 }

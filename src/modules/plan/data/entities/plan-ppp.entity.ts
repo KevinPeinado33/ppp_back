@@ -28,7 +28,7 @@ export class PlanPPPEntity {
     })
     endDate!: Date
 
-    @Column({ type: 'text', name: 'banner_url' })
+    @Column({ type: 'text', name: 'banner_url', array: true })
     bannerUrl!: string[]
 
     @Column({ type: 'bool', default: true })
