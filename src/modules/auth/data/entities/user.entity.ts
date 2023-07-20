@@ -1,13 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany, ManyToOne } from 'typeorm'
+import { RolesUsersEntity } from './roles-users.entity'
 
 @Entity({ name: 'users' })
 export class UserEntity {
 
   @PrimaryGeneratedColumn('uuid')
   id?: string
-
-  @Column({ type: 'varchar', unique: true, name: 'dni' })
-  dni!: string
 
   @Column({ type: 'varchar', unique: true, name: 'user_name' })
   userName!: string
@@ -39,4 +37,9 @@ export class UserEntity {
   @Column({ type: 'boolean' })
   status!: boolean
 
+  @OneToMany(
+    () => RolesUsersEntity,
+    (rolesUser) => rolesUser.roles
+  )
+  rolesUsers!: RolesUsersEntity
 }
