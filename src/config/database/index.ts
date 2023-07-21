@@ -15,6 +15,7 @@ import {
 } from "../../modules/plan/data/entities"
 import { RolesEntity } from "../../modules/auth/data/entities/roles.entity"
 import { RoleUserEntity } from "../../modules/auth/data/entities/roles-users.entity"
+import { PPPEntity } from "../../modules/ppp/data/entities"
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -37,6 +38,7 @@ export const AppDataSource = new DataSource({
     AccessRoleEntity,
     RolesEntity,
     RoleUserEntity,
+    PPPEntity,
   ],
   logging: false,
   synchronize: true,

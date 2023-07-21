@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
 
 import { RoleUserEntity } from './'
+import { PPPEntity } from '../../../ppp/data/entities'
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -43,4 +44,5 @@ export class UserEntity {
     (rolesUser) => rolesUser.role
   )
   roleUser!: RoleUserEntity
+
 }

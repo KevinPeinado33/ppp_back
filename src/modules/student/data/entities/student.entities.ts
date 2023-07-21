@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm'
+import { Entity, Column, PrimaryColumn, OneToMany } from 'typeorm'
+import { PPPEntity } from '../../../ppp/data/entities/ppp.entity'
 
 @Entity({ name: 'students' })
 export class StudentEntity {
@@ -23,5 +24,15 @@ export class StudentEntity {
 
     @Column({ type: 'varchar', unique: true, name: 'user_id' })
     userId!: string
+
+    /**
+     * Relaciones entre tablas
+     */
+    @OneToMany(
+        () => PPPEntity,
+        ( ppp ) => ppp.student
+    )
+    ppp!: PPPEntity[]
+
 
 }

@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, Entity, Index, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 
 import { AreaPlanEntity, PlanDocumentEntity } from './'
+import { PPPEntity } from '../../../ppp/data/entities'
 
 @Entity({ name: 'plan_ppp' })
 export class PlanPPPEntity {
@@ -54,5 +55,11 @@ export class PlanPPPEntity {
         ( planDocument ) => planDocument.planPPP
     )
     planDocuments!: PlanDocumentEntity[]
+
+    @OneToMany(
+        () => PPPEntity,
+        ( ppp ) => ppp.plan
+    )
+    ppp!: PPPEntity[]
 
 }
