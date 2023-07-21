@@ -104,7 +104,46 @@
  *              type: inicio
  *              area: 12e12e12EEEDccf4uuid
  */
-
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *      PlanDocument:
+ *          type: object
+ *          properties:
+ *              name:
+ *                  type: string
+ *                  description: Nombre del documento.
+ *              documentB64:
+ *                  type: string
+ *                  format: base64
+ *                  description: Documento en formato Base64.
+ *              description:
+ *                  type: string
+ *                  description: Descripción del documento.
+ *              status:
+ *                  type: boolean
+ *                  description: Estado del documento.
+ *              type:
+ *                  type: string
+ *                  description: Tipo de documento (UUID).
+ *              planPPP:
+ *                  type: string
+ *                  description: Plan PPP al que pertenece el documento (UUID).
+ *          required:
+ *              - name
+ *              - documentB64
+ *              - description
+ *              - type
+ *              - planPPP
+ *          example:
+ *              name: Documento de prueba
+ *              documentB64: "JVBERi0xLjUKJcTl8uXrp/Og0MTGCjQgMCBvYmogPDwvTGluZWFyaXplZCAxL0wgNjQ3MjMv"
+ *              description: Este es un documento de prueba en formato PDF.
+ *              status: true
+ *              type: 123e4567-e89b-12d3-a456-426614174000
+ *              planPPP: 789e4567-e89b-12d3-a456-426614174000
+ */
 
 /**
  * @swagger
@@ -194,4 +233,23 @@
  *       500:
  *         description: Error del servidor al obtener los tipos de documentos.
  */
-
+/**
+ * @swagger
+ *   /api/plan/create-document-plan:
+ *     post:
+ *       summary: Crea un nuevo documento para un plan PPP.
+ *       tags: [Plan Document PPP]
+ *       requestBody:
+ *         required: true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/PlanDocument'
+ *       responses:
+ *         201:
+ *           description: Documento del plan PPP creado correctamente.
+ *         400:
+ *           description: Error de validación o solicitud incorrecta.
+ *         500:
+ *           description: Error del servidor.
+ */

@@ -3,7 +3,7 @@ import Joi from 'joi'
 export class CreatePlanDocumentDto {
 
     name!        : string
-    urlDocument! : string
+    documentB64! : string
     description! : string
     status?      : boolean
     type!        : string
@@ -13,7 +13,7 @@ export class CreatePlanDocumentDto {
 
     static schema = Joi.object({
         name:        Joi.string().required(),
-        urlDocument: Joi.string().required(),
+        documentB64: Joi.string().base64().required(),
         description: Joi.string().required(),
         status:      Joi.boolean(),
         type:        Joi.string().uuid().required(),

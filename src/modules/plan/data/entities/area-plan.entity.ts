@@ -18,15 +18,15 @@ export class AreaPlanEntity {
     @Column({ type: 'bool', default: true })
     status!: boolean
 
+    /**
+     * Relaciones entre tablas
+     */
     @ManyToOne( 
         () => PlanPPPEntity,
         ( plan ) => plan.areaPlans
     )
     plan!: PlanPPPEntity
-
-    /**
-     * Relaciones entre tablas
-     */
+    
     @OneToMany(
         () => QuestionEvaluationEntity,
         ( question ) => question.area

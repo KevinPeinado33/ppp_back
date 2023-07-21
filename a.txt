@@ -20,3 +20,12 @@ infrastructura
 - clase X extends clase Y
 
 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
+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
+
+================================================
+onedrive
+
+app_name:
+    Graph TypeScript quick start
+client_id:
+    aa27bda0-ff4f-494f-8d85-f0dab6cb5a9e
