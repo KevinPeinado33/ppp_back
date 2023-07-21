@@ -16,7 +16,7 @@ export class CreatePlanDocumentDto {
         urlDocument: Joi.string().required(),
         description: Joi.string().required(),
         status:      Joi.boolean(),
-        type:        Joi.string().required(),
+        type:        Joi.string().uuid().required(),
         planPPP:     Joi.string().uuid().required()
     })
 

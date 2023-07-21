@@ -12,7 +12,7 @@ export class CreateQuestionEvaluationDto {
     static schema = Joi.object({
         question : Joi.string().required(),
         status   : Joi.boolean(),
-        type     : Joi.string().valid('incio', 'intermedio', 'fin').required(),
+        type     : Joi.string().valid('inicio', 'intermedio', 'fin').required(),
         area     : Joi.string().required()
     })
 

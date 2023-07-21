@@ -9,4 +9,12 @@ export class TypeDocumentRepositoryImpl implements TypeDocumentRepository {
 
     constructor( ) { }
     
+    async findOneById(id: string): Promise<TypeDocumentEntity | null> {
+        return await this.typeDocumentRepository.findOneBy({ id })
+    }
+
+    async findAll(): Promise<TypeDocumentEntity[]> {
+        return await this.typeDocumentRepository.find()
+    }
+    
 }
