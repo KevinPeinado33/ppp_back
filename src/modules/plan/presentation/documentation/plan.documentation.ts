@@ -114,9 +114,8 @@
  *              name:
  *                  type: string
  *                  description: Nombre del documento.
- *              documentB64:
+ *              urlDocument:
  *                  type: string
- *                  format: base64
  *                  description: Documento en formato Base64.
  *              description:
  *                  type: string
@@ -132,13 +131,13 @@
  *                  description: Plan PPP al que pertenece el documento (UUID).
  *          required:
  *              - name
- *              - documentB64
+ *              - urlDocument
  *              - description
  *              - type
  *              - planPPP
  *          example:
  *              name: Documento de prueba
- *              documentB64: "JVBERi0xLjUKJcTl8uXrp/Og0MTGCjQgMCBvYmogPDwvTGluZWFyaXplZCAxL0wgNjQ3MjMv"
+ *              urlDocument: "https://gatitas.document.com/name?=documento_prueba"
  *              description: Este es un documento de prueba en formato PDF.
  *              status: true
  *              type: 123e4567-e89b-12d3-a456-426614174000

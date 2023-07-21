@@ -6,7 +6,6 @@ import { PlanDocumentRepository, PlanPPPRepository, TypeDocumentRepository } fro
 import { message } from '../../../../common/responses/msg.response'
 import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok'
 import { PlanDocumentEntity } from '../../data/entities'
-import { cloud } from '../../../../common/utils/cloud'
 
 export class CreatePlanDocumentUseCase {
 
@@ -55,29 +54,16 @@ export class CreatePlanDocumentUseCase {
                 })
             }
 
-            console.log('Ante de iniciar cloudinary')
-
-            const cloudinary       = cloud.setup
-            const documentUploaded = await cloud.uploadDocument({ 
-                cloudinary, 
-                documentB64: this.createPlanDocumentDto.documentB64, 
-                nameDocument: this.createPlanDocumentDto.name 
-            })
-
-            console.log('Documento converito', documentUploaded)
-
             newPlanDocument.type    = typeFound
             newPlanDocument.planPPP = planFound
 
-            // const documentCreated = await this.repository.save( newPlanDocument )
-
-            console.log(documentUploaded)
+            const documentCreated = await this.repository.save( newPlanDocument )
 
             message({
                 response: this.reponse,
                 code: CODE_STATUS.CREATED,
                 info: 'Documento registrado correctamente.',
-                data: { documentUploaded }
+                data: documentCreated
             })
 
         } catch( error ) {
