@@ -1,12 +1,15 @@
 import { Response } from 'express'
+import bcrypt       from 'bcrypt'
 
-import { message } from '../../../../common/responses/msg.response'
+import { message }     from '../../../../common/responses/msg.response'
 import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok'
 
 import { UserRepository } from '../repositories'
-import { CreateUserDto } from '../dtos'
+import { CreateUserDto }  from '../dtos'
 
 export class CreateUserUseCase {
+
+    private HASH_SALT_MAX = 10
     
     constructor(
         private readonly response      : Response,
@@ -28,16 +31,15 @@ export class CreateUserUseCase {
 
         try {
 
-            const newUser = await this.repository.create( this.createUserDto )
-
-            const userCreated = this.repository.save( newUser )
-
+            const newUser     = await this.repository.create( this.createUserDto )
+            newUser.password  = await bcrypt.hash( newUser.password, this.HASH_SALT_MAX )
+            const userCreated = await this.repository.save( newUser )
+            
             message({
                 response: this.response,
-                code: CODE_STATUS.OK,
-                data: {
-                    ...userCreated,
-                }
+                code: CODE_STATUS.CREATED,
+                info: 'Usuario creado correctamente.',
+                data: userCreated
             })
 
         } catch(error) {

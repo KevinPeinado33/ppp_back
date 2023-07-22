@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 
 import { message } from '../../../../common/responses/msg.response'
 import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok'
-import { generateKey } from '../../../../common/utils/jwt/generate.jwt'
+import { generateKey } from '../../../../common/utils/jwt'
 
 import { UserRepository } from '../repositories'
 import { LoginDto } from '../dtos'
@@ -31,12 +31,20 @@ export class LoginUseCase {
         try {
 
             const userFound = await this.repository.findUserByEmail( this.loginDto.userName )
-
+            
             if ( !userFound ) {
                 return message({
                     response: this.response,
                     code: CODE_STATUS.NOT_FOUND,
                     info: `El usuario ${ this.loginDto.userName }, no se ha encontrado.`
+                })
+            }
+
+            if ( !userFound.status ) {
+                return message({
+                    response: this.response,
+                    code: CODE_STATUS.BAD_REQUEST,
+                    info: 'El usuario está desactivado.'
                 })
             }
                 
@@ -55,6 +63,7 @@ export class LoginUseCase {
             message({
                 response: this.response,
                 code: CODE_STATUS.OK,
+                info: 'Inicio de sesión correcto.',
                 data: {
                     ...userFound,
                     token

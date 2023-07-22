@@ -31,7 +31,6 @@ export class FindAllUserUseCase {
                 data: users
             })
             
-            console.log(users)
         } catch( error ) {
             message({
                 response: this.response,

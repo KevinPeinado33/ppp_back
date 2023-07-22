@@ -4,6 +4,8 @@ import { message } from '../../../../common/responses/msg.response'
 import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok'
 import { PlanPPPRepository } from '../repositories'
 import { CreatePlanPPPDto } from '../dtos'
+import { plainToClass } from 'class-transformer'
+import { PlanPPPEntity } from '../../data/entities'
 
 export class CreatePlanPPPUseCase {
 
@@ -27,7 +29,10 @@ export class CreatePlanPPPUseCase {
 
         try {
 
-            const newPlanPPP = await this.repository.create( this.createPlanPPPDto )
+            const planPPPInstanced = plainToClass( PlanPPPEntity, this.createPlanPPPDto )
+            const newPlanPPP       = await this.repository.create( planPPPInstanced )
+
+            // TODO: asignar al usuario creador.
 
             const planPPPCreated = await this.repository.save( newPlanPPP )
 

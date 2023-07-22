@@ -1,7 +1,8 @@
-import { Column, CreateDateColumn, Entity, Index, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, Index, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 
-import { AreaPlanEntity, PlanDocumentEntity } from './'
 import { PPPEntity } from '../../../ppp/data/entities'
+import { UserEntity } from '../../../auth/data/entities'
+import { AreaPlanEntity, PlanDocumentEntity } from './'
 
 @Entity({ name: 'plan_ppp' })
 export class PlanPPPEntity {
@@ -35,12 +36,6 @@ export class PlanPPPEntity {
     @Column({ type: 'bool', default: true })
     status!: boolean
 
-    // TODO: crear la relacion con el usuario creador
-    @Column({ type: 'varchar' })
-    @JoinColumn({ name: 'commited' })
-    commited!: string
-
-
     /**
      * Relaciones entre tablas
      */
@@ -61,5 +56,11 @@ export class PlanPPPEntity {
         ( ppp ) => ppp.plan
     )
     ppp!: PPPEntity[]
+
+    @ManyToOne(
+        () => UserEntity,
+        ( user ) => user.planPPPs
+    )
+    commited!: UserEntity
 
 }

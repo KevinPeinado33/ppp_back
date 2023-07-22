@@ -1,8 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
 
+import { PlanPPPEntity } from '../../../plan/data/entities'
 import { RoleUserEntity } from './'
-import { PPPEntity } from '../../../ppp/data/entities'
-
 @Entity({ name: 'users' })
 export class UserEntity {
 
@@ -30,19 +29,25 @@ export class UserEntity {
   @Column({ type: 'varchar' })
   area!: string
 
-  @Column({ type: 'integer', name: 'num_students' })
+  @Column({ type: 'integer', name: 'num_students', default: 0 })
   numStudents!: number
 
   @Column({ type: 'varchar', name: 'url_profile' })
   urlProfile!: string
 
-  @Column({ type: 'boolean' })
+  @Column({ type: 'boolean', default: true })
   status!: boolean
 
   @OneToMany(
     () => RoleUserEntity,
     (rolesUser) => rolesUser.role
   )
-  roleUser!: RoleUserEntity
+  roleUser!: RoleUserEntity[]
+
+  @OneToMany(
+    () => PlanPPPEntity,
+    ( planPPP ) => planPPP.commited
+  )
+  planPPPs!: PlanPPPEntity[]
 
 }

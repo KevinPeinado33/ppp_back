@@ -11,6 +11,7 @@ import { PATH_SWAGGER, options } from '../swagger'
 import authRouter from '../../modules/auth/presentation/routes/auth.route'
 import studentRouter from '../../modules/student/presentation/routers/student.router'
 import planRouter from '../../modules/plan/presentation/routes/plan.route'
+import userRouter from '../../modules/auth/presentation/routes/user.route'
 
 export class AppServer {
 
@@ -21,6 +22,7 @@ export class AppServer {
         auth    : '/api/auth',
         student : '/api/student',
         plan    : '/api/plan',
+        user    : '/api/user'
     }
 
     constructor() {
@@ -64,6 +66,7 @@ export class AppServer {
         this.app.use(this.paths.auth, authRouter)
         this.app.use(this.paths.student, studentRouter)
         this.app.use(this.paths.plan, planRouter)
+        this.app.use(this.paths.user, userRouter)
     }
 
 }
