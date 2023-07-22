@@ -4,6 +4,8 @@ exports.CreatePlanPPPUseCase = void 0;
 const msg_response_1 = require("../../../../common/responses/msg.response");
 const code_status_ok_1 = require("../../../../common/responses/code/code-status.ok");
 const dtos_1 = require("../dtos");
+const class_transformer_1 = require("class-transformer");
+const entities_1 = require("../../data/entities");
 class CreatePlanPPPUseCase {
     constructor(response, createPlanPPPDto, repository) {
         this.response = response;
@@ -20,7 +22,9 @@ class CreatePlanPPPUseCase {
             });
         }
         try {
-            const newPlanPPP = await this.repository.create(this.createPlanPPPDto);
+            const planPPPInstanced = (0, class_transformer_1.plainToClass)(entities_1.PlanPPPEntity, this.createPlanPPPDto);
+            const newPlanPPP = await this.repository.create(planPPPInstanced);
+            // TODO: asignar al usuario creador.
             const planPPPCreated = await this.repository.save(newPlanPPP);
             (0, msg_response_1.message)({
                 response: this.response,

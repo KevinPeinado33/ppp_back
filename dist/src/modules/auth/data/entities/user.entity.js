@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserEntity = void 0;
 const typeorm_1 = require("typeorm");
+const entities_1 = require("../../../plan/data/entities");
 const _1 = require("./");
 let UserEntity = exports.UserEntity = class UserEntity {
 };
@@ -47,7 +48,7 @@ __decorate([
     __metadata("design:type", String)
 ], UserEntity.prototype, "area", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'integer', name: 'num_students' }),
+    (0, typeorm_1.Column)({ type: 'integer', name: 'num_students', default: 0 }),
     __metadata("design:type", Number)
 ], UserEntity.prototype, "numStudents", void 0);
 __decorate([
@@ -55,13 +56,17 @@ __decorate([
     __metadata("design:type", String)
 ], UserEntity.prototype, "urlProfile", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'boolean' }),
+    (0, typeorm_1.Column)({ type: 'boolean', default: true }),
     __metadata("design:type", Boolean)
 ], UserEntity.prototype, "status", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => _1.RoleUserEntity, (rolesUser) => rolesUser.role),
-    __metadata("design:type", _1.RoleUserEntity)
+    __metadata("design:type", Array)
 ], UserEntity.prototype, "roleUser", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => entities_1.PlanPPPEntity, (planPPP) => planPPP.commited),
+    __metadata("design:type", Array)
+], UserEntity.prototype, "planPPPs", void 0);
 exports.UserEntity = UserEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'users' })
 ], UserEntity);

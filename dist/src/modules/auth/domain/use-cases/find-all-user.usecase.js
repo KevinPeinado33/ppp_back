@@ -23,7 +23,6 @@ class FindAllUserUseCase {
                 code: code_status_ok_1.CODE_STATUS.OK,
                 data: users
             });
-            console.log(users);
         }
         catch (error) {
             (0, msg_response_1.message)({

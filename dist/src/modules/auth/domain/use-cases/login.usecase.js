@@ -7,7 +7,7 @@ exports.LoginUseCase = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const msg_response_1 = require("../../../../common/responses/msg.response");
 const code_status_ok_1 = require("../../../../common/responses/code/code-status.ok");
-const generate_jwt_1 = require("../../../../common/utils/jwt/generate.jwt");
+const jwt_1 = require("../../../../common/utils/jwt");
 const dtos_1 = require("../dtos");
 class LoginUseCase {
     constructor(response, loginDto, repository) {
@@ -33,6 +33,13 @@ class LoginUseCase {
                     info: `El usuario ${this.loginDto.userName}, no se ha encontrado.`
                 });
             }
+            if (!userFound.status) {
+                return (0, msg_response_1.message)({
+                    response: this.response,
+                    code: code_status_ok_1.CODE_STATUS.BAD_REQUEST,
+                    info: 'El usuario está desactivado.'
+                });
+            }
             const isPasswordCorrect = await bcrypt_1.default.compare(this.loginDto.password, userFound.password);
             if (!isPasswordCorrect) {
                 return (0, msg_response_1.message)({
@@ -41,10 +48,11 @@ class LoginUseCase {
                     info: 'Contraseña incorrecta.'
                 });
             }
-            const token = await (0, generate_jwt_1.generateKey)(userFound.id);
+            const token = await (0, jwt_1.generateKey)(userFound.id);
             (0, msg_response_1.message)({
                 response: this.response,
                 code: code_status_ok_1.CODE_STATUS.OK,
+                info: 'Inicio de sesión correcto.',
                 data: {
                     ...userFound,
                     token

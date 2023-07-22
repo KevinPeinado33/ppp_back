@@ -11,8 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlanPPPEntity = void 0;
 const typeorm_1 = require("typeorm");
-const _1 = require("./");
 const entities_1 = require("../../../ppp/data/entities");
+const entities_2 = require("../../../auth/data/entities");
+const _1 = require("./");
 let PlanPPPEntity = exports.PlanPPPEntity = class PlanPPPEntity {
 };
 __decorate([
@@ -52,11 +53,6 @@ __decorate([
     __metadata("design:type", Boolean)
 ], PlanPPPEntity.prototype, "status", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar' }),
-    (0, typeorm_1.JoinColumn)({ name: 'commited' }),
-    __metadata("design:type", String)
-], PlanPPPEntity.prototype, "commited", void 0);
-__decorate([
     (0, typeorm_1.OneToMany)(() => _1.AreaPlanEntity, (areaPlan) => areaPlan.plan),
     __metadata("design:type", Array)
 ], PlanPPPEntity.prototype, "areaPlans", void 0);
@@ -68,6 +64,10 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => entities_1.PPPEntity, (ppp) => ppp.plan),
     __metadata("design:type", Array)
 ], PlanPPPEntity.prototype, "ppp", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => entities_2.UserEntity, (user) => user.planPPPs),
+    __metadata("design:type", entities_2.UserEntity)
+], PlanPPPEntity.prototype, "commited", void 0);
 exports.PlanPPPEntity = PlanPPPEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'plan_ppp' })
 ], PlanPPPEntity);

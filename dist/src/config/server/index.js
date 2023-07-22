@@ -15,12 +15,14 @@ const swagger_1 = require("../swagger");
 const auth_route_1 = __importDefault(require("../../modules/auth/presentation/routes/auth.route"));
 const student_router_1 = __importDefault(require("../../modules/student/presentation/routers/student.router"));
 const plan_route_1 = __importDefault(require("../../modules/plan/presentation/routes/plan.route"));
+const user_route_1 = __importDefault(require("../../modules/auth/presentation/routes/user.route"));
 class AppServer {
     constructor() {
         this.paths = {
             auth: '/api/auth',
             student: '/api/student',
             plan: '/api/plan',
+            user: '/api/user'
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '';
@@ -52,6 +54,7 @@ class AppServer {
         this.app.use(this.paths.auth, auth_route_1.default);
         this.app.use(this.paths.student, student_router_1.default);
         this.app.use(this.paths.plan, plan_route_1.default);
+        this.app.use(this.paths.user, user_route_1.default);
     }
 }
 exports.AppServer = AppServer;

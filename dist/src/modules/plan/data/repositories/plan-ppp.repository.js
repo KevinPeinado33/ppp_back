@@ -13,8 +13,8 @@ class PlanPPPRepositoryImpl {
     async findAll() {
         return await this.planRepository.find();
     }
-    async create(createPlanPPPDto) {
-        return await this.planRepository.create(createPlanPPPDto);
+    async create(newPlanPPP) {
+        return await this.planRepository.create(newPlanPPP);
     }
     async save(planPPPCreated) {
         return await this.planRepository.save(planPPPCreated);

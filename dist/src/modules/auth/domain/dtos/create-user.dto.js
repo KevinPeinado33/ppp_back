@@ -10,16 +10,15 @@ class CreateUserDto {
 }
 exports.CreateUserDto = CreateUserDto;
 CreateUserDto.schema = joi_1.default.object({
-    dni: joi_1.default.string().required(),
     userName: joi_1.default.string().required(),
     password: joi_1.default.string().required(),
     firstName: joi_1.default.string().required(),
     lastName: joi_1.default.string().required(),
-    email: joi_1.default.string().required(),
-    cellphone: joi_1.default.string().required(),
+    email: joi_1.default.string().email().required(),
+    cellphone: joi_1.default.string().pattern(/^[0-9]{9}$/).message('Número de telefono no valido.').required(),
     area: joi_1.default.string().required(),
     numStudents: joi_1.default.number(),
-    urlProfile: joi_1.default.string().required(),
-    status: joi_1.default.boolean(),
+    urlProfile: joi_1.default.string().uri().required(),
+    status: joi_1.default.boolean()
 });
 //# sourceMappingURL=create-user.dto.js.map

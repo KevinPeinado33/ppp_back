@@ -150,6 +150,8 @@
  *   post:
  *     summary: Crea un nuevo plan PPP.
  *     tags: [Plan PPP]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -163,6 +165,18 @@
  *         description: Error de validación o solicitud incorrecta.
  *       500:
  *         description: Error del servidor.
+ *     securitySchemes:
+ *       bearerAuth:
+ *         type: http
+ *         scheme: bearer
+ *         bearerFormat: JWT
+ *     parameters:
+ *       - in: header
+ *         name: x-token
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Token de autenticación de usuario.
  */
 /**
  * @swagger
@@ -170,6 +184,8 @@
  *   post:
  *     summary: Crea un nuevo Area Plan para el plan PPP.
  *     tags: [Area Plan]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -183,6 +199,18 @@
  *         description: Error de validación o solicitud incorrecta.
  *       500:
  *         description: Error del servidor.
+ *     securitySchemes:
+ *       bearerAuth:
+ *         type: http
+ *         scheme: bearer
+ *         bearerFormat: JWT
+ *     parameters:
+ *       - in: header
+ *         name: x-token
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Token de autenticación de usuario.
  */
 /**
  * @swagger
@@ -190,6 +218,8 @@
  *   post:
  *     summary: Crea una nueva evaluación de pregunta.
  *     tags: [Question Evaluation]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -203,53 +233,109 @@
  *         description: Error de validación o solicitud incorrecta.
  *       500:
  *         description: Error del servidor.
+ *     securitySchemes:
+ *       bearerAuth:
+ *         type: http
+ *         scheme: bearer
+ *         bearerFormat: JWT
+ *     parameters:
+ *       - in: header
+ *         name: x-token
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Token de autenticación de usuario.
  */
 /**
  * @swagger
  * /api/plan/get-all:
  *   get:
- *     summary: Crea una nueva evaluación de pregunta.
+ *     summary: Obtener todos los planes PPP.
  *     tags: [Plan PPP]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Lista completa
+ *         description: Lista completa de planes PPP.
  *       404:
- *         description: Todo vacio
+ *         description: No se encontraron planes PPP.
  *       500:
- *         description: Error del servidor.
+ *         description: Error del servidor al obtener los planes PPP.
+ *     securitySchemes:
+ *       bearerAuth:
+ *         type: http
+ *         scheme: bearer
+ *         bearerFormat: JWT
+ *     parameters:
+ *       - in: header
+ *         name: x-token
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Token de autenticación de usuario.
  */
 /**
  * @swagger
  * /api/plan/get-all-types-documents:
  *   get:
- *     summary: Obtiene todos los tipos de documentos disponibles.
+ *     summary: Obtener todos los tipos de documentos disponibles.
  *     tags: [ Type Documents ]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Lista de tipos de documentos obtenida exitosamente.
  *       404:
- *         description: Lista vacia.
+ *         description: Lista vacía. No se encontraron tipos de documentos.
  *       500:
  *         description: Error del servidor al obtener los tipos de documentos.
+ *     securitySchemes:
+ *       bearerAuth:
+ *         type: http
+ *         scheme: bearer
+ *         bearerFormat: JWT
+ *     parameters:
+ *       - in: header
+ *         name: x-token
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Token de autenticación de usuario.
  */
 /**
  * @swagger
- *   /api/plan/create-document-plan:
- *     post:
- *       summary: Crea un nuevo documento para un plan PPP.
- *       tags: [Plan Document PPP]
- *       requestBody:
+ * /api/plan/create-document-plan:
+ *   post:
+ *     summary: Crea un nuevo documento para un plan PPP.
+ *     tags: [Plan Document PPP]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/PlanDocument'
+ *     responses:
+ *       201:
+ *         description: Documento del plan PPP creado correctamente.
+ *       400:
+ *         description: Error de validación o solicitud incorrecta.
+ *       401:
+ *         description: No autorizado. El token de acceso no fue proporcionado o es inválido.
+ *       500:
+ *         description: Error del servidor al crear el documento del plan PPP.
+ *     securitySchemes:
+ *       bearerAuth:
+ *         type: http
+ *         scheme: bearer
+ *         bearerFormat: JWT
+ *     parameters:
+ *       - in: header
+ *         name: x-token
+ *         schema:
+ *           type: string
  *         required: true
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/PlanDocument'
- *       responses:
- *         201:
- *           description: Documento del plan PPP creado correctamente.
- *         400:
- *           description: Error de validación o solicitud incorrecta.
- *         500:
- *           description: Error del servidor.
+ *         description: Token de autenticación de usuario.
  */
 //# sourceMappingURL=plan.documentation.js.map
