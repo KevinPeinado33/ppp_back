@@ -8,5 +8,6 @@ export interface UserRepository {
     create(userCreateDto: CreateUserDto)  : Promise< UserEntity >
     save(userCreated: UserEntity)         : Promise< UserEntity >
     findAll()                             : Promise< UserEntity[] >
+    findById(id: string)                  : Promise< UserEntity | null >
     
 }
