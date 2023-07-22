@@ -26,4 +26,9 @@ export class UserRepositoryImpl implements UserRepository {
         return this.userRepository.find()
     }
 
+    async findById(id: string): Promise<UserEntity | null> {
+        return await this.userRepository.findOneBy({ id })
+    }
+    
+
 }

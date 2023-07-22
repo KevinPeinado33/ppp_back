@@ -6,13 +6,15 @@ import { PlanPPPRepository } from '../repositories'
 import { CreatePlanPPPDto } from '../dtos'
 import { plainToClass } from 'class-transformer'
 import { PlanPPPEntity } from '../../data/entities'
+import { UserRepository } from '../../../auth/domain/repositories'
 
 export class CreatePlanPPPUseCase {
 
     constructor(
-        private readonly response:         Response,
-        private readonly createPlanPPPDto: CreatePlanPPPDto,
-        private readonly repository:       PlanPPPRepository
+        private readonly response         : Response,
+        private readonly createPlanPPPDto : CreatePlanPPPDto,
+        private readonly repository       : PlanPPPRepository,
+        private readonly userRepository   : UserRepository
     ) { }
 
     async execute() {
@@ -32,7 +34,17 @@ export class CreatePlanPPPUseCase {
             const planPPPInstanced = plainToClass( PlanPPPEntity, this.createPlanPPPDto )
             const newPlanPPP       = await this.repository.create( planPPPInstanced )
 
-            // TODO: asignar al usuario creador.
+            const userFound        = await this.userRepository.findById( this.createPlanPPPDto.commited )
+            
+            if ( !userFound ) {
+                return message({
+                    response: this.response,
+                    code: CODE_STATUS.BAD_REQUEST,
+                    info: `No se encontró usuario con id #${ this.createPlanPPPDto.commited }`
+                })
+            }
+
+            newPlanPPP.commited = userFound
 
             const planPPPCreated = await this.repository.save( newPlanPPP )
 

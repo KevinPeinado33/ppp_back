@@ -4,6 +4,8 @@ import { AreaPlanRepository, PlanDocumentRepository, PlanPPPRepository, Question
 import { AreaPlanRepositoryImpl, PlanDocumentRepositoryImpl, PlanPPPRepositoryImpl, QuestionEvaluationRepositoryImpl, TypeDocumentRepositoryImpl } from '../../data/repositories'
 import { CreatePlanPPPUseCase, FindAllUseCase, CreateAreaPlanUseCase, CreateQuestionEvaluationUseCase, CreatePlanDocumentUseCase, GetAllTypeDocumentsUseCase } from '../../domain/use-cases'
 import { CreatePlanPPPDto, CreateAreaPlanDto, CreateQuestionEvaluationDto, CreatePlanDocumentDto } from '../../domain/dtos'
+import { UserRepository } from '../../../auth/domain/repositories'
+import { UserRepositoryImpl } from '../../../auth/data/repositories'
 
 export class PlanController {
 
@@ -12,6 +14,7 @@ export class PlanController {
     private questionEvaluationRepository : QuestionEvaluationRepository
     private planDocumentRepository       : PlanDocumentRepository
     private typeDocumentRepository       : TypeDocumentRepository
+    private userRepository               : UserRepository
 
     constructor() {
         
@@ -20,6 +23,7 @@ export class PlanController {
         this.questionEvaluationRepository = new QuestionEvaluationRepositoryImpl()
         this.planDocumentRepository       = new PlanDocumentRepositoryImpl()
         this.typeDocumentRepository       = new TypeDocumentRepositoryImpl()
+        this.userRepository               = new UserRepositoryImpl()
 
         this.getAllPlans                  = this.getAllPlans.bind( this )
         this.postCreatePlan               = this.postCreatePlan.bind( this )
@@ -47,7 +51,8 @@ export class PlanController {
         const usecase          = new CreatePlanPPPUseCase(
             res,
             createPlanPPPDto,
-            this.planRepository
+            this.planRepository,
+            this.userRepository
         )
 
         usecase.execute()
