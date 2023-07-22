@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PlanController = void 0;
 const repositories_1 = require("../../data/repositories");
 const use_cases_1 = require("../../domain/use-cases");
+const repositories_2 = require("../../../auth/data/repositories");
 class PlanController {
     constructor() {
         this.planRepository = new repositories_1.PlanPPPRepositoryImpl();
@@ -10,6 +11,7 @@ class PlanController {
         this.questionEvaluationRepository = new repositories_1.QuestionEvaluationRepositoryImpl();
         this.planDocumentRepository = new repositories_1.PlanDocumentRepositoryImpl();
         this.typeDocumentRepository = new repositories_1.TypeDocumentRepositoryImpl();
+        this.userRepository = new repositories_2.UserRepositoryImpl();
         this.getAllPlans = this.getAllPlans.bind(this);
         this.postCreatePlan = this.postCreatePlan.bind(this);
         this.postCreateAreaPlan = this.postCreateAreaPlan.bind(this);
@@ -23,7 +25,7 @@ class PlanController {
     }
     postCreatePlan(req, res) {
         const createPlanPPPDto = req.body;
-        const usecase = new use_cases_1.CreatePlanPPPUseCase(res, createPlanPPPDto, this.planRepository);
+        const usecase = new use_cases_1.CreatePlanPPPUseCase(res, createPlanPPPDto, this.planRepository, this.userRepository);
         usecase.execute();
     }
     postCreateAreaPlan(req, res) {

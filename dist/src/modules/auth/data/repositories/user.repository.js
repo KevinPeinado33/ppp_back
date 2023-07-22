@@ -19,6 +19,9 @@ class UserRepositoryImpl {
     findAll() {
         return this.userRepository.find();
     }
+    async findById(id) {
+        return await this.userRepository.findOneBy({ id });
+    }
 }
 exports.UserRepositoryImpl = UserRepositoryImpl;
 //# sourceMappingURL=user.repository.js.map
