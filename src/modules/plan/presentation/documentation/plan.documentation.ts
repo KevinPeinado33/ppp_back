@@ -340,3 +340,16 @@
  *         required: true
  *         description: Token de autenticación de usuario.
  */
+
+/**
+ * @swagger
+ * /api/plan/get-bases-ppp:
+ *   get:
+ *     summary: Obtener todas las bases PPP.
+ *     tags: [Plan PPP]
+ *     responses:
+ *       200:
+ *         description: Lista de todas las bases PPP obtenidas exitosamente.
+ *       500:
+ *         description: Error del servidor al obtener las bases PPP.
+ */

@@ -41,5 +41,5 @@ export const AppDataSource = new DataSource({
     PPPEntity,
   ],
   logging: false,
-  synchronize: true,
+  synchronize: false,
 })

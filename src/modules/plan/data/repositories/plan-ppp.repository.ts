@@ -5,6 +5,8 @@ import { PlanPPPEntity } from '../entities'
 
 export class PlanPPPRepositoryImpl implements PlanPPPRepository {
 
+    private QUERY_GET_BANNERS = 'select ppp.banner_url  from plan_ppp ppp order by start_date desc limit  1'
+
     private planRepository = AppDataSource.getRepository( PlanPPPEntity )
     
     constructor() { }
@@ -23,6 +25,10 @@ export class PlanPPPRepositoryImpl implements PlanPPPRepository {
 
     async save(planPPPCreated: PlanPPPEntity): Promise<PlanPPPEntity> {
         return await this.planRepository.save( planPPPCreated )
+    }
+
+    async findBases(): Promise<string[]> {
+        return await this.planRepository.query( this.QUERY_GET_BANNERS )
     }
 
 }

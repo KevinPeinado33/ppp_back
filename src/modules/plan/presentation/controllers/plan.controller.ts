@@ -6,6 +6,7 @@ import { CreatePlanPPPUseCase, FindAllUseCase, CreateAreaPlanUseCase, CreateQues
 import { CreatePlanPPPDto, CreateAreaPlanDto, CreateQuestionEvaluationDto, CreatePlanDocumentDto } from '../../domain/dtos'
 import { UserRepository } from '../../../auth/domain/repositories'
 import { UserRepositoryImpl } from '../../../auth/data/repositories'
+import { GetBasesPPPUseCase } from '../../domain/use-cases/get-bases-ppp.usecase'
 
 export class PlanController {
 
@@ -31,6 +32,7 @@ export class PlanController {
         this.postCreateQuestionEvaluation = this.postCreateQuestionEvaluation.bind( this )
         this.postCreateDocument           = this.postCreateDocument.bind( this )
         this.getTypesDocuments            = this.getTypesDocuments.bind( this )
+        this.getBasesPPP                  = this.getBasesPPP.bind( this )
 
     }
 
@@ -107,6 +109,17 @@ export class PlanController {
         const usecase = new GetAllTypeDocumentsUseCase(
             res,
             this.typeDocumentRepository
+        )
+
+        usecase.execute()
+
+    }
+
+    getBasesPPP(req: Request, res: Response) {
+        
+        const usecase = new GetBasesPPPUseCase(
+            res,
+            this.planRepository
         )
 
         usecase.execute()
