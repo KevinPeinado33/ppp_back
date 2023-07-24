@@ -4,6 +4,7 @@ exports.PlanController = void 0;
 const repositories_1 = require("../../data/repositories");
 const use_cases_1 = require("../../domain/use-cases");
 const repositories_2 = require("../../../auth/data/repositories");
+const get_bases_ppp_usecase_1 = require("../../domain/use-cases/get-bases-ppp.usecase");
 class PlanController {
     constructor() {
         this.planRepository = new repositories_1.PlanPPPRepositoryImpl();
@@ -18,6 +19,7 @@ class PlanController {
         this.postCreateQuestionEvaluation = this.postCreateQuestionEvaluation.bind(this);
         this.postCreateDocument = this.postCreateDocument.bind(this);
         this.getTypesDocuments = this.getTypesDocuments.bind(this);
+        this.getBasesPPP = this.getBasesPPP.bind(this);
     }
     getAllPlans(req, res) {
         const usecase = new use_cases_1.FindAllUseCase(res, this.planRepository);
@@ -45,6 +47,10 @@ class PlanController {
     }
     getTypesDocuments(req, res) {
         const usecase = new use_cases_1.GetAllTypeDocumentsUseCase(res, this.typeDocumentRepository);
+        usecase.execute();
+    }
+    getBasesPPP(req, res) {
+        const usecase = new get_bases_ppp_usecase_1.GetBasesPPPUseCase(res, this.planRepository);
         usecase.execute();
     }
 }

@@ -31,6 +31,6 @@ exports.AppDataSource = new typeorm_1.DataSource({
         entities_4.PPPEntity,
     ],
     logging: false,
-    synchronize: true,
+    synchronize: false,
 });
 //# sourceMappingURL=index.js.map
