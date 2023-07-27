@@ -1,28 +1,29 @@
 import { Response } from 'express'
 
-import { StudentRepository } from '../repositories'
-import { message } from '../../../../common/responses/msg.response'
 import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok'
+import { message } from '../../../../common/responses/msg.response'
+import { StudentRepository } from '../repositories'
 
-export class GetAllStudentUseCase {
-
+export class FindAllStudentUseCase {
+    
     constructor(
-        private response: Response,
-        private readonly studentRepository: StudentRepository
+        private readonly response   : Response,
+        private readonly repository : StudentRepository
     ) { }
 
-    async execute () {
+    async execute() {
         
         try {
 
-            const students = await { }
+            const students = await this.repository.getAllStudents()
 
-            if ( !students )
+            if ( students.length === 0 ) {
                 return message({
                     response: this.response,
                     code: CODE_STATUS.NOT_FOUND,
-                    info: 'No hay estudiantes aún.'
+                    info: 'No existen estudiantes aún.'
                 })
+            }
 
             message({
                 response: this.response,
@@ -34,7 +35,7 @@ export class GetAllStudentUseCase {
             message({
                 response: this.response,
                 code: CODE_STATUS.INTERNAL_SERVER_ERROR,
-                info: String(error)
+                info: error
             })
         }
 

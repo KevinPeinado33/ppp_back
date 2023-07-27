@@ -2,6 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
 
 import { PlanPPPEntity } from '../../../plan/data/entities'
 import { RoleUserEntity } from './'
+import { PPPEntity } from '../../../ppp/data/entities'
 @Entity({ name: 'users' })
 export class UserEntity {
 
@@ -49,5 +50,11 @@ export class UserEntity {
     ( planPPP ) => planPPP.commited
   )
   planPPPs!: PlanPPPEntity[]
+
+  @OneToMany(
+    () => PPPEntity,
+    ( ppp ) => ppp.advisor 
+  )
+  ppp!: PPPEntity[]
 
 }

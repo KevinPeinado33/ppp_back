@@ -6,13 +6,14 @@ import { validateJWT } from '../../../../common/middlewares/jwt'
 const router = Router()
 
 const { 
-    postCreate,
+
     getOneByCode,
-    getAll
+    getAllStudents
+    
+
 } = new StudentController()
 
-router.post('/create', validateJWT, postCreate)
 router.get('/get-by-code', validateJWT, getOneByCode)
-router.get('/get-all', validateJWT, getAll)
+router.get('/get-all-students', getAllStudents)
 
 export default router

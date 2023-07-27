@@ -1,7 +1,8 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { StudentEntity } from "../../../student/data/entities";
 import { PlanPPPEntity } from "../../../plan/data/entities";
 import { UserEntity } from "../../../auth/data/entities";
+import { EvaluationEntity } from "./evaluation.entity";
 
 @Entity ({ name: 'ppp'})
 export class PPPEntity {
@@ -51,7 +52,13 @@ export class PPPEntity {
 
     @ManyToOne(
         () => UserEntity,
-        (advisor) => advisor.id
+        (advisor) => advisor.ppp
     )
     advisor!: UserEntity
+
+    @OneToMany(
+        () => EvaluationEntity,
+        ( evaluation ) => evaluation.ppp
+    )
+    evaluations!: EvaluationEntity[]
 }

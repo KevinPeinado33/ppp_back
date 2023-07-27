@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryColumn, OneToMany } from 'typeorm'
-import { PPPEntity } from '../../../ppp/data/entities/ppp.entity'
+
+import { PPPEntity } from '../../../ppp/data/entities'
 
 @Entity({ name: 'students' })
 export class StudentEntity {

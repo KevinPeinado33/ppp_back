@@ -5,7 +5,7 @@ import { message } from '../../../../common/responses/msg.response'
 import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok'
 import { UserRepository } from '../../../auth/domain/repositories/user.repository'
 
-import { StudentCreateEntity } from '../entities'
+import { StudentCreateEntity } from '../dtos'
 import { StudentRepository } from '../repositories'
 
 export class CreateStudentUseCase {

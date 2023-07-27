@@ -12,6 +12,7 @@ export const options = {
     apis: [
         'src/modules/student/presentation/documentation/student.documentation.ts',
         'src/modules/plan/presentation/documentation/plan.documentation.ts',
-        'src/modules/auth/presentation/documentation/auth.documentation.ts'
+        'src/modules/auth/presentation/documentation/auth.documentation.ts',
+        'src/modules/ppp/presentation/documentation/ppp.documentation.ts'
     ]
 }

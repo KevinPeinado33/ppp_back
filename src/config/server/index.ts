@@ -12,6 +12,7 @@ import authRouter from '../../modules/auth/presentation/routes/auth.route'
 import studentRouter from '../../modules/student/presentation/routers/student.router'
 import planRouter from '../../modules/plan/presentation/routes/plan.route'
 import userRouter from '../../modules/auth/presentation/routes/user.route'
+import pppRouter from '../../modules/ppp/presentation/routes/ppp.route'
 
 export class AppServer {
 
@@ -22,7 +23,8 @@ export class AppServer {
         auth    : '/api/auth',
         student : '/api/student',
         plan    : '/api/plan',
-        user    : '/api/user'
+        user    : '/api/user',
+        ppp     : '/api/ppp'
     }
 
     constructor() {
@@ -67,6 +69,7 @@ export class AppServer {
         this.app.use(this.paths.student, studentRouter)
         this.app.use(this.paths.plan, planRouter)
         this.app.use(this.paths.user, userRouter)
+        this.app.use(this.paths.ppp, pppRouter)
     }
 
 }
