@@ -13,7 +13,7 @@ export class AuthController {
 
         this.userRepository = new UserRepositoryImpl()
 
-        this.postLogin    = this.postLogin.bind( this )
+        this.postLogin = this.postLogin.bind( this )
         
     }
 

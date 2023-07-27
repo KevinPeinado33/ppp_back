@@ -16,5 +16,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./create-student.usecase"), exports);
 __exportStar(require("./find-student.usecase"), exports);
-__exportStar(require("./get-all-student.usecase"), exports);
+__exportStar(require("./find-all-student.usecase"), exports);
 //# sourceMappingURL=index.js.map

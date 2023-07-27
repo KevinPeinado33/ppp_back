@@ -8,8 +8,9 @@ const entities_3 = require("../../modules/plan/data/entities");
 const roles_entity_1 = require("../../modules/auth/data/entities/roles.entity");
 const roles_users_entity_1 = require("../../modules/auth/data/entities/roles-users.entity");
 const entities_4 = require("../../modules/ppp/data/entities");
+const evaluation_entity_1 = require("../../modules/ppp/data/entities/evaluation.entity");
 exports.AppDataSource = new typeorm_1.DataSource({
-    type: "postgres",
+    type: 'postgres',
     host: process.env.DATABASE_HOST,
     port: Number(process.env.DATABASE_PORT),
     username: process.env.DATABASE_USERNAME,
@@ -29,6 +30,7 @@ exports.AppDataSource = new typeorm_1.DataSource({
         roles_entity_1.RolesEntity,
         roles_users_entity_1.RoleUserEntity,
         entities_4.PPPEntity,
+        evaluation_entity_1.EvaluationEntity,
     ],
     logging: false,
     synchronize: true,

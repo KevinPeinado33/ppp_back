@@ -1,36 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StudentController = void 0;
+const use_cases_1 = require("../../domain/use-cases");
+const repositories_1 = require("../../data/repositories");
 class StudentController {
-    /* private studentRepository : StudentRepository
-    private userRepository    : UserRepository */
     constructor() {
-        /* this.studentRepository = new StudentImplRepository()
-        this.userRepository    = new UserImplRepository() */
-        this.postCreate = this.postCreate.bind(this);
+        this.studentRepository = new repositories_1.StudentRepositoryImpl;
         this.getOneByCode = this.getOneByCode.bind(this);
-        this.getAll = this.getAll.bind(this);
-    }
-    postCreate(request, response) {
-        /* const studentCreate = request.body as StudentCreateEntity
-        
-        const usecase       = new CreateStudentUseCase(
-            response,
-            this.studentRepository,
-            this.userRepository,
-            studentCreate
-        )
-
-        usecase.execute() */
+        this.getAllStudents = this.getAllStudents.bind(this);
     }
     getOneByCode(request, response) { }
-    getAll(request, response) {
-        /* const usecase = new GetAllStudentUseCase(
-            response,
-            this.studentRepository
-        )
-
-        usecase.execute() */
+    getAllStudents(req, res) {
+        const usecase = new use_cases_1.FindAllStudentUseCase(res, this.studentRepository);
+        usecase.execute();
     }
 }
 exports.StudentController = StudentController;

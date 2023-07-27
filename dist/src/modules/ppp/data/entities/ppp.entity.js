@@ -14,7 +14,8 @@ const typeorm_1 = require("typeorm");
 const entities_1 = require("../../../student/data/entities");
 const entities_2 = require("../../../plan/data/entities");
 const entities_3 = require("../../../auth/data/entities");
-let PPPEntity = exports.PPPEntity = class PPPEntity {
+const evaluation_entity_1 = require("./evaluation.entity");
+let PPPEntity = class PPPEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
@@ -60,10 +61,15 @@ __decorate([
     __metadata("design:type", entities_2.PlanPPPEntity)
 ], PPPEntity.prototype, "plan", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => entities_3.UserEntity, (advisor) => advisor.id),
+    (0, typeorm_1.ManyToOne)(() => entities_3.UserEntity, (advisor) => advisor.ppp),
     __metadata("design:type", entities_3.UserEntity)
 ], PPPEntity.prototype, "advisor", void 0);
-exports.PPPEntity = PPPEntity = __decorate([
+__decorate([
+    (0, typeorm_1.OneToMany)(() => evaluation_entity_1.EvaluationEntity, (evaluation) => evaluation.ppp),
+    __metadata("design:type", Array)
+], PPPEntity.prototype, "evaluations", void 0);
+PPPEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'ppp' })
 ], PPPEntity);
+exports.PPPEntity = PPPEntity;
 //# sourceMappingURL=ppp.entity.js.map
