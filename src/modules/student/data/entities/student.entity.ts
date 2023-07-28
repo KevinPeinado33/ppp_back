@@ -19,10 +19,13 @@ export class StudentEntity {
 
     @Column({ type: 'varchar', name: 'url_cv' })
     urlCv!: string
-
+    
     @Column({ type: 'integer', name: 'final_rate' })
     finalRate!: number
-
+    
+    @Column({ type: 'varchar', name: 'plan_ppp' })
+    planPPP!: string
+    
     @Column({ type: 'varchar', unique: true, name: 'user_id' })
     userId!: string
 
