@@ -23,9 +23,10 @@
 
 /**
 * @swagger
- * /update-assing-advisor-ppp/{idPPP}/{advisorID}:
+ * /api/ppp/update-assing-advisor-ppp/{idPPP}/{advisorID}:
  *   put:
  *     summary: Actualiza la asignación de un asesor a un PPP (Proyecto de Prácticas Profesionales).
+ *     tags: [ PPP ]
  *     description: Actualiza la asignación de un asesor a un PPP identificado por su idPPP y el ID del asesor.
  *     parameters:
  *       - in: path

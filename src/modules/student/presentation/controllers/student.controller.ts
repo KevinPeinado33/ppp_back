@@ -21,9 +21,12 @@ export class StudentController {
 
     getAllStudents(req: Request, res: Response) {
 
+        const { planPPP } = req.params
+        
         const usecase = new FindAllStudentUseCase(
             res,
-            this.studentRepository
+            this.studentRepository,
+            planPPP
         )
 
         usecase.execute()
