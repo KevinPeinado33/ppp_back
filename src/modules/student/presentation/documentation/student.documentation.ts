@@ -4,6 +4,8 @@
  *   get:
  *     summary: Obtiene todos los estudiantes.
  *     tags: [Estudiantes]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Lista de todos los estudiantes.
