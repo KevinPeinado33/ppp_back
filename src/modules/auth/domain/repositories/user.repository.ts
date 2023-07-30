@@ -9,5 +9,6 @@ export interface UserRepository {
     save(userCreated: UserEntity)         : Promise< UserEntity >
     findAll()                             : Promise< UserEntity[] >
     findById(id: string)                  : Promise< UserEntity | null >
+    findByRol(rolSearch: string)          : Promise< UserEntity[] >
     
 }
