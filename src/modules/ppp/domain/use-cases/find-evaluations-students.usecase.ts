@@ -22,7 +22,7 @@ export class FindEvaluationsStudentsUseCase {
                 return message({
                     response: this.response,
                     code: CODE_STATUS.NOT_FOUND,
-                    info: `No es hallarón evaluaciones con el PPP #${ this.idPpp }.`
+                    info: `No se encontraron evaluaciones con el PPP #${ this.idPpp }.`
                 })
             }
 

@@ -1,1 +1,3 @@
 export * from './find-evaluations-students.usecase'
+export * from './find-satisfaction-evaluations.usecase'
+export * from './find-documents-ppp.usecase'

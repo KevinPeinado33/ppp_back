@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { PPPEntity } from "./ppp.entity";
+import { QuestionAnswerEntity } from "./question-answer.entity";
 
 @Entity({ name: 'evaluation'})
 export class EvaluationEntity {
@@ -50,4 +51,10 @@ export class EvaluationEntity {
         ( ppp ) => ppp.evaluations
     )
     ppp!: PPPEntity
+
+    @OneToMany(
+        () => QuestionAnswerEntity,
+        (question) => question.evaluations
+    )
+    questionAnswer!: QuestionAnswerEntity[]
 }
