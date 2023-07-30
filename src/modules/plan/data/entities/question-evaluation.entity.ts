@@ -2,7 +2,7 @@ import { Column, Entity, Index, ManyToOne, PrimaryGeneratedColumn } from 'typeor
 
 import { AreaPlanEntity } from './'
 
-@Entity({ name: 'question-evaluations' })
+@Entity({ name: 'question_evaluations' })
 export class QuestionEvaluationEntity {
 
     @PrimaryGeneratedColumn('uuid')

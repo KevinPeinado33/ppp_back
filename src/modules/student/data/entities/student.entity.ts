@@ -23,7 +23,7 @@ export class StudentEntity {
     @Column({ type: 'integer', name: 'final_rate' })
     finalRate!: number
     
-    @Column({ type: 'varchar', name: 'plan_ppp' })
+    @Column({ type: 'varchar', name: 'plan_ppp', nullable: true })
     planPPP!: string
     
     @Column({ type: 'varchar', unique: true, name: 'user_id' })
