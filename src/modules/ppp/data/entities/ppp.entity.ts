@@ -3,6 +3,7 @@ import { StudentEntity } from "../../../student/data/entities";
 import { PlanPPPEntity } from "../../../plan/data/entities";
 import { UserEntity } from "../../../auth/data/entities";
 import { EvaluationEntity } from "./evaluation.entity";
+import { PPPDocumentsEntity } from "./ppp-documents.entity";
 
 @Entity ({ name: 'ppp'})
 export class PPPEntity {
@@ -61,4 +62,10 @@ export class PPPEntity {
         ( evaluation ) => evaluation.ppp
     )
     evaluations!: EvaluationEntity[]
+
+    @OneToMany(
+        () => PPPDocumentsEntity,
+        (pppDocuments) => pppDocuments.ppp
+    )
+    pppDocuments!: PPPDocumentsEntity[]
 }
