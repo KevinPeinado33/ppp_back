@@ -9,8 +9,8 @@ export class StudentRepositoryImpl implements StudentRepository {
 
     constructor() { }
 
-    async getAllStudents(): Promise< StudentEntity[] > {
-        return await this.repository.find()
+    async getAllStudents(planPPP: string): Promise< StudentEntity[] > {
+        return await this.repository.findBy({ planPPP })
     }
 
 }

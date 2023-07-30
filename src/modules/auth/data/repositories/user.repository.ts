@@ -29,6 +29,16 @@ export class UserRepositoryImpl implements UserRepository {
     async findById(id: string): Promise<UserEntity | null> {
         return await this.userRepository.findOneBy({ id })
     }
-    
+
+    async findByRol(rolSearch: string): Promise<UserEntity[]> {
+        
+        return await this.userRepository
+                            .createQueryBuilder('u')
+                            .leftJoin('roles_user', 'ru', 'u.id = ru.userId')
+                            .leftJoin('roles', 'r', 'ru.roleId = r.id')
+                            .where('r.name = :name', { name: rolSearch })
+                            .getMany()
+
+    }    
 
 }

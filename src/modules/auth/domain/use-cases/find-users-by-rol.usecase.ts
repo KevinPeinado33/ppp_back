@@ -1,35 +1,37 @@
 import { Response } from 'express'
 
-import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok'
+import { UserRepository } from '../repositories'
 import { message } from '../../../../common/responses/msg.response'
-import { StudentRepository } from '../repositories'
+import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok'
 
-export class FindAllStudentUseCase {
-    
+export class FindUsersByRolUseCase {
+
     constructor(
         private readonly response   : Response,
-        private readonly repository : StudentRepository,
-        private readonly planPPPId  : string
-    ) { }
+        private readonly repository : UserRepository,
+        private readonly rolSearch  : string
+    ) {
+
+    }
 
     async execute() {
         
         try {
 
-            const students = await this.repository.getAllStudents( this.planPPPId )
+            const users = await this.repository.findByRol( this.rolSearch )
 
-            if ( students.length === 0 ) {
+            if ( users.length === 0 ) {
                 return message({
                     response: this.response,
                     code: CODE_STATUS.NOT_FOUND,
-                    info: 'No existen estudiantes aún.'
+                    info: `No encontramos usuarios con rol #${ this.rolSearch }`
                 })
             }
 
             message({
                 response: this.response,
                 code: CODE_STATUS.OK,
-                data: students
+                data: users
             })
 
         } catch( error ) {
@@ -41,5 +43,5 @@ export class FindAllStudentUseCase {
         }
 
     }
-
+    
 }
