@@ -15,9 +15,7 @@ import {
   QuestionEvaluationEntity,
   TypeDocumentEntity,
 } from '../../modules/plan/data/entities'
-import { RolesEntity } from '../../modules/auth/data/entities/roles.entity'
-import { RoleUserEntity } from '../../modules/auth/data/entities/roles-users.entity'
-import { PPPEntity } from '../../modules/ppp/data/entities'
+import { PPPDocumentsEntity, PPPEntity, QuestionAnswerEntity } from '../../modules/ppp/data/entities'
 import { EvaluationEntity } from '../../modules/ppp/data/entities/evaluation.entity'
 
 

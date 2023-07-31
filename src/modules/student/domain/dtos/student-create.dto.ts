@@ -1,6 +1,6 @@
 import Joi from 'joi'
 
-export class StudentCreateEntity {
+export class StudentCreateDto {
     
     code!           : string
     cycle!          : string
