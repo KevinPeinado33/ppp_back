@@ -4,13 +4,14 @@ exports.FindAllStudentUseCase = void 0;
 const code_status_ok_1 = require("../../../../common/responses/code/code-status.ok");
 const msg_response_1 = require("../../../../common/responses/msg.response");
 class FindAllStudentUseCase {
-    constructor(response, repository) {
+    constructor(response, repository, planPPPId) {
         this.response = response;
         this.repository = repository;
+        this.planPPPId = planPPPId;
     }
     async execute() {
         try {
-            const students = await this.repository.getAllStudents();
+            const students = await this.repository.getAllStudents(this.planPPPId);
             if (students.length === 0) {
                 return (0, msg_response_1.message)({
                     response: this.response,

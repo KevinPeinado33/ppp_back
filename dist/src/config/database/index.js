@@ -5,8 +5,6 @@ const typeorm_1 = require("typeorm");
 const entities_1 = require("../../modules/auth/data/entities");
 const entities_2 = require("../../modules/student/data/entities");
 const entities_3 = require("../../modules/plan/data/entities");
-const roles_entity_1 = require("../../modules/auth/data/entities/roles.entity");
-const roles_users_entity_1 = require("../../modules/auth/data/entities/roles-users.entity");
 const entities_4 = require("../../modules/ppp/data/entities");
 const evaluation_entity_1 = require("../../modules/ppp/data/entities/evaluation.entity");
 exports.AppDataSource = new typeorm_1.DataSource({
@@ -27,10 +25,12 @@ exports.AppDataSource = new typeorm_1.DataSource({
         // Auth
         entities_1.AccessEntity,
         entities_1.AccessRoleEntity,
-        roles_entity_1.RolesEntity,
-        roles_users_entity_1.RoleUserEntity,
+        entities_1.RolesEntity,
+        entities_1.RoleUserEntity,
         entities_4.PPPEntity,
         evaluation_entity_1.EvaluationEntity,
+        entities_4.QuestionAnswerEntity,
+        entities_4.PPPDocumentsEntity,
     ],
     logging: false,
     synchronize: true,

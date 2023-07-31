@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EvaluationEntity = void 0;
 const typeorm_1 = require("typeorm");
 const ppp_entity_1 = require("./ppp.entity");
+const question_answer_entity_1 = require("./question-answer.entity");
 let EvaluationEntity = class EvaluationEntity {
 };
 __decorate([
@@ -65,6 +66,10 @@ __decorate([
     (0, typeorm_1.ManyToOne)(() => ppp_entity_1.PPPEntity, (ppp) => ppp.evaluations),
     __metadata("design:type", ppp_entity_1.PPPEntity)
 ], EvaluationEntity.prototype, "ppp", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => question_answer_entity_1.QuestionAnswerEntity, (question) => question.evaluations),
+    __metadata("design:type", Array)
+], EvaluationEntity.prototype, "questionAnswer", void 0);
 EvaluationEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'evaluation' })
 ], EvaluationEntity);
