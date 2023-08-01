@@ -9,12 +9,17 @@ const {
 
     getOneByCode,
     getAllStudents,
+    getStudentsSemester,
+    getStudentsProcessEnd,
     postCreateListStudents
+    
     
 } = new StudentController()
 
 router.get('/get-by-code', validateJWT, getOneByCode)
 router.get('/get-students-by-plan-ppp/:planPPP', validateJWT , getAllStudents)
+router.get('/get-students-by-semester/:cycle', getStudentsSemester)
+router.get('/get-students-process-or-end/:statusParams', getStudentsProcessEnd)
 router.post('/create-list-students', validateJWT, postCreateListStudents)
 
 export default router
