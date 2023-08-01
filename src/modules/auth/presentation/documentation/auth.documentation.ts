@@ -98,6 +98,7 @@
  *         description: Token de autenticación de usuario.
  *
  */
+
 /**
  * @swagger
  * /api/auth/sign-in:
@@ -127,6 +128,7 @@
  *      401:
  *        description: Credenciales inválidas, inicio de sesión fallido.
  */
+
 /**
  * @swagger
  * /api/user/get-all:
@@ -154,4 +156,37 @@
  *           type: string
  *         required: true
  *         description: Token de autenticación de usuario.
+ */
+
+/**
+ * @swagger
+ * /get-users-by-rol/{rolSearch}:
+ *   get:
+ *     summary: Obtener usuarios por rol.
+ *     tags: [Usuario]
+ *     security:
+ *       - bearerAuth: []
+ *     description: Obtiene una lista de usuarios que tienen el rol especificado.
+ *     parameters:
+ *       - in: path
+ *         name: rolSearch
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Rol por el cual se buscarán los usuarios.
+ *     responses:
+ *       200:
+ *         description: Respuesta exitosa. Devuelve la lista de usuarios que tienen el rol especificado.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/User' # Reemplaza esto con la referencia al esquema del usuario
+ *       400:
+ *         description: Solicitud incorrecta. El rol proporcionado no es válido o está mal formateado.
+ *       404:
+ *         description: No se encontraron usuarios con el rol especificado.
+ *       500:
+ *         description: Error interno del servidor.
  */
