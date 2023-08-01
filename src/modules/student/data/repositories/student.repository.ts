@@ -5,6 +5,8 @@ import { StudentEntity } from '../entities'
 
 export class StudentRepositoryImpl implements StudentRepository {
 
+    private STUDENT_PROCESS_END = 0
+
     private readonly repository = AppDataSource.getRepository( StudentEntity )
 
     constructor() { }    
@@ -18,11 +20,23 @@ export class StudentRepositoryImpl implements StudentRepository {
     }
 
     async findStudentsSemester(cycle: number): Promise<StudentEntity[]> {
-        return await this.repository.findBy({cycle})
+        return await this.repository.findBy({ cycle })
     }
 
     async findStudentsProcessEnd(finalRate:number): Promise<StudentEntity[]> {
-        return await this.repository.findBy({finalRate})
+    
+        const studentQry = this.repository.createQueryBuilder('student')
+
+        if ( finalRate === this.STUDENT_PROCESS_END ) {
+            studentQry.where('student.final_rate <> 0')
+        }
+
+        if ( finalRate !== this.STUDENT_PROCESS_END ) {
+            studentQry.where('student.final_rate = 0')
+        }
+
+        return await studentQry.getMany()
+
     }
 
 }

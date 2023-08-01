@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryColumn, OneToMany } from 'typeorm'
+import { Entity, Column, PrimaryColumn, OneToMany, OneToOne } from 'typeorm'
 
 import { PPPEntity } from '../../../ppp/data/entities'
+import { UserEntity } from '../../../auth/data/entities'
 
 @Entity({ name: 'students' })
 export class StudentEntity {
@@ -25,10 +26,8 @@ export class StudentEntity {
     
     @Column({ type: 'varchar', name: 'plan_ppp', nullable: true })
     planPPP!: string
-    
-    @Column({ type: 'varchar', unique: true, name: 'user_id' })
-    userId!: string
 
+    
     /**
      * Relaciones entre tablas
      */
@@ -38,5 +37,10 @@ export class StudentEntity {
     )
     ppp!: PPPEntity[]
 
+    @OneToOne(
+        () => UserEntity,
+        ( user ) => user.student
+    )
+    user!: UserEntity
 
 }
