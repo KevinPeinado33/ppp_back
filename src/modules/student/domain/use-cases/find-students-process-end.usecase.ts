@@ -1,9 +1,8 @@
-import { Response } from 'express';
+import { Response } from 'express'
 
-import { message } from "../../../../common/responses/msg.response";
-import { StudentRepository } from "../repositories";
-import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok';
-import { UserRepository } from '../../../auth/domain/repositories/user.repository';
+import { message } from "../../../../common/responses/msg.response"
+import { StudentRepository } from "../repositories"
+import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok'
 
 export class FindStudentsProcessOrEnd {
 
@@ -12,7 +11,6 @@ export class FindStudentsProcessOrEnd {
     constructor(
         private readonly response: Response,
         private readonly repository: StudentRepository,
-        private readonly userRepository: UserRepository,
         private readonly statusParams: number
     ) { }
 
@@ -25,8 +23,6 @@ export class FindStudentsProcessOrEnd {
              * 1 = proceso
              */
             const students = await this.repository.findStudentsProcessEnd(this.statusParams)
-
-            // TODO: traer la info de la tabla usuario
 
             if (students.length === 0) {
                 return message({
@@ -49,7 +45,7 @@ export class FindStudentsProcessOrEnd {
                 info: error
             })
         }
-    }
 
+    }
 
 }

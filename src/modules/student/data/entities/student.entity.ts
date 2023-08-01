@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryColumn, OneToMany, OneToOne } from 'typeorm'
+import { Entity, Column, PrimaryColumn, OneToMany, OneToOne, JoinColumn } from 'typeorm'
 
 import { PPPEntity } from '../../../ppp/data/entities'
 import { UserEntity } from '../../../auth/data/entities'
@@ -39,8 +39,9 @@ export class StudentEntity {
 
     @OneToOne(
         () => UserEntity,
-        ( user ) => user.student
+        ( user ) => user.student,
     )
+    @JoinColumn()
     user!: UserEntity
 
 }

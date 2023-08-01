@@ -35,6 +35,8 @@ export class StudentRepositoryImpl implements StudentRepository {
             studentQry.where('student.final_rate = 0')
         }
 
+        studentQry.innerJoinAndSelect('student.user', 'user')
+
         return await studentQry.getMany()
 
     }
