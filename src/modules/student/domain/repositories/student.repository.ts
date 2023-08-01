@@ -7,5 +7,4 @@ export abstract class StudentRepository {
     abstract findStudentsProcessEnd(finalRate: number)      : Promise< StudentEntity[] >
     abstract save(student: StudentEntity)                   : Promise< StudentEntity >
     
-
 }

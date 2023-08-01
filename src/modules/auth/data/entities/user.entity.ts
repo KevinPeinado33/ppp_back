@@ -1,9 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne, JoinColumn } from 'typeorm'
 
 import { PlanPPPEntity } from '../../../plan/data/entities'
-import { RoleUserEntity } from './'
 import { PPPEntity } from '../../../ppp/data/entities'
 import { StudentEntity } from '../../../student/data/entities'
+import { RoleUserEntity } from './'
+
 @Entity({ name: 'users' })
 export class UserEntity {
 
@@ -60,7 +61,7 @@ export class UserEntity {
 
   @OneToOne(
     () => StudentEntity,
-    ( student ) => student.user
+    ( student ) => student.user,
   )
   student!: StudentEntity
 
