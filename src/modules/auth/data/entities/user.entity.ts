@@ -1,8 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne } from 'typeorm'
 
 import { PlanPPPEntity } from '../../../plan/data/entities'
 import { RoleUserEntity } from './'
 import { PPPEntity } from '../../../ppp/data/entities'
+import { StudentEntity } from '../../../student/data/entities'
 @Entity({ name: 'users' })
 export class UserEntity {
 
@@ -56,5 +57,11 @@ export class UserEntity {
     ( ppp ) => ppp.advisor 
   )
   ppp!: PPPEntity[]
+
+  @OneToOne(
+    () => StudentEntity,
+    ( student ) => student.user
+  )
+  student!: StudentEntity
 
 }
