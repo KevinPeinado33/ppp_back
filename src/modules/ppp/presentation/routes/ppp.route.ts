@@ -23,8 +23,8 @@ const {
 route.get('/get-evaluation-by-ppp/:idPPP', validateJWT, getEvaluationHistory)
 route.put('/update-assing-advisor-ppp/:idPPP/:advisorID', validateJWT, updateAssingAdvisor)
 
-route.get('/get-result-satisfaction/:idEvaluation', getResultSatisfaction)
+route.get('/get-result-evaluation/:idEvaluation', validateJWT, getResultSatisfaction)
 
-route.get('/get-documents-ppp/:idPPP', getDocumentsPPP)
+route.get('/get-documents-ppp/:idPPP', validateJWT, getDocumentsPPP)
 
 export default route 
