@@ -1,36 +1,28 @@
 /**
  * @swagger
- * /api/ppp/get-result-satisfaction/{idEvaluation}:
+ * /api/ppp/get-result-evaluation/{idEvaluation}:
  *   get:
- *     summary: Obtener resultado de satisfacción por ID de evaluación.
- *     tags: [ PPP ]
+ *     summary: Obtener un resultado de evaluación por ID
+ *     description: Obtiene un resultado de evaluación específico según su ID.
+ *     tags: [Resultados de Evaluación]
+ *     security:
+ *       - BearerAuth: []
  *     parameters:
  *       - in: path
  *         name: idEvaluation
  *         schema:
  *           type: string
- *           format: uuid
  *         required: true
- *         description: ID de la evaluación para obtener el resultado de satisfacción.
+ *         description: ID del resultado de evaluación a obtener.
  *     responses:
- *       200:
- *         description: Resultado de satisfacción obtenido exitosamente.
+ *       '200':
+ *         description: Respuesta exitosa con el resultado de evaluación solicitado.
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 evaluationId:
- *                   type: string
- *                   description: ID de la evaluación.
- *                 satisfactionScore:
- *                   type: number
- *                   description: Puntuación de satisfacción obtenida en la evaluación.
- *                 comments:
- *                   type: string
- *                   description: Comentarios adicionales proporcionados en la evaluación.
- *       404:
- *         description: No se encontró la evaluación o no tiene un resultado de satisfacción asociado.
- *       500:
- *         description: Error del servidor al obtener el resultado de satisfacción.
+ *               $ref: '#/components/schemas/ResultEvaluation'
+ *       '404':
+ *         description: Resultado de evaluación no encontrado.
+ *       '500':
+ *         description: Error del servidor al obtener el resultado de evaluación.
  */
