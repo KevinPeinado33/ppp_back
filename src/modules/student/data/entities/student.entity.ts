@@ -24,6 +24,10 @@ export class StudentEntity {
     @Column({ type: 'float', name: 'final_rate', nullable:true })
     finalRate!: number
     
+    /**
+     * Se agrego esto para hacer las consultas de manera 
+     * mas rapido
+     */
     @Column({ type: 'varchar', name: 'plan_ppp', nullable: true })
     planPPP!: string
 

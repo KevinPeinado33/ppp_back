@@ -41,13 +41,19 @@ export class StudentRepositoryImpl implements StudentRepository {
 
     }
 
-    async findOneByCode(codeStudent: string): Promise<StudentEntity | null> {
-        return await this
-                        .repository
-                        .findOne({ 
-                            where: { code: codeStudent },
-                            relations: ['user']
-                        })
+    async findOneByCode(codeStudent: string, withRelation: boolean = true ): Promise<StudentEntity | null> {
+        
+        if ( withRelation ) {
+            return await this
+                            .repository
+                            .findOne({ 
+                                where: { code: codeStudent },
+                                relations: ['user']
+                            })
+        }
+
+        return await this.repository.findOneBy({ code: codeStudent })
+
     }
 
 }

@@ -1,6 +1,8 @@
 import Joi from 'joi'
 
-export class StudentCreateDto {
+import { CreateUserDto } from '../../../auth/domain/dtos'
+
+export class StudentCreateOneSelfDto {
 
     code!           : string
     cycle!          : number
@@ -9,7 +11,7 @@ export class StudentCreateDto {
     urlCv?          : string
     finalRate!      : number
     planPPP!        : string
-    userId?         : string
+    user!           : CreateUserDto
 
     constructor() { }
 
@@ -21,7 +23,7 @@ export class StudentCreateDto {
         urlCv          : Joi.string().uri(),
         finalRate      : Joi.number(),
         planPPP        : Joi.string(),
-        userId         : Joi.string(),
+        user           : CreateUserDto.schema.required()
     })
 
 }

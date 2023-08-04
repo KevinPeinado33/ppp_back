@@ -3,24 +3,32 @@ import { Request, Response } from 'express'
 import { FindAllStudentUseCase, CreateListStudentsUseCase, FindStudentsSemesterUseCase, FindStudentsProcessOrEnd, FindStudentUseCase } from '../../domain/use-cases'
 import { StudentRepository } from '../../domain/repositories'
 import { StudentRepositoryImpl } from '../../data/repositories'
-import { StudentCreateDto } from '../../domain/dtos'
+import { StudentCreateDto, StudentCreateOneSelfDto } from '../../domain/dtos'
 import { PPPRepository } from '../../../ppp/domain/repositories'
 import { PPPRepositoryImpl } from '../../../ppp/data/repositories'
+import { CreateOneSelfStudentUseCase } from '../../domain/use-cases/create-oneself-student.usecase'
+import { UserRepository } from '../../../auth/domain/repositories'
+import { UserRepositoryImpl } from '../../../auth/data/repositories'
 
 export class StudentController {
 
     private studentRepository : StudentRepository
     private pppRepository     : PPPRepository
+    private userRepository    : UserRepository
+
+
     constructor() {
 
         this.studentRepository = new StudentRepositoryImpl()
         this.pppRepository     = new PPPRepositoryImpl()
+        this.userRepository    = new UserRepositoryImpl()
 
         this.getStudentByCode       = this.getStudentByCode.bind(this)
         this.getAllStudents         = this.getAllStudents.bind(this)
         this.getStudentsSemester    = this.getStudentsSemester.bind(this)
         this.postCreateListStudents = this.postCreateListStudents.bind(this)
         this.getStudentsProcessEnd  = this.getStudentsProcessEnd.bind( this )
+        this.postCreateStudent      = this.postCreateStudent.bind( this )
 
     }
 
@@ -65,7 +73,7 @@ export class StudentController {
         usecase.execute()
     }
 
-    getStudentsProcessEnd(req: Request, res: Response){
+    getStudentsProcessEnd(req: Request, res: Response) {
         
         const { finalRate } = req.params
 
@@ -87,6 +95,21 @@ export class StudentController {
             res,
             this.studentRepository,
             listStudents
+        )
+
+        usecase.execute()
+
+    }
+
+    postCreateStudent(req: Request, res: Response) {
+
+        const createStudentDto = req.body as StudentCreateOneSelfDto
+
+        const usecase = new CreateOneSelfStudentUseCase(
+            res,
+            this.studentRepository,
+            this.userRepository,
+            createStudentDto
         )
 
         usecase.execute()
