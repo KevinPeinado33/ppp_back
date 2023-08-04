@@ -1,9 +1,10 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { StudentEntity } from "../../../student/data/entities";
 import { PlanPPPEntity } from "../../../plan/data/entities";
 import { UserEntity } from "../../../auth/data/entities";
 import { EvaluationEntity } from "./evaluation.entity";
 import { PPPDocumentsEntity } from "./ppp-documents.entity";
+import { CompanyEntity } from './company.entity';
 
 @Entity ({ name: 'ppp'})
 export class PPPEntity {
@@ -14,7 +15,7 @@ export class PPPEntity {
     @Column({ type:'integer', name:'intership_hours'})
     intershipHours!: number
 
-    @Column({ type: 'text', array: true })
+    @Column({ type: 'text', nullable: true })
     area!: string
 
     @CreateDateColumn({
@@ -68,4 +69,10 @@ export class PPPEntity {
         (pppDocuments) => pppDocuments.ppp
     )
     pppDocuments!: PPPDocumentsEntity[]
+
+    @OneToOne(
+        () => CompanyEntity,
+        ( company ) => company.ppp
+    )
+    company!: CompanyEntity
 }

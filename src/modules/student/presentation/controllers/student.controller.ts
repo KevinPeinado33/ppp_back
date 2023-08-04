@@ -1,27 +1,43 @@
 import { Request, Response } from 'express'
 
-import { FindAllStudentUseCase, CreateListStudentsUseCase, FindStudentsSemesterUseCase, FindStudentsProcessOrEnd } from '../../domain/use-cases'
+import { FindAllStudentUseCase, CreateListStudentsUseCase, FindStudentsSemesterUseCase, FindStudentsProcessOrEnd, FindStudentUseCase } from '../../domain/use-cases'
 import { StudentRepository } from '../../domain/repositories'
 import { StudentRepositoryImpl } from '../../data/repositories'
 import { StudentCreateDto } from '../../domain/dtos'
+import { PPPRepository } from '../../../ppp/domain/repositories'
+import { PPPRepositoryImpl } from '../../../ppp/data/repositories'
 
 export class StudentController {
 
-    private studentRepository: StudentRepository
-
+    private studentRepository : StudentRepository
+    private pppRepository     : PPPRepository
     constructor() {
 
-        this.studentRepository = new StudentRepositoryImpl
+        this.studentRepository = new StudentRepositoryImpl()
+        this.pppRepository     = new PPPRepositoryImpl()
 
-        this.getOneByCode = this.getOneByCode.bind(this)
-        this.getAllStudents = this.getAllStudents.bind(this)
-        this.getStudentsSemester = this.getStudentsSemester.bind(this)
+        this.getStudentByCode       = this.getStudentByCode.bind(this)
+        this.getAllStudents         = this.getAllStudents.bind(this)
+        this.getStudentsSemester    = this.getStudentsSemester.bind(this)
         this.postCreateListStudents = this.postCreateListStudents.bind(this)
-        this.getStudentsProcessEnd = this.getStudentsProcessEnd.bind( this )
+        this.getStudentsProcessEnd  = this.getStudentsProcessEnd.bind( this )
 
     }
 
-    getOneByCode(request: Request, response: Response) { }
+    getStudentByCode(req: Request, res: Response) {
+
+        const { codeStudent } = req.params
+
+        const usecase = new FindStudentUseCase(
+            res,
+            this.studentRepository,
+            this.pppRepository,
+            codeStudent
+        )
+
+        usecase.execute()
+
+    }
 
     getAllStudents(req: Request, res: Response) {
 

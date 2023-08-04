@@ -10,7 +10,7 @@ export class StudentRepositoryImpl implements StudentRepository {
     private readonly repository = AppDataSource.getRepository( StudentEntity )
 
     constructor() { }    
-
+    
     async getAllStudents(planPPP: string): Promise< StudentEntity[] > {
         return await this.repository.findBy({ planPPP })
     }
@@ -39,6 +39,15 @@ export class StudentRepositoryImpl implements StudentRepository {
 
         return await studentQry.getMany()
 
+    }
+
+    async findOneByCode(codeStudent: string): Promise<StudentEntity | null> {
+        return await this
+                        .repository
+                        .findOne({ 
+                            where: { code: codeStudent },
+                            relations: ['user']
+                        })
     }
 
 }
