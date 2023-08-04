@@ -1,5 +1,8 @@
 import { DataSource } from 'typeorm'
 
+import { 
+  StudentEntity 
+} from '../../modules/student/data/entities'
 import {
   AccessEntity,
   AccessRoleEntity,
@@ -7,7 +10,6 @@ import {
   RolesEntity,
   RoleUserEntity
 } from '../../modules/auth/data/entities'
-import { StudentEntity } from '../../modules/student/data/entities'
 import {
   AreaPlanEntity,
   PlanDocumentEntity,
@@ -15,8 +17,14 @@ import {
   QuestionEvaluationEntity,
   TypeDocumentEntity,
 } from '../../modules/plan/data/entities'
-import { PPPDocumentsEntity, PPPEntity, QuestionAnswerEntity, EvaluationEntity } from '../../modules/ppp/data/entities'
 
+import { 
+  PPPDocumentsEntity, 
+  PPPEntity, 
+  QuestionAnswerEntity, 
+  CompanyEntity, 
+  EvaluationEntity 
+} from '../../modules/ppp/data/entities'
 
 
 export const AppDataSource = new DataSource({
@@ -34,6 +42,7 @@ export const AppDataSource = new DataSource({
     PlanDocumentEntity,
     QuestionEvaluationEntity,
     TypeDocumentEntity,
+    CompanyEntity,
 
     // Auth
     AccessEntity,

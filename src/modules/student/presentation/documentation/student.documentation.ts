@@ -44,27 +44,13 @@
  *              userId: "1a2b3c4d5e6f7g8h9i0j"
  */
 
-/**
- * @swagger
- * /api/student/get-all-students:
- *   get:
- *     summary: Obtiene todos los estudiantes.
- *     tags: [Estudiantes]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: Lista de todos los estudiantes.
- *       500:
- *         description: Error del servidor al obtener estudiantes.
- */
 
 /**
  * @swagger
  * /api/student/create-list-students:
  *   post:
  *     summary: Crea una lista de estudiantes.
- *     tags: [Estudiantes]
+ *     tags: [Estudiante]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -97,3 +83,40 @@
  *         required: true
  *         description: Token de autenticación de usuario (JWT).
  */
+/**
+ * @swagger
+ * /api/student/get-by-code/{codeStudent}:
+ *   get:
+ *     summary: Obtener estudiante por código (Para ver el perfil).
+ *     tags: [Estudiante]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: codeStudent
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Código del estudiante a buscar.
+ *       - in: header
+ *         name: x-token
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Token de autenticación de usuario (JWT).
+ *     responses:
+ *       200:
+ *         description: Estudiante encontrado exitosamente.
+ *       401:
+ *         description: No autorizado. El token de acceso no fue proporcionado o es inválido.
+ *       404:
+ *         description: Estudiante no encontrado.
+ *       500:
+ *         description: Error del servidor al buscar el estudiante.
+ *     securitySchemes:
+ *       bearerAuth:
+ *         type: http
+ *         scheme: bearer
+ *         bearerFormat: JWT
+ */
+
