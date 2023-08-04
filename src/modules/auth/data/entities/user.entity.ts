@@ -41,6 +41,9 @@ export class UserEntity {
   @Column({ type: 'boolean', default: true })
   status!: boolean
 
+  /**
+   * Relaciones entre tablas
+   */
   @OneToMany(
     () => RoleUserEntity,
     (rolesUser) => rolesUser.role
