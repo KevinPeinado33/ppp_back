@@ -7,6 +7,7 @@ import { generateKey } from '../../../../common/utils/jwt'
 
 import { UserRepository } from '../repositories'
 import { LoginDto } from '../dtos'
+import { UserEntity } from '../../data/entities'
 
 export class LoginUseCase {
     
@@ -58,15 +59,30 @@ export class LoginUseCase {
                 })
             }
 
+            const permissionsFound = await this.repository.findByIdWithRolesAndAccess( userFound.id! )
+
+            if ( !permissionsFound ) {
+                return message({
+                    response: this.response,
+                    code: CODE_STATUS.BAD_REQUEST,
+                    info: `No tienes roles, contacta al admin.`
+                })
+            }
+
+            const { roles, accesses }            = this.extractRolesAndAccessFromJson( permissionsFound )
+            const { password, ...restUserFound } = userFound
+
             const token = await generateKey( userFound.id! )
 
             message({
                 response: this.response,
                 code: CODE_STATUS.OK,
-                info: 'Inicio de sesión correcto.',
+                info: `Bienvenido ${ userFound.firstName }`,
                 data: {
-                    ...userFound,
-                    token
+                    ...restUserFound,
+                    token,
+                    roles,
+                    accesses
                 }
             })
 
@@ -80,4 +96,53 @@ export class LoginUseCase {
 
     }
 
+    extractRolesAndAccessFromJson( data: UserEntity ): { roles: IRole[], accesses: IAccess[] } {
+
+        let roles   : IRole[]   = []
+        let accesses: IAccess[] = []
+
+        // Tiene roles este usuario?
+        if ( data.roleUser ) {
+
+            data.roleUser.forEach( ({ role }: any) => {
+
+                roles.push({
+                    name       : role[0].name,
+                    description: role[0].description
+                })
+    
+                // Tiene accessos esos roles?
+                if ( role[0].accessRoles ) {
+
+                    role[0].accessRoles.forEach( ({ access }: any) => {
+                                
+                        accesses.push({
+                            path: access[0].path,
+                            name: access[0].name,
+                            icon: access[0].icon
+                        })
+                        
+                    })
+
+                }    
+    
+            })   
+
+        }
+
+        return { roles, accesses }
+
+    }
+
+}
+
+interface IRole {
+    name       : string
+    description: string
+}
+
+interface IAccess {
+    path: string
+    name: string
+    icon: string
 }

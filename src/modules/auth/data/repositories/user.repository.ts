@@ -2,14 +2,14 @@ import { AppDataSource } from '../../../../config/database'
 import { CreateUserDto } from '../../domain/dtos'
 
 import { UserRepository } from '../../domain/repositories'
-import { UserEntity } from '../entities'
+import { AccessEntity, AccessRoleEntity, RoleUserEntity, RolesEntity, UserEntity } from '../entities'
 
 export class UserRepositoryImpl implements UserRepository {
 
     private userRepository = AppDataSource.getRepository( UserEntity )
 
     constructor() { }
-    
+        
     findUserByEmail(userName: string): Promise< UserEntity | null > {
         return this.userRepository.findOneBy({ userName })
     }
@@ -40,5 +40,18 @@ export class UserRepositoryImpl implements UserRepository {
                             .getMany()
 
     }    
+
+    async findByIdWithRolesAndAccess(userId: string): Promise<UserEntity | null> {
+        
+        return await this.userRepository
+                            .createQueryBuilder('user')
+                            .leftJoinAndMapMany('user.roleUser', RoleUserEntity, 'roleUser', 'roleUser.userId = user.id')
+                            .leftJoinAndMapMany('roleUser.role', RolesEntity, 'role', 'role.id = roleUser.roleId')
+                            .leftJoinAndMapMany('role.accessRoles', AccessRoleEntity, 'accessRole', 'accessRole.roleId = role.id')
+                            .leftJoinAndMapMany('accessRole.access', AccessEntity, 'access', 'access.id = accessRole.accessId')
+                            .where('user.id = :userId', { userId })
+                            .getOne()
+                        
+    }
 
 }
