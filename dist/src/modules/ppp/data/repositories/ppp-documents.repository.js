@@ -14,6 +14,9 @@ class PPPDocumentsRepositoryImpl {
             .where('document.pppId = :idPPP', { idPPP })
             .getMany();
     }
+    async create(newDocument) {
+        return await this.repository.create(newDocument);
+    }
 }
 exports.PPPDocumentsRepositoryImpl = PPPDocumentsRepositoryImpl;
 //# sourceMappingURL=ppp-documents.repository.js.map

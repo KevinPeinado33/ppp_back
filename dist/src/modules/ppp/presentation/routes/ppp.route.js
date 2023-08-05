@@ -9,7 +9,7 @@ const { getEvaluationHistory, getResultSatisfaction, getDocumentsPPP } = new eva
 const { updateAssingAdvisor } = new ppp_controller_1.PPPController();
 route.get('/get-evaluation-by-ppp/:idPPP', jwt_1.validateJWT, getEvaluationHistory);
 route.put('/update-assing-advisor-ppp/:idPPP/:advisorID', jwt_1.validateJWT, updateAssingAdvisor);
-route.get('/get-result-satisfaction/:idEvaluation', getResultSatisfaction);
-route.get('/get-documents-ppp/:idPPP', getDocumentsPPP);
+route.get('/get-result-evaluation/:idEvaluation', jwt_1.validateJWT, getResultSatisfaction);
+route.get('/get-documents-ppp/:idPPP', jwt_1.validateJWT, getDocumentsPPP);
 exports.default = route;
 //# sourceMappingURL=ppp.route.js.map

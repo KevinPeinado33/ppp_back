@@ -18,4 +18,5 @@ __exportStar(require("./ppp.entity"), exports);
 __exportStar(require("./evaluation.entity"), exports);
 __exportStar(require("./question-answer.entity"), exports);
 __exportStar(require("./ppp-documents.entity"), exports);
+__exportStar(require("./company.entity"), exports);
 //# sourceMappingURL=index.js.map

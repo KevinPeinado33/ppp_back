@@ -17,4 +17,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./find-student.usecase"), exports);
 __exportStar(require("./find-all-student.usecase"), exports);
 __exportStar(require("./create-list-students.usecase"), exports);
+__exportStar(require("./find-students-semester.usecase"), exports);
+__exportStar(require("./find-students-process-end.usecase"), exports);
 //# sourceMappingURL=index.js.map

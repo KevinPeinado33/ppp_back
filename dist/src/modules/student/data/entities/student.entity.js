@@ -12,7 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.StudentEntity = void 0;
 const typeorm_1 = require("typeorm");
 const entities_1 = require("../../../ppp/data/entities");
-let StudentEntity = class StudentEntity {
+const entities_2 = require("../../../auth/data/entities");
+let StudentEntity = exports.StudentEntity = class StudentEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryColumn)({ type: 'varchar' }),
@@ -43,15 +44,15 @@ __decorate([
     __metadata("design:type", String)
 ], StudentEntity.prototype, "planPPP", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', unique: true, name: 'user_id' }),
-    __metadata("design:type", String)
-], StudentEntity.prototype, "userId", void 0);
-__decorate([
     (0, typeorm_1.OneToMany)(() => entities_1.PPPEntity, (ppp) => ppp.student),
     __metadata("design:type", Array)
 ], StudentEntity.prototype, "ppp", void 0);
-StudentEntity = __decorate([
+__decorate([
+    (0, typeorm_1.OneToOne)(() => entities_2.UserEntity, (user) => user.student),
+    (0, typeorm_1.JoinColumn)(),
+    __metadata("design:type", entities_2.UserEntity)
+], StudentEntity.prototype, "user", void 0);
+exports.StudentEntity = StudentEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'students' })
 ], StudentEntity);
-exports.StudentEntity = StudentEntity;
 //# sourceMappingURL=student.entity.js.map
