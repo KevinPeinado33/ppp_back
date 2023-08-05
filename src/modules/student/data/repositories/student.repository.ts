@@ -7,10 +7,14 @@ export class StudentRepositoryImpl implements StudentRepository {
 
     private readonly repository = AppDataSource.getRepository( StudentEntity )
 
-    constructor() { }
-
+    constructor() { }    
+    
     async getAllStudents(planPPP: string): Promise< StudentEntity[] > {
         return await this.repository.findBy({ planPPP })
+    }
+
+    async save(student: StudentEntity): Promise<StudentEntity> {
+        return await this.repository.save( student )
     }
 
 }

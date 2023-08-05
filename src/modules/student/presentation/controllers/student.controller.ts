@@ -1,8 +1,9 @@
 import { Request, Response } from 'express'
 
-import { FindAllStudentUseCase } from '../../domain/use-cases'
+import { FindAllStudentUseCase , CreateListStudentsUseCase } from '../../domain/use-cases'
 import { StudentRepository } from '../../domain/repositories'
 import { StudentRepositoryImpl } from '../../data/repositories'
+import { StudentCreateDto } from '../../domain/dtos'
 
 export class StudentController { 
 
@@ -12,8 +13,9 @@ export class StudentController {
 
         this.studentRepository = new StudentRepositoryImpl
 
-        this.getOneByCode   = this.getOneByCode.bind( this )
-        this.getAllStudents = this.getAllStudents.bind( this )
+        this.getOneByCode           = this.getOneByCode.bind( this )
+        this.getAllStudents         = this.getAllStudents.bind( this )
+        this.postCreateListStudents = this.postCreateListStudents.bind( this )
 
     }
 
@@ -27,6 +29,20 @@ export class StudentController {
             res,
             this.studentRepository,
             planPPP
+        )
+
+        usecase.execute()
+
+    }
+
+    postCreateListStudents(req: Request, res: Response) {
+        
+        const listStudents = req.body as StudentCreateDto[]
+
+        const usecase = new CreateListStudentsUseCase(
+            res, 
+            this.studentRepository,
+            listStudents
         )
 
         usecase.execute()
