@@ -10,5 +10,6 @@ export abstract class UserRepository {
     abstract findAll()                             : Promise< UserEntity[] >
     abstract findById(id: string)                  : Promise< UserEntity | null >
     abstract findByRol(rolSearch: string)          : Promise< UserEntity[] >
+    abstract findByIdWithRolesAndAccess(id: string): Promise< UserEntity | null >
     
 }
