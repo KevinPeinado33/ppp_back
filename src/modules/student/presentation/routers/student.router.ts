@@ -15,6 +15,6 @@ const {
 
 router.get('/get-by-code', validateJWT, getOneByCode)
 router.get('/get-students-by-plan-ppp/:planPPP', validateJWT , getAllStudents)
-router.post('/create-list-students', postCreateListStudents)
+router.post('/create-list-students', validateJWT, postCreateListStudents)
 
 export default router

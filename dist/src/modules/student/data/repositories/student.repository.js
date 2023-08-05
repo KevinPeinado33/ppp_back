@@ -7,8 +7,11 @@ class StudentRepositoryImpl {
     constructor() {
         this.repository = database_1.AppDataSource.getRepository(entities_1.StudentEntity);
     }
-    async getAllStudents() {
-        return await this.repository.find();
+    async getAllStudents(planPPP) {
+        return await this.repository.findBy({ planPPP });
+    }
+    async save(student) {
+        return await this.repository.save(student);
     }
 }
 exports.StudentRepositoryImpl = StudentRepositoryImpl;

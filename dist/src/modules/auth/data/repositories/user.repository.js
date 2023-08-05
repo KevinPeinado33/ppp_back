@@ -22,6 +22,14 @@ class UserRepositoryImpl {
     async findById(id) {
         return await this.userRepository.findOneBy({ id });
     }
+    async findByRol(rolSearch) {
+        return await this.userRepository
+            .createQueryBuilder('u')
+            .leftJoin('roles_user', 'ru', 'u.id = ru.userId')
+            .leftJoin('roles', 'r', 'ru.roleId = r.id')
+            .where('r.name = :name', { name: rolSearch })
+            .getMany();
+    }
 }
 exports.UserRepositoryImpl = UserRepositoryImpl;
 //# sourceMappingURL=user.repository.js.map

@@ -16,12 +16,12 @@ export class StudentCreateDto {
     static schema = Joi.object({
         code: Joi.string().required(),
         cycle: Joi.number().required(),
-        intershipHours: Joi.number().required(),
-        nameCv: Joi.string().required(),
-        urlCv: Joi.string().uri().required(),
-        finalRate: Joi.number().required(),
+        intershipHours: Joi.number(),
+        nameCv: Joi.string(),
+        urlCv: Joi.string().uri(),
+        finalRate: Joi.number(),
         planPPP: Joi.string().required(),
-        userId: Joi.string().required(),
+        userId: Joi.string(),
     })
 
 }

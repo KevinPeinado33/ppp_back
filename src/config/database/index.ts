@@ -15,12 +15,8 @@ import {
   QuestionEvaluationEntity,
   TypeDocumentEntity,
 } from '../../modules/plan/data/entities'
-<<<<<<< HEAD
 import { PPPDocumentsEntity, PPPEntity, QuestionAnswerEntity, EvaluationEntity } from '../../modules/ppp/data/entities'
-=======
-import { PPPDocumentsEntity, PPPEntity, QuestionAnswerEntity } from '../../modules/ppp/data/entities'
-import { EvaluationEntity } from '../../modules/ppp/data/entities/evaluation.entity'
->>>>>>> dd23c82 (crear lista estudiantes)
+
 
 
 export const AppDataSource = new DataSource({

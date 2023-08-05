@@ -15,4 +15,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./find-evaluations-students.usecase"), exports);
+__exportStar(require("./find-satisfaction-evaluations.usecase"), exports);
+__exportStar(require("./find-documents-ppp.usecase"), exports);
 //# sourceMappingURL=index.js.map

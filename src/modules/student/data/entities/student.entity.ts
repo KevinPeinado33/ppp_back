@@ -20,7 +20,7 @@ export class StudentEntity {
     @Column({ type: 'varchar', name: 'url_cv' })
     urlCv!: string
     
-    @Column({ type: 'integer', name: 'final_rate' })
+    @Column({ type: 'float', name: 'final_rate', nullable:true })
     finalRate!: number
     
     @Column({ type: 'varchar', name: 'plan_ppp', nullable: true })
