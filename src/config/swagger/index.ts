@@ -15,6 +15,7 @@ export const options = {
         'src/modules/auth/presentation/documentation/auth.documentation.ts',
         'src/modules/ppp/presentation/documentation/ppp.documentation.ts',
         'src/modules/ppp/presentation/documentation/question-answer.documentation.ts',
-        'src/modules/ppp/presentation/documentation/ppp-documents.documentation.ts'
+        'src/modules/ppp/presentation/documentation/ppp-documents.documentation.ts',
+        'src/modules/ppp/presentation/documentation/company.documentation.ts'
     ]
 }
