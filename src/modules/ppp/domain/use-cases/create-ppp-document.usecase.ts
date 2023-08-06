@@ -44,7 +44,7 @@ export class CreatePPPDocumentUseCase{
                 })
             }
 
-            newPPPDocument.ppp = pppFound
+            // newPPPDocument.ppp = pppFound
 
             const documentCreated = await this.repository.save( newPPPDocument )
             
