@@ -24,6 +24,7 @@ import {
   CompanyEntity, 
   EvaluationEntity 
 } from '../../modules/ppp/data/entities'
+import { NotificationsEntity, ShareEntity } from '../../modules/notificactions/data/entities'
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -41,6 +42,8 @@ export const AppDataSource = new DataSource({
     QuestionEvaluationEntity,
     TypeDocumentEntity,
     CompanyEntity,
+    NotificationsEntity,
+    ShareEntity,
 
     // Auth
     AccessEntity,

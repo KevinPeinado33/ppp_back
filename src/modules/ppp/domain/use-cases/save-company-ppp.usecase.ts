@@ -32,7 +32,7 @@ export class SaveCompanyUseCase{
             const companyInstance = plainToClass(CompanyEntity, this.dtoCompany)
             const newCompany = await this.repository.create(companyInstance)
 
-            /* const foundPPP = await this.pppRepository.findOnebyId(this.dtoCompany.ppp)
+            const foundPPP = await this.pppRepository.findOnebyId(this.dtoCompany.ppp)
 
             if(!foundPPP){
 
@@ -43,9 +43,9 @@ export class SaveCompanyUseCase{
                 })
             }
 
-            newCompany.ppp = foundPPP */
+            newCompany.ppp = foundPPP
 
-            const companyPPPCreated = await this.repository.create(newCompany)
+            const companyPPPCreated = await this.repository.save(newCompany)
 
             message({
                 response: this.response,
