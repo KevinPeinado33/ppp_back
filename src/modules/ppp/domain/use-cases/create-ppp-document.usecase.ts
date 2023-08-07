@@ -36,7 +36,7 @@ export class CreatePPPDocumentUseCase{
 
             const pppFound = await this.pppRepository.findOnebyId( this.createPPPDocumentDto.ppp)
 
-            if ( pppFound ) {
+            if ( !pppFound ) {
                 return message({
                     response: this.response,
                     code: CODE_STATUS.NOT_FOUND,
@@ -44,7 +44,7 @@ export class CreatePPPDocumentUseCase{
                 })
             }
 
-            // newPPPDocument.ppp = pppFound
+            newPPPDocument.ppp = pppFound
 
             const documentCreated = await this.repository.save( newPPPDocument )
             
