@@ -34,7 +34,7 @@ export class UpdateIntershipHourUseCase{
             message({
                 response: this.response,
                 code: CODE_STATUS.OK,
-                info: `Horas de prácticas actualizadas correctamente.`,
+                info: `Horas de prácticas actualizadas correctamente en PPP #${this.pppId}.`,
             });
 
         } catch (error) {
