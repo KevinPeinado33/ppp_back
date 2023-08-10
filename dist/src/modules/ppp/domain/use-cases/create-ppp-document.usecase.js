@@ -1,13 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreatePPPDocumentUseCase = void 0;
-<<<<<<< HEAD
-class CreatePPPDocumentUseCase {
-    constructor(response, createPPPDocument, repository) {
-        this.response = response;
-        this.createPPPDocument = createPPPDocument;
-        this.repository = repository;
-=======
 const class_transformer_1 = require("class-transformer");
 const code_status_ok_1 = require("../../../../common/responses/code/code-status.ok");
 const msg_response_1 = require("../../../../common/responses/msg.response");
@@ -56,7 +49,6 @@ class CreatePPPDocumentUseCase {
                 info: error
             });
         }
->>>>>>> develop
     }
 }
 exports.CreatePPPDocumentUseCase = CreatePPPDocumentUseCase;

@@ -17,12 +17,9 @@ class PPPDocumentsRepositoryImpl {
     async create(newDocument) {
         return await this.repository.create(newDocument);
     }
-<<<<<<< HEAD
-=======
     async save(documentCreated) {
         return await this.repository.save(documentCreated);
     }
->>>>>>> develop
 }
 exports.PPPDocumentsRepositoryImpl = PPPDocumentsRepositoryImpl;
 //# sourceMappingURL=ppp-documents.repository.js.map

@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-{"version":3,"file":"company.repository.js","sourceRoot":"","sources":["../../../../../../src/modules/ppp/domain/repositories/company.repository.ts"],"names":[],"mappings":";;;AAAA,MAAsB,iBAAiB;CAEtC;AAFD,8CAEC"}
-=======
 {"version":3,"file":"company.repository.js","sourceRoot":"","sources":["../../../../../../src/modules/ppp/domain/repositories/company.repository.ts"],"names":[],"mappings":";;;AAEA,MAAsB,iBAAiB;CAKtC;AALD,8CAKC"}
->>>>>>> develop

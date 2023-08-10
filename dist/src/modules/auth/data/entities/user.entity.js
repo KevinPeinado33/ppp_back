@@ -15,10 +15,7 @@ const entities_1 = require("../../../plan/data/entities");
 const entities_2 = require("../../../ppp/data/entities");
 const entities_3 = require("../../../student/data/entities");
 const _1 = require("./");
-<<<<<<< HEAD
-=======
 const entities_4 = require("../../../notificactions/data/entities");
->>>>>>> develop
 let UserEntity = exports.UserEntity = class UserEntity {
 };
 __decorate([
@@ -81,8 +78,6 @@ __decorate([
     (0, typeorm_1.OneToOne)(() => entities_3.StudentEntity, (student) => student.user),
     __metadata("design:type", entities_3.StudentEntity)
 ], UserEntity.prototype, "student", void 0);
-<<<<<<< HEAD
-=======
 __decorate([
     (0, typeorm_1.OneToMany)(() => entities_4.NotificationsEntity, (notification) => notification.property),
     __metadata("design:type", Array)
@@ -91,7 +86,6 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => entities_4.ShareEntity, (share) => share.address),
     __metadata("design:type", Array)
 ], UserEntity.prototype, "share", void 0);
->>>>>>> develop
 exports.UserEntity = UserEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'users' })
 ], UserEntity);

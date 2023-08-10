@@ -6,10 +6,7 @@ const entities_1 = require("../../modules/student/data/entities");
 const entities_2 = require("../../modules/auth/data/entities");
 const entities_3 = require("../../modules/plan/data/entities");
 const entities_4 = require("../../modules/ppp/data/entities");
-<<<<<<< HEAD
-=======
 const entities_5 = require("../../modules/notificactions/data/entities");
->>>>>>> develop
 exports.AppDataSource = new typeorm_1.DataSource({
     type: 'postgres',
     host: process.env.DATABASE_HOST,
@@ -26,11 +23,8 @@ exports.AppDataSource = new typeorm_1.DataSource({
         entities_3.QuestionEvaluationEntity,
         entities_3.TypeDocumentEntity,
         entities_4.CompanyEntity,
-<<<<<<< HEAD
-=======
         entities_5.NotificationsEntity,
         entities_5.ShareEntity,
->>>>>>> develop
         // Auth
         entities_2.AccessEntity,
         entities_2.AccessRoleEntity,
