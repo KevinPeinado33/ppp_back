@@ -17,6 +17,7 @@ const student_router_1 = __importDefault(require("../../modules/student/presenta
 const plan_route_1 = __importDefault(require("../../modules/plan/presentation/routes/plan.route"));
 const user_route_1 = __importDefault(require("../../modules/auth/presentation/routes/user.route"));
 const ppp_route_1 = __importDefault(require("../../modules/ppp/presentation/routes/ppp.route"));
+const notification_router_1 = __importDefault(require("../../modules/notificactions/presentation/routers/notification.router"));
 class AppServer {
     constructor() {
         this.paths = {
@@ -24,7 +25,8 @@ class AppServer {
             student: '/api/student',
             plan: '/api/plan',
             user: '/api/user',
-            ppp: '/api/ppp'
+            ppp: '/api/ppp',
+            notification: '/api/notification',
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '';
@@ -58,6 +60,7 @@ class AppServer {
         this.app.use(this.paths.plan, plan_route_1.default);
         this.app.use(this.paths.user, user_route_1.default);
         this.app.use(this.paths.ppp, ppp_route_1.default);
+        this.app.use(this.paths.notification, notification_router_1.default);
     }
 }
 exports.AppServer = AppServer;

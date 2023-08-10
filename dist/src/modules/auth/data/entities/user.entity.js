@@ -12,9 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserEntity = void 0;
 const typeorm_1 = require("typeorm");
 const entities_1 = require("../../../plan/data/entities");
-const _1 = require("./");
 const entities_2 = require("../../../ppp/data/entities");
-let UserEntity = class UserEntity {
+const entities_3 = require("../../../student/data/entities");
+const _1 = require("./");
+const entities_4 = require("../../../notificactions/data/entities");
+let UserEntity = exports.UserEntity = class UserEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
@@ -72,8 +74,19 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => entities_2.PPPEntity, (ppp) => ppp.advisor),
     __metadata("design:type", Array)
 ], UserEntity.prototype, "ppp", void 0);
-UserEntity = __decorate([
+__decorate([
+    (0, typeorm_1.OneToOne)(() => entities_3.StudentEntity, (student) => student.user),
+    __metadata("design:type", entities_3.StudentEntity)
+], UserEntity.prototype, "student", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => entities_4.NotificationsEntity, (notification) => notification.property),
+    __metadata("design:type", Array)
+], UserEntity.prototype, "notifications", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => entities_4.ShareEntity, (share) => share.address),
+    __metadata("design:type", Array)
+], UserEntity.prototype, "share", void 0);
+exports.UserEntity = UserEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'users' })
 ], UserEntity);
-exports.UserEntity = UserEntity;
 //# sourceMappingURL=user.entity.js.map

@@ -13,6 +13,14 @@ class PPPRepositoryImpl {
     async findOnebyId(id) {
         return await this.pppRepository.findOneBy({ id });
     }
+    async findLastOneWithCompanyByStudent(studentCode) {
+        return await this.pppRepository
+            .createQueryBuilder('ppp')
+            .innerJoinAndSelect('ppp.student', 'student', 'student.code = :studentCode', { studentCode })
+            .leftJoinAndSelect('ppp.company', 'company')
+            .orderBy('ppp.startedDate', 'DESC')
+            .getOne();
+    }
 }
 exports.PPPRepositoryImpl = PPPRepositoryImpl;
 //# sourceMappingURL=ppp.repository.js.map
