@@ -1,6 +1,6 @@
 import Joi from "joi"
 
-export class CreatePPPDoumentDto{
+export class CreatePPPDocumentDto{
 
     type!           :   string
     name!           :   string

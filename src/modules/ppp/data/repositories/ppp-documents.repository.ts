@@ -21,4 +21,8 @@ export class PPPDocumentsRepositoryImpl implements PPPDocumentsRepository{
         return await this.repository.create( newDocument )
     }
 
+    async save(documentCreated: PPPDocumentsEntity): Promise<PPPDocumentsEntity> {
+        return await this.repository.save( documentCreated )
+    }
+
 }

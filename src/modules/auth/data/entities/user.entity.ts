@@ -1,9 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne, JoinColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne } from 'typeorm'
 
 import { PlanPPPEntity } from '../../../plan/data/entities'
 import { PPPEntity } from '../../../ppp/data/entities'
 import { StudentEntity } from '../../../student/data/entities'
 import { RoleUserEntity } from './'
+import { NotificationsEntity, ShareEntity } from '../../../notificactions/data/entities'
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -67,5 +68,17 @@ export class UserEntity {
     ( student ) => student.user,
   )
   student!: StudentEntity
+
+  @OneToMany(
+    () => NotificationsEntity,
+    (notification) => notification.property
+  )
+  notifications!: NotificationsEntity[]
+
+  @OneToMany(
+    () => ShareEntity,
+    (share) => share.address
+  )
+  share!: ShareEntity[]
 
 }

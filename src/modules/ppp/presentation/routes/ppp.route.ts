@@ -1,7 +1,7 @@
 import { Router } from 'express'
 
 import { EvaluationController } from '../controller/evaluation.controller'
-import { PPPController } from '../controller/ppp.controller'
+import { PPPController, PPPDocumentController } from '../controller'
 import { validateJWT } from '../../../../common/middlewares/jwt'
 
 
@@ -11,20 +11,28 @@ const {
 
     getEvaluationHistory,
     getResultSatisfaction,
-    getDocumentsPPP
-
-
+    getDocumentsPPP,
 } = new EvaluationController()
 
 const {
-    updateAssingAdvisor
+    updateAssingAdvisor,
+    postcompanyPPP,
+    updateIntershipHours,
 } = new PPPController()
+
+const {
+    postCreatePPPDocument, 
+} = new PPPDocumentController()
 
 route.get('/get-evaluation-by-ppp/:idPPP', validateJWT, getEvaluationHistory)
 route.put('/update-assing-advisor-ppp/:idPPP/:advisorID', validateJWT, updateAssingAdvisor)
 
 route.get('/get-result-evaluation/:idEvaluation', validateJWT, getResultSatisfaction)
 
-route.get('/get-documents-ppp/:idPPP', validateJWT, getDocumentsPPP)
+route.get('/get-documents-ppp/:idPPP',  validateJWT,getDocumentsPPP)
+
+route.post('/create-company-ppp', validateJWT, postcompanyPPP)
+route.post('/create-ppp-document', validateJWT, postCreatePPPDocument)
+route.put('/update-intership-hours', validateJWT , updateIntershipHours)
 
 export default route 
