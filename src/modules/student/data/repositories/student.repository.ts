@@ -12,7 +12,7 @@ export class StudentRepositoryImpl implements StudentRepository {
     constructor() { }    
     
     async getAllStudents(planPPP: string): Promise< StudentEntity[] > {
-        return await this.repository.findBy({ planPPP })
+        return await this.repository.find({ where: { planPPP }, relations: ['user'] })
     }
 
     async save(student: StudentEntity): Promise<StudentEntity> {
