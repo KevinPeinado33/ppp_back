@@ -246,8 +246,6 @@
  *         schema:
  *           type: string
  *         description: Plan PPP por el cual se buscarán los estudiantes.
- *     security:
- *       - jwt: []  # Requiere autenticación mediante JWT
  *     responses:
  *       200:
  *         description: Respuesta exitosa. Devuelve la lista de estudiantes asociados al plan PPP especificado.
