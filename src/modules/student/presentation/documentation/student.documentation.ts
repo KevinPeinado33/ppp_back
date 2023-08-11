@@ -232,7 +232,7 @@
 
 /**
  * @swagger
- * /get-students-by-plan-ppp/{planPPP}:
+ * /api/student/get-students-by-plan-ppp/{planPPP}:
  *   get:
  *     summary: Obtener estudiantes por plan PPP.
  *     tags: [Estudiante]
