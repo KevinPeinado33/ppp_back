@@ -13,6 +13,8 @@ import studentRouter from '../../modules/student/presentation/routers/student.ro
 import planRouter from '../../modules/plan/presentation/routes/plan.route'
 import userRouter from '../../modules/auth/presentation/routes/user.route'
 import pppRouter from '../../modules/ppp/presentation/routes/ppp.route'
+import notificationRouter from '../../modules/notificactions/presentation/routers/notification.router'
+
 
 export class AppServer {
 
@@ -20,11 +22,12 @@ export class AppServer {
     private port: string
 
     private paths = {
-        auth    : '/api/auth',
-        student : '/api/student',
-        plan    : '/api/plan',
-        user    : '/api/user',
-        ppp     : '/api/ppp'
+        auth                : '/api/auth',
+        student             : '/api/student',
+        plan                : '/api/plan',
+        user                : '/api/user',
+        ppp                 : '/api/ppp',
+        notification        : '/api/notification',
     }
 
     constructor() {
@@ -70,6 +73,7 @@ export class AppServer {
         this.app.use(this.paths.plan, planRouter)
         this.app.use(this.paths.user, userRouter)
         this.app.use(this.paths.ppp, pppRouter)
+        this.app.use(this.paths.notification, notificationRouter)
     }
 
 }

@@ -1,8 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne } from 'typeorm'
 
 import { PlanPPPEntity } from '../../../plan/data/entities'
-import { RoleUserEntity } from './'
 import { PPPEntity } from '../../../ppp/data/entities'
+import { StudentEntity } from '../../../student/data/entities'
+import { RoleUserEntity } from './'
+import { NotificationsEntity, ShareEntity } from '../../../notificactions/data/entities'
+
 @Entity({ name: 'users' })
 export class UserEntity {
 
@@ -39,6 +42,9 @@ export class UserEntity {
   @Column({ type: 'boolean', default: true })
   status!: boolean
 
+  /**
+   * Relaciones entre tablas
+   */
   @OneToMany(
     () => RoleUserEntity,
     (rolesUser) => rolesUser.role
@@ -56,5 +62,23 @@ export class UserEntity {
     ( ppp ) => ppp.advisor 
   )
   ppp!: PPPEntity[]
+
+  @OneToOne(
+    () => StudentEntity,
+    ( student ) => student.user,
+  )
+  student!: StudentEntity
+
+  @OneToMany(
+    () => NotificationsEntity,
+    (notification) => notification.property
+  )
+  notifications!: NotificationsEntity[]
+
+  @OneToMany(
+    () => ShareEntity,
+    (share) => share.address
+  )
+  share!: ShareEntity[]
 
 }

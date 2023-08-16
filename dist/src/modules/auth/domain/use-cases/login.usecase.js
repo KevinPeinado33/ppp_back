@@ -48,14 +48,26 @@ class LoginUseCase {
                     info: 'Contraseña incorrecta.'
                 });
             }
+            const permissionsFound = await this.repository.findByIdWithRolesAndAccess(userFound.id);
+            if (!permissionsFound) {
+                return (0, msg_response_1.message)({
+                    response: this.response,
+                    code: code_status_ok_1.CODE_STATUS.BAD_REQUEST,
+                    info: `No tienes roles, contacta al admin.`
+                });
+            }
+            const { roles, accesses } = this.extractRolesAndAccessFromJson(permissionsFound);
+            const { password, ...restUserFound } = userFound;
             const token = await (0, jwt_1.generateKey)(userFound.id);
             (0, msg_response_1.message)({
                 response: this.response,
                 code: code_status_ok_1.CODE_STATUS.OK,
-                info: 'Inicio de sesión correcto.',
+                info: `Bienvenido ${userFound.firstName}`,
                 data: {
-                    ...userFound,
-                    token
+                    ...restUserFound,
+                    token,
+                    roles,
+                    accesses
                 }
             });
         }
@@ -66,6 +78,33 @@ class LoginUseCase {
                 info: error
             });
         }
+    }
+    extractRolesAndAccessFromJson(data) {
+        let roles = [];
+        let accesses = [];
+        // Tiene roles este usuario?
+        if (data.roleUser) {
+            data.roleUser.forEach(({ role }) => {
+                roles.push({
+                    name: role[0].name,
+                    description: role[0].description
+                });
+                // Tiene accessos esos roles?
+                if (role[0].accessRoles) {
+                    role[0].accessRoles.forEach(({ access }) => {
+                        const isExist = accesses.some((x) => x.path === access[0].path);
+                        if (isExist)
+                            return;
+                        accesses.push({
+                            path: access[0].path,
+                            name: access[0].name,
+                            icon: access[0].icon
+                        });
+                    });
+                }
+            });
+        }
+        return { roles, accesses };
     }
 }
 exports.LoginUseCase = LoginUseCase;

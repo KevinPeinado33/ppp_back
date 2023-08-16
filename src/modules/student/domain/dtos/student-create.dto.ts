@@ -1,40 +1,27 @@
 import Joi from 'joi'
 
-export class StudentCreateEntity {
-    
+export class StudentCreateDto {
+
     code!           : string
-    cycle!          : string
-    nameCv!         : number
-    urlCv!          : string
-    dni!            : string
-    username!       : string
-    password!       : string
-    firstName!      : string
-    lastName!       : string
-    faculty!        : string
-    schoolName!     : string
-    email!          : string
-    cellphone!      : string
-    role!           : string
-    user?           : string
+    cycle!          : number
+    intershipHours? : number
+    nameCv?         : string
+    urlCv?          : string
+    finalRate!      : number
+    planPPP!        : string
+    userId?         : string
 
     constructor() { }
 
     static schema = Joi.object({
-        code       : Joi.string().pattern(/^[0-9]+$/, 'Solo se acepta numeros').required(),
-        cycle      : Joi.string().required(),
-        nameCv     : Joi.string().required(),
-        urlCv      : Joi.string().required(),  
-        dni        : Joi.string().pattern(/^[0-9]+$/, 'Solo se acepta numeros').required(),
-        username   : Joi.string().required(),
-        password   : Joi.string().required(),
-        firstName  : Joi.string().required(),
-        lastName   : Joi.string().required(),
-        faculty    : Joi.string().required(),
-        schoolName : Joi.string().required(),
-        email      : Joi.string().required(),
-        cellphone  : Joi.string().pattern(/^[0-9]+$/, 'Solo se acepta numeros').required(),
-        role       : Joi.string().required(),
+        code           : Joi.string().required(),
+        cycle          : Joi.number().required(),
+        intershipHours : Joi.number(),
+        nameCv         : Joi.string(),
+        urlCv          : Joi.string().uri(),
+        finalRate      : Joi.number(),
+        planPPP        : Joi.string(),
+        userId         : Joi.string(),
     })
 
 }

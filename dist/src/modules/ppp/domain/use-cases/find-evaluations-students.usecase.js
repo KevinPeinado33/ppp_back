@@ -16,7 +16,7 @@ class FindEvaluationsStudentsUseCase {
                 return (0, msg_response_1.message)({
                     response: this.response,
                     code: code_status_ok_1.CODE_STATUS.NOT_FOUND,
-                    info: `No es hallarón evaluaciones con el PPP #${this.idPpp}.`
+                    info: `No se encontraron evaluaciones con el PPP #${this.idPpp}.`
                 });
             }
             (0, msg_response_1.message)({

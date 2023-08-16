@@ -2,12 +2,14 @@ import { UserEntity } from '../../data/entities'
 
 import { CreateUserDto } from '../dtos'
 
-export interface UserRepository {
+export abstract class UserRepository {
 
-    findUserByEmail(userName: string)     : Promise< UserEntity | null >
-    create(userCreateDto: CreateUserDto)  : Promise< UserEntity >
-    save(userCreated: UserEntity)         : Promise< UserEntity >
-    findAll()                             : Promise< UserEntity[] >
-    findById(id: string)                  : Promise< UserEntity | null >
+    abstract findUserByEmail(userName: string)     : Promise< UserEntity | null >
+    abstract create(userCreateDto: CreateUserDto)  : Promise< UserEntity >
+    abstract save(userCreated: UserEntity)         : Promise< UserEntity >
+    abstract findAll()                             : Promise< UserEntity[] >
+    abstract findById(id: string)                  : Promise< UserEntity | null >
+    abstract findByRol(rolSearch: string)          : Promise< UserEntity[] >
+    abstract findByIdWithRolesAndAccess(id: string): Promise< UserEntity | null >
     
 }

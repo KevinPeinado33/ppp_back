@@ -1,11 +1,15 @@
 import { DataSource } from 'typeorm'
 
+import { 
+  StudentEntity 
+} from '../../modules/student/data/entities'
 import {
   AccessEntity,
   AccessRoleEntity,
   UserEntity,
+  RolesEntity,
+  RoleUserEntity
 } from '../../modules/auth/data/entities'
-import { StudentEntity } from '../../modules/student/data/entities'
 import {
   AreaPlanEntity,
   PlanDocumentEntity,
@@ -13,11 +17,14 @@ import {
   QuestionEvaluationEntity,
   TypeDocumentEntity,
 } from '../../modules/plan/data/entities'
-import { RolesEntity } from '../../modules/auth/data/entities/roles.entity'
-import { RoleUserEntity } from '../../modules/auth/data/entities/roles-users.entity'
-import { PPPEntity } from '../../modules/ppp/data/entities'
-import { EvaluationEntity } from '../../modules/ppp/data/entities/evaluation.entity'
-
+import { 
+  PPPDocumentsEntity, 
+  PPPEntity, 
+  QuestionAnswerEntity, 
+  CompanyEntity, 
+  EvaluationEntity 
+} from '../../modules/ppp/data/entities'
+import { NotificationsEntity, ShareEntity } from '../../modules/notificactions/data/entities'
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -34,6 +41,9 @@ export const AppDataSource = new DataSource({
     PlanDocumentEntity,
     QuestionEvaluationEntity,
     TypeDocumentEntity,
+    CompanyEntity,
+    NotificationsEntity,
+    ShareEntity,
 
     // Auth
     AccessEntity,
@@ -42,6 +52,8 @@ export const AppDataSource = new DataSource({
     RoleUserEntity,
     PPPEntity,
     EvaluationEntity,
+    QuestionAnswerEntity,
+    PPPDocumentsEntity,
   ],
   logging: false,
   synchronize: true,

@@ -33,13 +33,12 @@ export class CreateUserUseCase {
 
             const newUser     = await this.repository.create( this.createUserDto )
             newUser.password  = await bcrypt.hash( newUser.password, this.HASH_SALT_MAX )
-            const userCreated = await this.repository.save( newUser )
+            await this.repository.save( newUser )
             
             message({
                 response: this.response,
                 code: CODE_STATUS.CREATED,
-                info: 'Usuario creado correctamente.',
-                data: userCreated
+                info: 'Usuario creado correctamente.'
             })
 
         } catch(error) {

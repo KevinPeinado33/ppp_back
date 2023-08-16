@@ -8,6 +8,7 @@ class UserController {
         this.userRepository = new repositories_1.UserRepositoryImpl();
         this.postRegister = this.postRegister.bind(this);
         this.getAllUsers = this.getAllUsers.bind(this);
+        this.getUsersByRol = this.getUsersByRol.bind(this);
     }
     postRegister(req, res) {
         const createUserDto = req.body;
@@ -16,6 +17,11 @@ class UserController {
     }
     getAllUsers(req, res) {
         const usecase = new use_cases_1.FindAllUserUseCase(res, this.userRepository);
+        usecase.execute();
+    }
+    getUsersByRol(req, res) {
+        const { rolSearch } = req.params;
+        const usecase = new use_cases_1.FindUsersByRolUseCase(res, this.userRepository, rolSearch);
         usecase.execute();
     }
 }

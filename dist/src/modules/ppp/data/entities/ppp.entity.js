@@ -15,6 +15,8 @@ const entities_1 = require("../../../student/data/entities");
 const entities_2 = require("../../../plan/data/entities");
 const entities_3 = require("../../../auth/data/entities");
 const evaluation_entity_1 = require("./evaluation.entity");
+const ppp_documents_entity_1 = require("./ppp-documents.entity");
+const company_entity_1 = require("./company.entity");
 let PPPEntity = class PPPEntity {
 };
 __decorate([
@@ -26,7 +28,7 @@ __decorate([
     __metadata("design:type", Number)
 ], PPPEntity.prototype, "intershipHours", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'text', array: true }),
+    (0, typeorm_1.Column)({ type: 'text', nullable: true }),
     __metadata("design:type", String)
 ], PPPEntity.prototype, "area", void 0);
 __decorate([
@@ -68,6 +70,14 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => evaluation_entity_1.EvaluationEntity, (evaluation) => evaluation.ppp),
     __metadata("design:type", Array)
 ], PPPEntity.prototype, "evaluations", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => ppp_documents_entity_1.PPPDocumentsEntity, (pppDocuments) => pppDocuments.ppp),
+    __metadata("design:type", Array)
+], PPPEntity.prototype, "pppDocuments", void 0);
+__decorate([
+    (0, typeorm_1.OneToOne)(() => company_entity_1.CompanyEntity, (company) => company.ppp),
+    __metadata("design:type", company_entity_1.CompanyEntity)
+], PPPEntity.prototype, "company", void 0);
 PPPEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'ppp' })
 ], PPPEntity);

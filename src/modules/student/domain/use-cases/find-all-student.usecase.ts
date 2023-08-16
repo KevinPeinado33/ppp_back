@@ -8,14 +8,15 @@ export class FindAllStudentUseCase {
     
     constructor(
         private readonly response   : Response,
-        private readonly repository : StudentRepository
+        private readonly repository : StudentRepository,
+        private readonly planPPPId  : string
     ) { }
 
     async execute() {
         
         try {
 
-            const students = await this.repository.getAllStudents()
+            const students = await this.repository.getAllStudents( this.planPPPId )
 
             if ( students.length === 0 ) {
                 return message({

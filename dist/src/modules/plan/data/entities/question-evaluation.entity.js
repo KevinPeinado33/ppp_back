@@ -36,7 +36,7 @@ __decorate([
     __metadata("design:type", _1.AreaPlanEntity)
 ], QuestionEvaluationEntity.prototype, "area", void 0);
 QuestionEvaluationEntity = __decorate([
-    (0, typeorm_1.Entity)({ name: 'question-evaluations' })
+    (0, typeorm_1.Entity)({ name: 'question_evaluations' })
 ], QuestionEvaluationEntity);
 exports.QuestionEvaluationEntity = QuestionEvaluationEntity;
 //# sourceMappingURL=question-evaluation.entity.js.map

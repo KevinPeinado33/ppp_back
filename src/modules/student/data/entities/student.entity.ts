@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryColumn, OneToMany } from 'typeorm'
+import { Entity, Column, PrimaryColumn, OneToMany, OneToOne, JoinColumn } from 'typeorm'
 
 import { PPPEntity } from '../../../ppp/data/entities'
+import { UserEntity } from '../../../auth/data/entities'
 
 @Entity({ name: 'students' })
 export class StudentEntity {
@@ -19,13 +20,18 @@ export class StudentEntity {
 
     @Column({ type: 'varchar', name: 'url_cv' })
     urlCv!: string
-
-    @Column({ type: 'integer', name: 'final_rate' })
+    
+    @Column({ type: 'float', name: 'final_rate', nullable:true })
     finalRate!: number
+    
+    /**
+     * Se agrego esto para hacer las consultas de manera 
+     * mas rapido
+     */
+    @Column({ type: 'varchar', name: 'plan_ppp', nullable: true })
+    planPPP!: string
 
-    @Column({ type: 'varchar', unique: true, name: 'user_id' })
-    userId!: string
-
+    
     /**
      * Relaciones entre tablas
      */
@@ -35,5 +41,11 @@ export class StudentEntity {
     )
     ppp!: PPPEntity[]
 
+    @OneToOne(
+        () => UserEntity,
+        ( user ) => user.student,
+    )
+    @JoinColumn()
+    user!: UserEntity
 
 }
