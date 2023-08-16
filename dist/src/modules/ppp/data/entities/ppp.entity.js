@@ -16,7 +16,8 @@ const entities_2 = require("../../../plan/data/entities");
 const entities_3 = require("../../../auth/data/entities");
 const evaluation_entity_1 = require("./evaluation.entity");
 const ppp_documents_entity_1 = require("./ppp-documents.entity");
-let PPPEntity = class PPPEntity {
+const company_entity_1 = require("./company.entity");
+let PPPEntity = exports.PPPEntity = class PPPEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
@@ -27,7 +28,7 @@ __decorate([
     __metadata("design:type", Number)
 ], PPPEntity.prototype, "intershipHours", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'text', array: true }),
+    (0, typeorm_1.Column)({ type: 'text', nullable: true }),
     __metadata("design:type", String)
 ], PPPEntity.prototype, "area", void 0);
 __decorate([
@@ -73,8 +74,11 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => ppp_documents_entity_1.PPPDocumentsEntity, (pppDocuments) => pppDocuments.ppp),
     __metadata("design:type", Array)
 ], PPPEntity.prototype, "pppDocuments", void 0);
-PPPEntity = __decorate([
+__decorate([
+    (0, typeorm_1.OneToOne)(() => company_entity_1.CompanyEntity, (company) => company.ppp),
+    __metadata("design:type", company_entity_1.CompanyEntity)
+], PPPEntity.prototype, "company", void 0);
+exports.PPPEntity = PPPEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'ppp' })
 ], PPPEntity);
-exports.PPPEntity = PPPEntity;
 //# sourceMappingURL=ppp.entity.js.map

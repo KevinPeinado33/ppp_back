@@ -16,7 +16,7 @@ StudentCreateDto.schema = joi_1.default.object({
     nameCv: joi_1.default.string(),
     urlCv: joi_1.default.string().uri(),
     finalRate: joi_1.default.number(),
-    planPPP: joi_1.default.string().required(),
+    planPPP: joi_1.default.string(),
     userId: joi_1.default.string(),
 });
 //# sourceMappingURL=student-create.dto.js.map

@@ -4,9 +4,12 @@ const express_1 = require("express");
 const controllers_1 = require("../controllers");
 const jwt_1 = require("../../../../common/middlewares/jwt");
 const router = (0, express_1.Router)();
-const { getOneByCode, getAllStudents, postCreateListStudents } = new controllers_1.StudentController();
-router.get('/get-by-code', jwt_1.validateJWT, getOneByCode);
+const { getStudentByCode, getAllStudents, getStudentsSemester, getStudentsProcessEnd, postCreateListStudents, postCreateStudent } = new controllers_1.StudentController();
+router.get('/get-by-code/:codeStudent', jwt_1.validateJWT, getStudentByCode);
 router.get('/get-students-by-plan-ppp/:planPPP', jwt_1.validateJWT, getAllStudents);
+router.get('/get-students-by-semester/:cycle', jwt_1.validateJWT, getStudentsSemester);
+router.get('/get-students-process-or-end/:finalRate', jwt_1.validateJWT, getStudentsProcessEnd);
 router.post('/create-list-students', jwt_1.validateJWT, postCreateListStudents);
+router.post('/create-student', jwt_1.validateJWT, postCreateStudent);
 exports.default = router;
 //# sourceMappingURL=student.router.js.map

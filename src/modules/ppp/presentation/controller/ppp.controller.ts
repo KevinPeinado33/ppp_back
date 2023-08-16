@@ -6,6 +6,7 @@ import { UserRepositoryImpl } from "../../../auth/data/repositories"
 import { UserRepository } from "../../../auth/domain/repositories"
 import { CreateCompanyPPPDto } from "../../domain/dtos/create-ppp-company"
 import { SaveCompanyUseCase } from "../../domain/use-cases"
+import { UpdateIntershipHourUseCase } from "../../domain/use-cases/update-intership-hour.usecase"
 
 export class PPPController{
 
@@ -22,6 +23,7 @@ export class PPPController{
         
         this.updateAssingAdvisor = this.updateAssingAdvisor.bind( this )
         this.postcompanyPPP = this.postcompanyPPP.bind(this)
+        this.updateIntershipHours = this.updateIntershipHours.bind(this)
 
 
     }
@@ -47,6 +49,19 @@ export class PPPController{
             createCompanyDto,
             this.pppRepository              
 
+        )
+
+        usecase.execute()
+    }
+
+    updateIntershipHours(req: Request, res: Response){
+        // const { idPPP} = req.params
+        const { idPPP, intershipHours} = req.body
+        const usecase = new UpdateIntershipHourUseCase(
+            res,
+            this.pppRepository,
+            idPPP,
+            intershipHours
         )
 
         usecase.execute()

@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RoleUserEntity = void 0;
 const typeorm_1 = require("typeorm");
 const _1 = require("./");
-let RoleUserEntity = class RoleUserEntity {
+let RoleUserEntity = exports.RoleUserEntity = class RoleUserEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
@@ -26,8 +26,7 @@ __decorate([
     (0, typeorm_1.ManyToOne)(() => _1.UserEntity, (user) => user.roleUser),
     __metadata("design:type", _1.UserEntity)
 ], RoleUserEntity.prototype, "user", void 0);
-RoleUserEntity = __decorate([
+exports.RoleUserEntity = RoleUserEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'roles_user' })
 ], RoleUserEntity);
-exports.RoleUserEntity = RoleUserEntity;
 //# sourceMappingURL=roles-users.entity.js.map

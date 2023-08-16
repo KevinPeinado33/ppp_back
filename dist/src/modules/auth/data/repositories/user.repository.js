@@ -30,6 +30,16 @@ class UserRepositoryImpl {
             .where('r.name = :name', { name: rolSearch })
             .getMany();
     }
+    async findByIdWithRolesAndAccess(userId) {
+        return await this.userRepository
+            .createQueryBuilder('user')
+            .leftJoinAndMapMany('user.roleUser', entities_1.RoleUserEntity, 'roleUser', 'roleUser.userId = user.id')
+            .leftJoinAndMapMany('roleUser.role', entities_1.RolesEntity, 'role', 'role.id = roleUser.roleId')
+            .leftJoinAndMapMany('role.accessRoles', entities_1.AccessRoleEntity, 'accessRole', 'accessRole.roleId = role.id')
+            .leftJoinAndMapMany('accessRole.access', entities_1.AccessEntity, 'access', 'access.id = accessRole.accessId')
+            .where('user.id = :userId', { userId })
+            .getOne();
+    }
 }
 exports.UserRepositoryImpl = UserRepositoryImpl;
 //# sourceMappingURL=user.repository.js.map

@@ -229,3 +229,38 @@
  *        required: true
  *        description: Token de autenticación de usuario (JWT).
  */
+
+/**
+ * @swagger
+ * /api/student/get-students-by-plan-ppp/{planPPP}:
+ *   get:
+ *     summary: Obtener estudiantes por plan PPP.
+ *     tags: [Estudiante]
+ *     security:
+ *       - bearerAuth: []
+ *     description: Obtiene una lista de estudiantes que están asociados al plan PPP especificado.
+ *     parameters:
+ *       - in: path
+ *         name: planPPP
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Plan PPP por el cual se buscarán los estudiantes.
+ *     responses:
+ *       200:
+ *         description: Respuesta exitosa. Devuelve la lista de estudiantes asociados al plan PPP especificado.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Student' # Reemplaza esto con la referencia al esquema del estudiante
+ *       400:
+ *         description: Solicitud incorrecta. El plan PPP proporcionado no es válido o está mal formateado.
+ *       401:
+ *         description: No autorizado. El JWT no es válido o no se proporcionó.
+ *       404:
+ *         description: No se encontraron estudiantes con el plan PPP especificado.
+ *       500:
+ *         description: Error interno del servidor.
+ */

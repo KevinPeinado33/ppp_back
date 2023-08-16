@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.QuestionEvaluationEntity = void 0;
 const typeorm_1 = require("typeorm");
 const _1 = require("./");
-let QuestionEvaluationEntity = class QuestionEvaluationEntity {
+let QuestionEvaluationEntity = exports.QuestionEvaluationEntity = class QuestionEvaluationEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
@@ -35,8 +35,7 @@ __decorate([
     (0, typeorm_1.ManyToOne)(() => _1.AreaPlanEntity, (area) => area.questionEvaluations),
     __metadata("design:type", _1.AreaPlanEntity)
 ], QuestionEvaluationEntity.prototype, "area", void 0);
-QuestionEvaluationEntity = __decorate([
+exports.QuestionEvaluationEntity = QuestionEvaluationEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'question_evaluations' })
 ], QuestionEvaluationEntity);
-exports.QuestionEvaluationEntity = QuestionEvaluationEntity;
 //# sourceMappingURL=question-evaluation.entity.js.map
