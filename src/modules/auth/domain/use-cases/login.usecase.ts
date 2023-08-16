@@ -115,6 +115,10 @@ export class LoginUseCase {
                 if ( role[0].accessRoles ) {
 
                     role[0].accessRoles.forEach( ({ access }: any) => {
+
+                        const isExist = accesses.some( ( x ) => x.path === access[0].path )
+
+                        if ( isExist ) return
                                 
                         accesses.push({
                             path: access[0].path,
