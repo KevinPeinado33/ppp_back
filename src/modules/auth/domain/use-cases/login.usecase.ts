@@ -134,6 +134,15 @@ export class LoginUseCase {
 
         }
 
+        const configurationFound = accesses.find( x => x.path === '/menu-items/configuracion-de-cuenta' )
+
+        if ( configurationFound ) {
+
+            accesses = accesses.filter( x => x.path !== '/menu-items/configuracion-de-cuenta' )
+            accesses.push( configurationFound! )
+        
+        }
+
         return { roles, accesses }
 
     }
