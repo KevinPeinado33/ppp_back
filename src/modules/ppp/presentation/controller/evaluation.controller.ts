@@ -1,24 +1,28 @@
 import { Response, Request } from 'express'
 
-import { FindEvaluationsStudentsUseCase, FindAnswersSatisfactionEvaluationsUseCase, FindDocumentsPPPUseCase } from '../../domain/use-cases'
-import { EvaluationRepository, PPPDocumentsRepository, QuestionAnswerRepository } from '../../domain/repositories'
-import { EvaluationRepositoryImpl, PPPDocumentsRepositoryImpl, QuestionAnswerRepositoryImpl } from '../../data/repositories'
+import { FindEvaluationsStudentsUseCase, FindAnswersSatisfactionEvaluationsUseCase, FindDocumentsPPPUseCase, CreateEvaluationUseCase } from '../../domain/use-cases'
+import { EvaluationRepository, PPPDocumentsRepository, PPPRepository, QuestionAnswerRepository } from '../../domain/repositories'
+import { EvaluationRepositoryImpl, PPPDocumentsRepositoryImpl, PPPRepositoryImpl, QuestionAnswerRepositoryImpl } from '../../data/repositories'
+import { CreateEvaluationDto } from '../../domain/dtos/create-evaluation';
 
 export class EvaluationController { 
 
     private evaluationRepository        : EvaluationRepository
     private questionAnswerRepository    : QuestionAnswerRepository
     private PPPDocumentsRepository      : PPPDocumentsRepository
+    private PPPRepository               : PPPRepository
     
     constructor() {
 
         this.evaluationRepository       = new EvaluationRepositoryImpl()
         this.questionAnswerRepository   = new QuestionAnswerRepositoryImpl()
         this.PPPDocumentsRepository     = new PPPDocumentsRepositoryImpl()
+        this.PPPRepository              = new PPPRepositoryImpl()
 
         this.getEvaluationHistory       = this.getEvaluationHistory.bind( this )
         this.getResultSatisfaction      = this.getResultSatisfaction.bind( this )
         this.getDocumentsPPP            = this.getDocumentsPPP.bind( this )
+        this.postCreateEvaluation       = this.postCreateEvaluation.bind( this )
         
     }
 
@@ -61,6 +65,16 @@ export class EvaluationController {
         )
 
         usecase.execute()
+    }
+
+    postCreateEvaluation( req: Request, res: Response){
+        const createEvaluationDto = req.body as CreateEvaluationDto
+        const usecase             = new CreateEvaluationUseCase(
+            res,
+            createEvaluationDto,
+            this.evaluationRepository,
+            this.PPPRepository
+        )
     }
 
 }
