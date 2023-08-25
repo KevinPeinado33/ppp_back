@@ -5,8 +5,9 @@ import { AssingAdvisorPppUseCase } from "../../domain/use-cases/assing-advisor-p
 import { UserRepositoryImpl } from "../../../auth/data/repositories"
 import { UserRepository } from "../../../auth/domain/repositories"
 import { CreateCompanyPPPDto } from "../../domain/dtos/create-ppp-company"
-import { SaveCompanyUseCase } from "../../domain/use-cases"
+import { RegisterLetterAceptanceUseCase, SaveCompanyUseCase } from "../../domain/use-cases"
 import { UpdateIntershipHourUseCase } from "../../domain/use-cases/update-intership-hour.usecase"
+import { UpdateRegisterAceptanceDto } from "../../domain/dtos/update-register-aceptance"
 
 export class PPPController{
 
@@ -24,7 +25,7 @@ export class PPPController{
         this.updateAssingAdvisor = this.updateAssingAdvisor.bind( this )
         this.postcompanyPPP = this.postcompanyPPP.bind(this)
         this.updateIntershipHours = this.updateIntershipHours.bind(this)
-
+        this.updateRegisterLetterAceptance = this.updateRegisterLetterAceptance.bind(this)
 
     }
 
@@ -64,6 +65,19 @@ export class PPPController{
             intershipHours
         )
 
+        usecase.execute()
+    }
+
+    updateRegisterLetterAceptance(req: Request, res: Response){
+        const { id } = req.params
+        const payload = req.body as UpdateRegisterAceptanceDto;
+        const usecase = new RegisterLetterAceptanceUseCase(
+            res,
+            this.pppRepository,
+            id,
+            payload
+        )
+        
         usecase.execute()
     }
 
