@@ -1,7 +1,6 @@
 import { Router } from 'express'
 
-import { EvaluationController } from '../controller/evaluation.controller'
-import { PPPController, PPPDocumentController } from '../controller'
+import { EvaluationController, PPPController, PPPDocumentController } from '../controller'
 import { validateJWT } from '../../../../common/middlewares/jwt'
 
 
@@ -37,6 +36,7 @@ route.post('/create-company-ppp', validateJWT, postcompanyPPP)
 route.post('/create-ppp-document', validateJWT, postCreatePPPDocument)
 route.put('/update-intership-hours', validateJWT , updateIntershipHours)
 route.put('/update-register-letter-aceptance/:id', updateRegisterLetterAceptance)
+
 route.post('/create-evaluation', postCreateEvaluation)
 
 export default route 

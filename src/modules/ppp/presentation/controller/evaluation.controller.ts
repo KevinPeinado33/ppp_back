@@ -68,6 +68,7 @@ export class EvaluationController {
     }
 
     postCreateEvaluation( req: Request, res: Response){
+        
         const createEvaluationDto = req.body as CreateEvaluationDto
         const usecase             = new CreateEvaluationUseCase(
             res,
@@ -75,6 +76,8 @@ export class EvaluationController {
             this.evaluationRepository,
             this.PPPRepository
         )
+
+        usecase.execute()
     }
 
 }
