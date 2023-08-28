@@ -1,4 +1,4 @@
-import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 
 import { AccessEntity, RolesEntity } from './'
 
@@ -7,6 +7,10 @@ export class AccessRoleEntity {
 
   @PrimaryGeneratedColumn('uuid')
   id!: string
+
+  @Column({ type: 'numeric', default: 0
+ })
+  numPosition!: number
 
   /**
    * Relaciones con las tablas

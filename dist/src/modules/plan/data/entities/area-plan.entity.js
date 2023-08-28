@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AreaPlanEntity = void 0;
 const typeorm_1 = require("typeorm");
 const _1 = require("./");
-let AreaPlanEntity = class AreaPlanEntity {
+let AreaPlanEntity = exports.AreaPlanEntity = class AreaPlanEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
@@ -39,8 +39,7 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => _1.QuestionEvaluationEntity, (question) => question.area),
     __metadata("design:type", Array)
 ], AreaPlanEntity.prototype, "questionEvaluations", void 0);
-AreaPlanEntity = __decorate([
+exports.AreaPlanEntity = AreaPlanEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'area_plan' })
 ], AreaPlanEntity);
-exports.AreaPlanEntity = AreaPlanEntity;
 //# sourceMappingURL=area-plan.entity.js.map
