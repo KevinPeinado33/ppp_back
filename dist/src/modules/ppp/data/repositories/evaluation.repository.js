@@ -7,6 +7,15 @@ class EvaluationRepositoryImpl {
     constructor() {
         this.repository = database_1.AppDataSource.getRepository(entities_1.EvaluationEntity);
     }
+    async findOneById(id) {
+        return await this.repository.findOneBy({ id });
+    }
+    async create(createEvaluation) {
+        return await this.repository.create(createEvaluation);
+    }
+    async save(evaluationCreated) {
+        return await this.repository.save(evaluationCreated);
+    }
     async getEvaluationsByPPP(idPPP) {
         return await this
             .repository

@@ -15,4 +15,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./create-ppp-document"), exports);
+__exportStar(require("./create-ppp-company"), exports);
+__exportStar(require("./create-question-answer"), exports);
+__exportStar(require("./create-evaluation"), exports);
 //# sourceMappingURL=index.js.map
