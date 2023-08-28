@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PPPDocumentsEntity = void 0;
 const typeorm_1 = require("typeorm");
 const ppp_entity_1 = require("./ppp.entity");
-let PPPDocumentsEntity = class PPPDocumentsEntity {
+let PPPDocumentsEntity = exports.PPPDocumentsEntity = class PPPDocumentsEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
@@ -46,8 +46,7 @@ __decorate([
     (0, typeorm_1.ManyToOne)(() => ppp_entity_1.PPPEntity, (ppp) => ppp.pppDocuments),
     __metadata("design:type", ppp_entity_1.PPPEntity)
 ], PPPDocumentsEntity.prototype, "ppp", void 0);
-PPPDocumentsEntity = __decorate([
+exports.PPPDocumentsEntity = PPPDocumentsEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'ppp_documents' })
 ], PPPDocumentsEntity);
-exports.PPPDocumentsEntity = PPPDocumentsEntity;
 //# sourceMappingURL=ppp-documents.entity.js.map

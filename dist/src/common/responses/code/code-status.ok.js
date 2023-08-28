@@ -21,5 +21,5 @@ var CODE_STATUS;
      * Codigo de estatus con errores por parte del servidor
      */
     CODE_STATUS[CODE_STATUS["INTERNAL_SERVER_ERROR"] = 500] = "INTERNAL_SERVER_ERROR";
-})(CODE_STATUS = exports.CODE_STATUS || (exports.CODE_STATUS = {}));
+})(CODE_STATUS || (exports.CODE_STATUS = CODE_STATUS = {}));
 //# sourceMappingURL=code-status.ok.js.map

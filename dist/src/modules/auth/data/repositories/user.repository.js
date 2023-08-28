@@ -38,6 +38,7 @@ class UserRepositoryImpl {
             .leftJoinAndMapMany('role.accessRoles', entities_1.AccessRoleEntity, 'accessRole', 'accessRole.roleId = role.id')
             .leftJoinAndMapMany('accessRole.access', entities_1.AccessEntity, 'access', 'access.id = accessRole.accessId')
             .where('user.id = :userId', { userId })
+            .orderBy('accessRole.numPosition', 'ASC')
             .getOne();
     }
 }

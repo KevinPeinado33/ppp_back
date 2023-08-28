@@ -16,7 +16,7 @@ const entities_2 = require("../../../ppp/data/entities");
 const entities_3 = require("../../../student/data/entities");
 const _1 = require("./");
 const entities_4 = require("../../../notificactions/data/entities");
-let UserEntity = class UserEntity {
+let UserEntity = exports.UserEntity = class UserEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
@@ -86,8 +86,7 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => entities_4.ShareEntity, (share) => share.address),
     __metadata("design:type", Array)
 ], UserEntity.prototype, "share", void 0);
-UserEntity = __decorate([
+exports.UserEntity = UserEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'users' })
 ], UserEntity);
-exports.UserEntity = UserEntity;
 //# sourceMappingURL=user.entity.js.map

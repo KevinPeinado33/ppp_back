@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CompanyEntity = void 0;
 const typeorm_1 = require("typeorm");
 const ppp_entity_1 = require("./ppp.entity");
-let CompanyEntity = class CompanyEntity {
+let CompanyEntity = exports.CompanyEntity = class CompanyEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
@@ -63,8 +63,7 @@ __decorate([
     (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", ppp_entity_1.PPPEntity)
 ], CompanyEntity.prototype, "ppp", void 0);
-CompanyEntity = __decorate([
+exports.CompanyEntity = CompanyEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'companies' })
 ], CompanyEntity);
-exports.CompanyEntity = CompanyEntity;
 //# sourceMappingURL=company.entity.js.map
