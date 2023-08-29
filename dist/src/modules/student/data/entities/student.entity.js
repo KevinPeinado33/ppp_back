@@ -13,7 +13,7 @@ exports.StudentEntity = void 0;
 const typeorm_1 = require("typeorm");
 const entities_1 = require("../../../ppp/data/entities");
 const entities_2 = require("../../../auth/data/entities");
-let StudentEntity = class StudentEntity {
+let StudentEntity = exports.StudentEntity = class StudentEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryColumn)({ type: 'varchar' }),
@@ -52,8 +52,7 @@ __decorate([
     (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", entities_2.UserEntity)
 ], StudentEntity.prototype, "user", void 0);
-StudentEntity = __decorate([
+exports.StudentEntity = StudentEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'students' })
 ], StudentEntity);
-exports.StudentEntity = StudentEntity;
 //# sourceMappingURL=student.entity.js.map

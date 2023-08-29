@@ -8,9 +8,11 @@ class EvaluationController {
         this.evaluationRepository = new repositories_1.EvaluationRepositoryImpl();
         this.questionAnswerRepository = new repositories_1.QuestionAnswerRepositoryImpl();
         this.PPPDocumentsRepository = new repositories_1.PPPDocumentsRepositoryImpl();
+        this.PPPRepository = new repositories_1.PPPRepositoryImpl();
         this.getEvaluationHistory = this.getEvaluationHistory.bind(this);
         this.getResultSatisfaction = this.getResultSatisfaction.bind(this);
         this.getDocumentsPPP = this.getDocumentsPPP.bind(this);
+        this.postCreateEvaluation = this.postCreateEvaluation.bind(this);
     }
     getEvaluationHistory(req, res) {
         const { idPPP } = req.params;
@@ -25,6 +27,11 @@ class EvaluationController {
     getDocumentsPPP(req, res) {
         const { idPPP } = req.params;
         const usecase = new use_cases_1.FindDocumentsPPPUseCase(res, this.PPPDocumentsRepository, idPPP);
+        usecase.execute();
+    }
+    postCreateEvaluation(req, res) {
+        const createEvaluationDto = req.body;
+        const usecase = new use_cases_1.CreateEvaluationUseCase(res, createEvaluationDto, this.evaluationRepository, this.PPPRepository);
         usecase.execute();
     }
 }

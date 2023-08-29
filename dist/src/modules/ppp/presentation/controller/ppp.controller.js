@@ -14,6 +14,7 @@ class PPPController {
         this.updateAssingAdvisor = this.updateAssingAdvisor.bind(this);
         this.postcompanyPPP = this.postcompanyPPP.bind(this);
         this.updateIntershipHours = this.updateIntershipHours.bind(this);
+        this.updateRegisterLetterAceptance = this.updateRegisterLetterAceptance.bind(this);
     }
     updateAssingAdvisor(req, res) {
         const { idPPP, advisorID } = req.params;
@@ -29,6 +30,12 @@ class PPPController {
         // const { idPPP} = req.params
         const { idPPP, intershipHours } = req.body;
         const usecase = new update_intership_hour_usecase_1.UpdateIntershipHourUseCase(res, this.pppRepository, idPPP, intershipHours);
+        usecase.execute();
+    }
+    updateRegisterLetterAceptance(req, res) {
+        const { id } = req.params;
+        const payload = req.body;
+        const usecase = new use_cases_1.RegisterLetterAceptanceUseCase(res, this.pppRepository, id, payload);
         usecase.execute();
     }
 }

@@ -17,7 +17,7 @@ const entities_3 = require("../../../auth/data/entities");
 const evaluation_entity_1 = require("./evaluation.entity");
 const ppp_documents_entity_1 = require("./ppp-documents.entity");
 const company_entity_1 = require("./company.entity");
-let PPPEntity = class PPPEntity {
+let PPPEntity = exports.PPPEntity = class PPPEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
@@ -78,8 +78,7 @@ __decorate([
     (0, typeorm_1.OneToOne)(() => company_entity_1.CompanyEntity, (company) => company.ppp),
     __metadata("design:type", company_entity_1.CompanyEntity)
 ], PPPEntity.prototype, "company", void 0);
-PPPEntity = __decorate([
+exports.PPPEntity = PPPEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'ppp' })
 ], PPPEntity);
-exports.PPPEntity = PPPEntity;
 //# sourceMappingURL=ppp.entity.js.map

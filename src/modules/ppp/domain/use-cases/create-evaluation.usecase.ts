@@ -14,7 +14,7 @@ export class CreateEvaluationUseCase{
         private readonly response               : Response,
         private readonly createEvaluationDto    : CreateEvaluationDto, 
         private readonly repository             : EvaluationRepository,
-        private readonly pppRepository          : PPPRepository,
+        private readonly pppRepository          : PPPRepository
 
     ){ }
 
@@ -27,7 +27,7 @@ export class CreateEvaluationUseCase{
                 response: this.response,
                 code: CODE_STATUS.BAD_REQUEST,
                 info: error.message
-            })
+            });
         }
 
         try {
@@ -42,7 +42,7 @@ export class CreateEvaluationUseCase{
                     response: this.response,
                     code: CODE_STATUS.NOT_FOUND,
                     info: `No existe el ppp con id #${ this.createEvaluationDto.ppp }`
-                })
+                });
             }
 
             newEvaluation.ppp = pppFound
@@ -54,14 +54,14 @@ export class CreateEvaluationUseCase{
                 code: CODE_STATUS.CREATED,
                 info: 'Evaluación creada correctamente.',
                 data: evaluationCreated
-            })
+            });
 
         } catch (error) {
             message({
                 response: this.response,
                 code: CODE_STATUS.INTERNAL_SERVER_ERROR,
                 info: error
-            })
+            });
             
         }
     }

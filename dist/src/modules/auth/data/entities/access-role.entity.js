@@ -12,12 +12,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AccessRoleEntity = void 0;
 const typeorm_1 = require("typeorm");
 const _1 = require("./");
-let AccessRoleEntity = class AccessRoleEntity {
+let AccessRoleEntity = exports.AccessRoleEntity = class AccessRoleEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
     __metadata("design:type", String)
 ], AccessRoleEntity.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'numeric', default: 0
+    }),
+    __metadata("design:type", Number)
+], AccessRoleEntity.prototype, "numPosition", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => _1.AccessEntity, (access) => access.accessRoles),
     __metadata("design:type", _1.AccessEntity)
@@ -26,8 +31,7 @@ __decorate([
     (0, typeorm_1.ManyToOne)(() => _1.RolesEntity, (role) => role.accessRoles),
     __metadata("design:type", _1.RolesEntity)
 ], AccessRoleEntity.prototype, "role", void 0);
-AccessRoleEntity = __decorate([
+exports.AccessRoleEntity = AccessRoleEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'access_roles' })
 ], AccessRoleEntity);
-exports.AccessRoleEntity = AccessRoleEntity;
 //# sourceMappingURL=access-role.entity.js.map

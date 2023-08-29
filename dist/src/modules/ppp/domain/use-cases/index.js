@@ -19,4 +19,10 @@ __exportStar(require("./find-satisfaction-evaluations.usecase"), exports);
 __exportStar(require("./find-documents-ppp.usecase"), exports);
 __exportStar(require("./save-company-ppp.usecase"), exports);
 __exportStar(require("./create-ppp-document.usecase"), exports);
+__exportStar(require("./register-letter-aceptance.usecase"), exports);
+__exportStar(require("./close-ppp.usecase"), exports);
+__exportStar(require("./assing-advisor-ppp.usecases"), exports);
+__exportStar(require("./update-intership-hour.usecase"), exports);
+__exportStar(require("./create-evaluation.usecase"), exports);
+__exportStar(require("./create-question-answer.usecase"), exports);
 //# sourceMappingURL=index.js.map

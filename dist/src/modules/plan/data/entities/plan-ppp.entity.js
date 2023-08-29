@@ -14,7 +14,7 @@ const typeorm_1 = require("typeorm");
 const entities_1 = require("../../../ppp/data/entities");
 const entities_2 = require("../../../auth/data/entities");
 const _1 = require("./");
-let PlanPPPEntity = class PlanPPPEntity {
+let PlanPPPEntity = exports.PlanPPPEntity = class PlanPPPEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
@@ -68,8 +68,7 @@ __decorate([
     (0, typeorm_1.ManyToOne)(() => entities_2.UserEntity, (user) => user.planPPPs),
     __metadata("design:type", entities_2.UserEntity)
 ], PlanPPPEntity.prototype, "commited", void 0);
-PlanPPPEntity = __decorate([
+exports.PlanPPPEntity = PlanPPPEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'plan_ppp' })
 ], PlanPPPEntity);
-exports.PlanPPPEntity = PlanPPPEntity;
 //# sourceMappingURL=plan-ppp.entity.js.map

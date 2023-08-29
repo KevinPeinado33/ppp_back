@@ -37,5 +37,6 @@ exports.AppDataSource = new typeorm_1.DataSource({
     ],
     logging: false,
     synchronize: true,
+    ssl: true
 });
 //# sourceMappingURL=index.js.map

@@ -50,6 +50,7 @@ export class UserRepositoryImpl implements UserRepository {
                             .leftJoinAndMapMany('role.accessRoles', AccessRoleEntity, 'accessRole', 'accessRole.roleId = role.id')
                             .leftJoinAndMapMany('accessRole.access', AccessEntity, 'access', 'access.id = accessRole.accessId')
                             .where('user.id = :userId', { userId })
+                            .orderBy('accessRole.numPosition', 'ASC')
                             .getOne()
                         
     }
