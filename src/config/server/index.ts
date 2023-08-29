@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 import 'dotenv/config'
+import cron from 'node-cron'
 import express, { Application } from 'express'
 import cors from 'cors'
 import swaggerUI from 'swagger-ui-express'
@@ -38,7 +39,14 @@ export class AppServer {
         this.dbConnection()
         this.middlewares()
         this.routes()
+        this.cronSchedule()
+    }
 
+    async cronSchedule(){
+        cron.schedule("0 0 23 * * *", async () => {
+            console.log("Pinga")
+        }    
+        )
     }
 
     listen() {
@@ -75,5 +83,7 @@ export class AppServer {
         this.app.use(this.paths.ppp, pppRouter)
         this.app.use(this.paths.notification, notificationRouter)
     }
+
+
 
 }
