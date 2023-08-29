@@ -98,7 +98,7 @@
 
 /**
  * @swagger
- * /update-register-letter-aceptance/{id}:
+ * /api/ppp/update-register-letter-aceptance/{id}:
  *   put:
  *     summary: Actualizar carta de aceptación de registro.
  *     description: Actualiza el estado de la carta de aceptación de registro identificada por su ID.
@@ -135,7 +135,7 @@
 
 /**
  * @swagger
- * /update-close-ppp:
+ * /api/ppp/update-close-ppp:
  *   put:
  *     summary: Actualizar el estado de cierre de un PPP (Proyecto de Prácticas Profesionales).
  *     description: Actualiza el estado de cierre de un PPP.
