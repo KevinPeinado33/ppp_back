@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { PPPEntity } from "./ppp.entity";
+import { CommentDocumentEntity } from "./comment_document.entity";
 
 @Entity ({ name: 'ppp_documents' })
 
@@ -36,5 +37,11 @@ export class PPPDocumentsEntity{
         (ppp) => ppp.pppDocuments
     )
     ppp!: PPPEntity
+
+    @OneToMany(
+        () => CommentDocumentEntity,
+        (comments) => comments.pppDocument
+    )
+    comments!: CommentDocumentEntity[]
 
 }

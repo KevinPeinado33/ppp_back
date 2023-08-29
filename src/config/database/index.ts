@@ -22,7 +22,8 @@ import {
   PPPEntity, 
   QuestionAnswerEntity, 
   CompanyEntity, 
-  EvaluationEntity 
+  EvaluationEntity, 
+  CommentDocumentEntity
 } from '../../modules/ppp/data/entities'
 import { NotificationsEntity, ShareEntity } from '../../modules/notificactions/data/entities'
 
@@ -55,6 +56,7 @@ export const AppDataSource = new DataSource({
     EvaluationEntity,
     QuestionAnswerEntity,
     PPPDocumentsEntity,
+    CommentDocumentEntity
   ],
   logging: false,
   synchronize: true,
