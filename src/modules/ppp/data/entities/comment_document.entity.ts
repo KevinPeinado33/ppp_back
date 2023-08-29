@@ -1,8 +1,10 @@
-import { Entity, OneToMany } from 'typeorm'
+import { Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { PPPDocumentsEntity } from './'
 
 @Entity('comments_document')
 export class CommentDocumentEntity {
+
+    @PrimaryGeneratedColumn('uuid')
     id!: string
 
     comment!: string
