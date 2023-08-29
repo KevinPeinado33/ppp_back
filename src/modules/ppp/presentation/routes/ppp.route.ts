@@ -18,7 +18,8 @@ const {
     updateAssingAdvisor,
     postcompanyPPP,
     updateIntershipHours,
-    updateRegisterLetterAceptance
+    updateRegisterLetterAceptance,
+    updateClosePpp
 } = new PPPController()
 
 const {
@@ -35,6 +36,7 @@ route.get('/get-documents-ppp/:idPPP',  validateJWT,getDocumentsPPP)
 route.post('/create-company-ppp', validateJWT, postcompanyPPP)
 route.post('/create-ppp-document', validateJWT, postCreatePPPDocument)
 route.put('/update-intership-hours', validateJWT , updateIntershipHours)
-route.put('/update-register-letter-aceptance/:id', updateRegisterLetterAceptance)
+route.put('/update-register-letter-aceptance/:id', validateJWT, updateRegisterLetterAceptance)
+route.put('/update-close-ppp', updateClosePpp)
 
 export default route 

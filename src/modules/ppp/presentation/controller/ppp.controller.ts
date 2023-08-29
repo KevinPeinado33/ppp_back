@@ -5,9 +5,10 @@ import { AssingAdvisorPppUseCase } from "../../domain/use-cases/assing-advisor-p
 import { UserRepositoryImpl } from "../../../auth/data/repositories"
 import { UserRepository } from "../../../auth/domain/repositories"
 import { CreateCompanyPPPDto } from "../../domain/dtos/create-ppp-company"
-import { RegisterLetterAceptanceUseCase, SaveCompanyUseCase } from "../../domain/use-cases"
+import { ClosePppUsecase, RegisterLetterAceptanceUseCase, SaveCompanyUseCase } from "../../domain/use-cases"
 import { UpdateIntershipHourUseCase } from "../../domain/use-cases/update-intership-hour.usecase"
 import { UpdateRegisterAceptanceDto } from "../../domain/dtos/update-register-aceptance"
+import { ClosePppDto } from "../../domain/dtos"
 
 export class PPPController{
 
@@ -81,4 +82,14 @@ export class PPPController{
         usecase.execute()
     }
 
+    updateClosePpp( req: Request, res: Response){
+        const { id } = req.params
+        const payload = req.body as ClosePppDto
+        const usecase = new ClosePppUsecase(
+            res,
+            this.pppRepository,
+            id,
+            payload
+        )
+    }
 }
