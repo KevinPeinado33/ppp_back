@@ -17,5 +17,12 @@ CreatePlanPPPDto.schema = joi_1.default.object({
     bannerUrl: joi_1.default.array().required(),
     status: joi_1.default.boolean(),
     commited: joi_1.default.string().uuid().required(),
+    documents: joi_1.default.array().items(joi_1.default.object({
+        name: joi_1.default.string().required(),
+        urlDocument: joi_1.default.string().required(),
+        description: joi_1.default.string().required(),
+        status: joi_1.default.boolean(),
+        type: joi_1.default.string().required(),
+    }))
 });
 //# sourceMappingURL=create-plan-ppp.dto.js.map

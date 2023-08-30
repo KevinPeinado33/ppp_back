@@ -54,7 +54,9 @@ export class PlanController {
             res,
             createPlanPPPDto,
             this.planRepository,
-            this.userRepository
+            this.userRepository,
+            this.typeDocumentRepository,
+            this.planDocumentRepository
         )
 
         usecase.execute()

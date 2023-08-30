@@ -34,6 +34,7 @@ exports.AppDataSource = new typeorm_1.DataSource({
         entities_4.EvaluationEntity,
         entities_4.QuestionAnswerEntity,
         entities_4.PPPDocumentsEntity,
+        entities_4.CommentDocumentEntity
     ],
     logging: false,
     synchronize: true,

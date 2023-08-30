@@ -27,7 +27,7 @@ class PlanController {
     }
     postCreatePlan(req, res) {
         const createPlanPPPDto = req.body;
-        const usecase = new use_cases_1.CreatePlanPPPUseCase(res, createPlanPPPDto, this.planRepository, this.userRepository);
+        const usecase = new use_cases_1.CreatePlanPPPUseCase(res, createPlanPPPDto, this.planRepository, this.userRepository, this.typeDocumentRepository, this.planDocumentRepository);
         usecase.execute();
     }
     postCreateAreaPlan(req, res) {
