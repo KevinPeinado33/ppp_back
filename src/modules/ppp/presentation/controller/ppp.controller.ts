@@ -1,6 +1,7 @@
 import { Response, Request } from "express"
-import { CompanyRepositoryImpl, EvaluationRepositoryImpl, PPPRepositoryImpl } from "../../data/repositories"
-import { CompanyRepositroy, EvaluationRepository, PPPRepository } from "../../domain/repositories"
+
+import { CompanyRepositoryImpl, PPPRepositoryImpl } from "../../data/repositories"
+import { CompanyRepositroy, PPPRepository } from "../../domain/repositories"
 import { AssingAdvisorPppUseCase } from "../../domain/use-cases/assing-advisor-ppp.usecases"
 import { UserRepositoryImpl } from "../../../auth/data/repositories"
 import { UserRepository } from "../../../auth/domain/repositories"

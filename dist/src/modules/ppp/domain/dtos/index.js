@@ -18,4 +18,5 @@ __exportStar(require("./create-ppp-document"), exports);
 __exportStar(require("./create-ppp-company"), exports);
 __exportStar(require("./create-question-answer"), exports);
 __exportStar(require("./create-evaluation"), exports);
+__exportStar(require("./close-ppp"), exports);
 //# sourceMappingURL=index.js.map

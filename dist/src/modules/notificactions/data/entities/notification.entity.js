@@ -13,7 +13,7 @@ exports.NotificationsEntity = void 0;
 const typeorm_1 = require("typeorm");
 const entities_1 = require("../../../auth/data/entities");
 const share_entity_1 = require("./share.entity");
-let NotificationsEntity = exports.NotificationsEntity = class NotificationsEntity {
+let NotificationsEntity = class NotificationsEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
@@ -47,7 +47,8 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => share_entity_1.ShareEntity, (share) => share.notification),
     __metadata("design:type", Array)
 ], NotificationsEntity.prototype, "share", void 0);
-exports.NotificationsEntity = NotificationsEntity = __decorate([
+NotificationsEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'notifications' })
 ], NotificationsEntity);
+exports.NotificationsEntity = NotificationsEntity;
 //# sourceMappingURL=notification.entity.js.map

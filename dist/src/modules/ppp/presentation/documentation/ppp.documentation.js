@@ -94,4 +94,70 @@
  *         required: true
  *         description: Token de autenticación JWT en el formato "Bearer {token}".
  */
+/**
+ * @swagger
+ * /api/ppp/update-register-letter-aceptance/{id}:
+ *   put:
+ *     summary: Actualizar carta de aceptación de registro.
+ *     description: Actualiza el estado de la carta de aceptación de registro identificada por su ID.
+ *     tags: [PPP]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID de la carta de aceptación de registro que se desea actualizar.
+ *     responses:
+ *       200:
+ *         description: Respuesta exitosa. La carta de aceptación de registro ha sido actualizada correctamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Mensaje de confirmación.
+ *       400:
+ *         description: Solicitud incorrecta. El ID proporcionado no es válido o está mal formateado.
+ *       401:
+ *         description: No autorizado. El JWT no es válido o no se proporcionó.
+ *       404:
+ *         description: No se encontró la carta de aceptación de registro con el ID especificado.
+ *       500:
+ *         description: Error interno del servidor.
+ */
+/**
+ * @swagger
+ * /api/ppp/update-close-ppp:
+ *   put:
+ *     summary: Actualizar el estado de cierre de un PPP (Proyecto de Prácticas Profesionales).
+ *     description: Actualiza el estado de cierre de un PPP.
+ *     tags: [PPP]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               idPPP:
+ *                 type: string
+ *                 description: ID del PPP que se desea actualizar.
+ *               closed:
+ *                 type: boolean
+ *                 description: Estado de cierre del PPP (true para cerrado, false para no cerrado).
+ *     responses:
+ *       200:
+ *         description: Respuesta exitosa. El estado de cierre del PPP ha sido actualizado correctamente.
+ *       400:
+ *         description: Solicitud incorrecta. Los datos proporcionados son inválidos o están incompletos.
+ *       404:
+ *         description: No se encontró el PPP con el ID proporcionado.
+ *       500:
+ *         description: Error interno del servidor.
+ */
 //# sourceMappingURL=ppp.documentation.js.map

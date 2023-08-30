@@ -29,7 +29,11 @@
  *                  description: Estado del plan PPP.
  *              commited:
  *                  type: string
- *                  description: Id del usuario que ha creado el plan PPP.
+ *                  description: ID del usuario que ha creado el plan PPP (formato UUID).
+ *              documents:
+ *                  type: array
+ *                  items:
+ *                      $ref: '#/components/schemas/PlanDocument'
  *          required:
  *              - name
  *              - intershipHours
@@ -37,6 +41,7 @@
  *              - endDate
  *              - bannerUrl
  *              - commited
+ *              - documents
  *          example:
  *              name: PPP - 2020
  *              intershipHours: 200
@@ -45,6 +50,17 @@
  *              bannerUrl: ['https://ejemplo.com/banner1.jpg', 'https://ejemplo.com/banner2.jpg']
  *              status: true
  *              commited: '12e12e12EEEDccf4uuid'
+ *              documents:
+ *                  - name: Documento 1
+ *                    urlDocument: 'https://ejemplo.com/documento1.pdf'
+ *                    description: Descripción del documento 1
+ *                    status: true
+ *                    type: Tipo A
+ *                  - name: Documento 2
+ *                    urlDocument: 'https://ejemplo.com/documento2.pdf'
+ *                    description: Descripción del documento 2
+ *                    status: false
+ *                    type: Tipo B
  */
 /**
  * @swagger
