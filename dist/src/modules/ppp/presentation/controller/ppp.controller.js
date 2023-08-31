@@ -38,6 +38,11 @@ class PPPController {
         const usecase = new use_cases_1.RegisterLetterAceptanceUseCase(res, this.pppRepository, id, payload);
         usecase.execute();
     }
+    updateClosePpp(req, res) {
+        const { id } = req.params;
+        const payload = req.body;
+        const usecase = new use_cases_1.ClosePppUsecase(res, this.pppRepository, id, payload);
+    }
 }
 exports.PPPController = PPPController;
 //# sourceMappingURL=ppp.controller.js.map

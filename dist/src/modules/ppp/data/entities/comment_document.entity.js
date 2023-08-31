@@ -9,25 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RoleUserEntity = void 0;
+exports.CommentDocumentEntity = void 0;
 const typeorm_1 = require("typeorm");
 const _1 = require("./");
-let RoleUserEntity = class RoleUserEntity {
+let CommentDocumentEntity = class CommentDocumentEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
     __metadata("design:type", String)
-], RoleUserEntity.prototype, "id", void 0);
+], CommentDocumentEntity.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => _1.RolesEntity, (role) => role.rolesUsers),
-    __metadata("design:type", _1.RolesEntity)
-], RoleUserEntity.prototype, "role", void 0);
-__decorate([
-    (0, typeorm_1.ManyToOne)(() => _1.UserEntity, (user) => user.roleUser),
-    __metadata("design:type", _1.UserEntity)
-], RoleUserEntity.prototype, "user", void 0);
-RoleUserEntity = __decorate([
-    (0, typeorm_1.Entity)({ name: 'roles_user' })
-], RoleUserEntity);
-exports.RoleUserEntity = RoleUserEntity;
-//# sourceMappingURL=roles-users.entity.js.map
+    (0, typeorm_1.OneToMany)(() => _1.PPPDocumentsEntity, (pppDocument) => pppDocument.comments),
+    __metadata("design:type", _1.PPPDocumentsEntity)
+], CommentDocumentEntity.prototype, "pppDocument", void 0);
+CommentDocumentEntity = __decorate([
+    (0, typeorm_1.Entity)('comments_document')
+], CommentDocumentEntity);
+exports.CommentDocumentEntity = CommentDocumentEntity;
+//# sourceMappingURL=comment_document.entity.js.map

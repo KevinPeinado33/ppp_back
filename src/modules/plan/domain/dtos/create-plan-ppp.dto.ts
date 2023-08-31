@@ -23,6 +23,7 @@ export class CreatePlanPPPDto {
         status:         Joi.boolean(),
         commited:       Joi.string().uuid().required(),
         documents:      Joi.array().items(
+
             Joi.object({
                 name: Joi.string().required(),
                 urlDocument: Joi.string().required(),
@@ -30,6 +31,7 @@ export class CreatePlanPPPDto {
                 status: Joi.boolean(),
                 type: Joi.string().required(),
             })
+            
         )
     })
 
