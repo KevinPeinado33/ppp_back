@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TypeDocumentEntity = void 0;
 const typeorm_1 = require("typeorm");
 const plan_document_entity_1 = require("./plan-document.entity");
-let TypeDocumentEntity = exports.TypeDocumentEntity = class TypeDocumentEntity {
+let TypeDocumentEntity = class TypeDocumentEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
@@ -35,7 +35,8 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => plan_document_entity_1.PlanDocumentEntity, (planDocument) => planDocument.type),
     __metadata("design:type", Array)
 ], TypeDocumentEntity.prototype, "planDocuments", void 0);
-exports.TypeDocumentEntity = TypeDocumentEntity = __decorate([
+TypeDocumentEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'type_documents' })
 ], TypeDocumentEntity);
+exports.TypeDocumentEntity = TypeDocumentEntity;
 //# sourceMappingURL=type-document.entity.js.map

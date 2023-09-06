@@ -8,6 +8,15 @@ export class PPPRepositoryImpl implements PPPRepository {
   private pppRepository = AppDataSource.getRepository(PPPEntity)
 
   constructor() {}
+
+  async getStartDate(): Promise<Map<string, object>[]> {
+    return await this.pppRepository
+                        .createQueryBuilder("ppp")
+                        .select(['ppp.advisor', 'ppp.started_date'])
+                        //.select('ppp.started_date', 'startDate')
+                        .getRawMany();
+    
+  }
   
   async save(ppp: PPPEntity): Promise<PPPEntity> {
     return await this.pppRepository.save(ppp)

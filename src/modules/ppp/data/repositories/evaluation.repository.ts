@@ -8,6 +8,9 @@ export class EvaluationRepositoryImpl implements EvaluationRepository {
     private repository = AppDataSource.getRepository( EvaluationEntity )
 
     constructor(){ }
+    getPropertiesEvaluations(): Promise<Map<string, object>[]> {
+        throw new Error('Method not implemented.')
+    }
 
     async findOneById(id: string): Promise<EvaluationEntity | null> {
         return await this.repository.findOneBy({id})

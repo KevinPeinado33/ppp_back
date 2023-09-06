@@ -14,36 +14,41 @@ import planRouter from '../../modules/plan/presentation/routes/plan.route'
 import userRouter from '../../modules/auth/presentation/routes/user.route'
 import pppRouter from '../../modules/ppp/presentation/routes/ppp.route'
 import notificationRouter from '../../modules/notificactions/presentation/routers/notification.router'
+import { scheduleController } from '../../modules/notificactions/presentation/controllers'
 
 
 export class AppServer {
 
-    private app : Application
+    private app: Application
     private port: string
 
     private paths = {
-        auth                : '/api/auth',
-        student             : '/api/student',
-        plan                : '/api/plan',
-        user                : '/api/user',
-        ppp                 : '/api/ppp',
-        notification        : '/api/notification',
+        auth: '/api/auth',
+        student: '/api/student',
+        plan: '/api/plan',
+        user: '/api/user',
+        ppp: '/api/ppp',
+        notification: '/api/notification',
     }
 
     constructor() {
-        
-        this.app  = express()
+
+        this.app = express()
         this.port = process.env.PORT || ''
 
         this.dbConnection()
         this.middlewares()
         this.routes()
+        this.cronSchedule()
+    }
 
+    cronSchedule() {
+        scheduleController()
     }
 
     listen() {
         this.app.listen(this.port, () => {
-            console.log(`🏃‍♂️ Server is already on port:${ this.port }.` )
+            console.log(`🏃‍♂️ Server is already on port:${this.port}.`)
         })
     }
 
@@ -53,7 +58,7 @@ export class AppServer {
         this.app.use(
             PATH_SWAGGER,
             swaggerUI.serve,
-            swaggerUI.setup(swaggerJSDoc( options ))
+            swaggerUI.setup(swaggerJSDoc(options))
         )
         console.log(`📄 Swagger is already on http://localhost:${this.port}${PATH_SWAGGER}`)
     }
@@ -62,7 +67,7 @@ export class AppServer {
         try {
             await AppDataSource.initialize()
             console.log('✅ DataBase is connected.')
-        } catch ( error: any ) {
+        } catch (error: any) {
             console.log(error)
         }
     }
@@ -75,5 +80,7 @@ export class AppServer {
         this.app.use(this.paths.ppp, pppRouter)
         this.app.use(this.paths.notification, notificationRouter)
     }
+
+
 
 }

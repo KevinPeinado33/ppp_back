@@ -10,6 +10,8 @@ export class CreatePlanPPPDto {
     status?         : boolean
     commited!       : string
 
+    documents!      : IDocumentPlanPPPDto[]
+
     constructor() { }
 
     static schema = Joi.object({
@@ -20,6 +22,25 @@ export class CreatePlanPPPDto {
         bannerUrl:      Joi.array< string >().required(),
         status:         Joi.boolean(),
         commited:       Joi.string().uuid().required(),
+        documents:      Joi.array().items(
+
+            Joi.object({
+                name: Joi.string().required(),
+                urlDocument: Joi.string().required(),
+                description: Joi.string().required(),
+                status: Joi.boolean(),
+                type: Joi.string().required(),
+            })
+            
+        )
     })
 
+}
+
+interface IDocumentPlanPPPDto {
+    name: string
+    urlDocument: string
+    description: string
+    status?: boolean
+    type: string
 }
