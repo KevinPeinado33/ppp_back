@@ -135,11 +135,13 @@
 
 /**
  * @swagger
- * /api/ppp/update-close-ppp:
+ * /api/ppp/update-close-ppp/{id}:
  *   put:
  *     summary: Actualizar el estado de cierre de un PPP (Proyecto de Prácticas Profesionales).
  *     description: Actualiza el estado de cierre de un PPP.
  *     tags: [PPP]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:

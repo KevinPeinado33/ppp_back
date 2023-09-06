@@ -9,7 +9,7 @@ export class StudentRepositoryImpl implements StudentRepository {
 
     private readonly repository = AppDataSource.getRepository( StudentEntity )
 
-    constructor() { }    
+    constructor() { }   
     
     async getAllStudents(planPPP: string): Promise< StudentEntity[] > {
         return await this.repository.find({ where: { planPPP }, relations: ['user'] })
@@ -56,4 +56,34 @@ export class StudentRepositoryImpl implements StudentRepository {
 
     }
 
+    async getRatesAndIntershipHoursById(codeStudent: string): Promise<Map<string, object>[]> {
+        
+        const pruebita: Map<string, object>[] = []
+
+        const qb = await this.repository
+          .createQueryBuilder("student")
+          .leftJoin("student.ppp", "ppp")
+          .where("student.code = :studentCode", { studentCode: codeStudent })
+          .select([
+            "ppp.rate AS ppp_rate",
+            "ppp.intershipHours AS intership_hours",
+          ])
+          .getRawMany();
+         
+
+         qb.map( x => {
+
+            const mapita = new Map<string, object>()
+
+            mapita.set('rate', x['ppp_rate'])
+            mapita.set('hours', x['intership_hours'])
+
+            pruebita.push(mapita)
+
+         })
+
+         return pruebita;
+
+    }
+    
 }
