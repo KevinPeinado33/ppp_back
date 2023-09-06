@@ -25,7 +25,11 @@ export class PPPDocumentsEntity{
     })
     dateUpload!: Date
 
-    @Column({ type: 'varchar'})
+    /**
+     * en string poque tendra al rededor 
+     * de 3 estados
+     */
+    @Column({ type: 'varchar', default: 'en espera'})
     status!: string
 
     /**

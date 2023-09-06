@@ -24,6 +24,7 @@ const {
 
 const {
     postCreatePPPDocument, 
+    postInsertCommentDocument
 } = new PPPDocumentController()
 
 route.get('/get-evaluation-by-ppp/:idPPP', validateJWT, getEvaluationHistory)
@@ -40,5 +41,8 @@ route.put('/update-register-letter-aceptance/:id', validateJWT, updateRegisterLe
 route.put("/update-close-ppp/:id", validateJWT, updateClosePpp)
 
 route.post('/create-evaluation', postCreateEvaluation)
+
+route.post('/insert-comment-document/:idDocumentPPP', validateJWT, postInsertCommentDocument)
+
 
 export default route 
