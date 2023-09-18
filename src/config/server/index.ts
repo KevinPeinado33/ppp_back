@@ -43,7 +43,7 @@ export class AppServer {
     }
 
     cronSchedule() {
-        scheduleController()
+        scheduleController();
     }
 
     listen() {
