@@ -41,8 +41,8 @@ route.put('/update-intership-hours', validateJWT , updateIntershipHours)
 route.put('/update-register-letter-aceptance/:id', validateJWT, updateRegisterLetterAceptance)
 route.put("/update-close-ppp/:id", validateJWT, updateClosePpp)
 
-route.post('/create-evaluation', postCreateEvaluation)
-route.post('/create-question-answer', postCreateQuestionAnswer)
+route.post('/create-evaluation', validateJWT, postCreateEvaluation)
+route.post('/create-question-answer', validateJWT, postCreateQuestionAnswer)
 route.post('/insert-comment-document/:idDocumentPPP', validateJWT, postInsertCommentDocument)
 
 
