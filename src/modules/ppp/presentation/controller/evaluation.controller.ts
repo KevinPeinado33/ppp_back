@@ -1,9 +1,10 @@
 import { Response, Request } from 'express'
 
-import { FindEvaluationsStudentsUseCase, FindAnswersSatisfactionEvaluationsUseCase, FindDocumentsPPPUseCase, CreateEvaluationUseCase } from '../../domain/use-cases'
+import { FindEvaluationsStudentsUseCase, FindAnswersSatisfactionEvaluationsUseCase, FindDocumentsPPPUseCase, CreateEvaluationUseCase, CreateQuestionAnswerUseCase } from '../../domain/use-cases'
 import { EvaluationRepository, PPPDocumentsRepository, PPPRepository, QuestionAnswerRepository } from '../../domain/repositories'
 import { EvaluationRepositoryImpl, PPPDocumentsRepositoryImpl, PPPRepositoryImpl, QuestionAnswerRepositoryImpl } from '../../data/repositories'
 import { CreateEvaluationDto } from '../../domain/dtos/create-evaluation';
+import { CreateQuestionAnswerDto } from '../../domain/dtos';
 
 export class EvaluationController { 
 
@@ -23,6 +24,7 @@ export class EvaluationController {
         this.getResultSatisfaction      = this.getResultSatisfaction.bind( this )
         this.getDocumentsPPP            = this.getDocumentsPPP.bind( this )
         this.postCreateEvaluation       = this.postCreateEvaluation.bind( this )
+        this.postCreateQuestionAnswer   = this.postCreateQuestionAnswer.bind( this )
         
     }
 
@@ -75,6 +77,18 @@ export class EvaluationController {
             createEvaluationDto,
             this.evaluationRepository,
             this.PPPRepository
+        )
+
+        usecase.execute()
+    }
+
+    postCreateQuestionAnswer(  req: Request, res: Response ){
+        const createQuestionAnswerDto   = req.body as CreateQuestionAnswerDto
+        const usecase                   = new CreateQuestionAnswerUseCase(
+            res,
+            createQuestionAnswerDto,
+            this.questionAnswerRepository,
+            this.evaluationRepository
         )
 
         usecase.execute()

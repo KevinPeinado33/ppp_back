@@ -12,6 +12,7 @@ const {
     getResultSatisfaction,
     getDocumentsPPP,
     postCreateEvaluation,
+    postCreateQuestionAnswer
 } = new EvaluationController()
 
 const {
@@ -41,7 +42,7 @@ route.put('/update-register-letter-aceptance/:id', validateJWT, updateRegisterLe
 route.put("/update-close-ppp/:id", validateJWT, updateClosePpp)
 
 route.post('/create-evaluation', postCreateEvaluation)
-
+route.post('/create-question-answer', postCreateQuestionAnswer)
 route.post('/insert-comment-document/:idDocumentPPP', validateJWT, postInsertCommentDocument)
 
 
