@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 
 import { AreaPlanRepository, PlanDocumentRepository, PlanPPPRepository, QuestionEvaluationRepository, TypeDocumentRepository } from '../../domain/repositories'
 import { AreaPlanRepositoryImpl, PlanDocumentRepositoryImpl, PlanPPPRepositoryImpl, QuestionEvaluationRepositoryImpl, TypeDocumentRepositoryImpl } from '../../data/repositories'
-import { CreatePlanPPPUseCase, FindAllUseCase, CreateAreaPlanUseCase, CreateQuestionEvaluationUseCase, CreatePlanDocumentUseCase, GetAllTypeDocumentsUseCase } from '../../domain/use-cases'
+import { CreatePlanPPPUseCase, FindAllUseCase, CreateAreaPlanUseCase, CreateQuestionEvaluationUseCase, CreatePlanDocumentUseCase, GetAllTypeDocumentsUseCase, GetAreaByPlanUsecas } from '../../domain/use-cases'
 import { CreatePlanPPPDto, CreateAreaPlanDto, CreateQuestionEvaluationDto, CreatePlanDocumentDto } from '../../domain/dtos'
 import { UserRepository } from '../../../auth/domain/repositories'
 import { UserRepositoryImpl } from '../../../auth/data/repositories'
@@ -33,6 +33,7 @@ export class PlanController {
         this.postCreateDocument           = this.postCreateDocument.bind( this )
         this.getTypesDocuments            = this.getTypesDocuments.bind( this )
         this.getBasesPPP                  = this.getBasesPPP.bind( this )
+        this.getAreaPlanByPlan            = this.getAreaPlanByPlan.bind( this )
 
     }
 
@@ -122,6 +123,20 @@ export class PlanController {
         const usecase = new GetBasesPPPUseCase(
             res,
             this.planRepository
+        )
+
+        usecase.execute()
+
+    }
+
+    getAreaPlanByPlan(req: Request, res: Response) {
+
+        const { idPlan } = req.params
+
+        const usecase = new GetAreaByPlanUsecas(
+            res,
+            this.areaPlanRepository,
+            idPlan
         )
 
         usecase.execute()

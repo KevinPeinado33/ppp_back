@@ -13,7 +13,8 @@ const {
     postCreateQuestionEvaluation,
     postCreateDocument,
     getTypesDocuments,
-    getBasesPPP
+    getBasesPPP,
+    getAreaPlanByPlan
 
 } = new PlanController()
 
@@ -23,6 +24,8 @@ router.post('/create-area-plan', validateJWT, postCreateAreaPlan)
 router.post('/create-question-evaluation', validateJWT, postCreateQuestionEvaluation)
 router.post('/create-document-plan', validateJWT, postCreateDocument)
 router.get('/get-all-types-documents', validateJWT, getTypesDocuments)
+
+router.get('/get-areas-plan/:idPlan', getAreaPlanByPlan)
 
 
 router.get('/get-bases-ppp', getBasesPPP)
