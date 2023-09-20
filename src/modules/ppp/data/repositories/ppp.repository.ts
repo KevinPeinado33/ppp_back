@@ -8,6 +8,12 @@ export class PPPRepositoryImpl implements PPPRepository {
   private pppRepository = AppDataSource.getRepository(PPPEntity)
 
   constructor() {}
+
+  async getStartDate(): Promise<Map<string, object>[]> {
+    // TODO: hacer el fucking filtro
+      const queryBuilder = this.pppRepository.createQueryBuilder("SELECT p.advisorId, p.started_date FROM ppp p WHERE NOT EXISTS (SELECT * FROM evaluation e WHERE e.pppId = p.id)")
+        return await queryBuilder.getRawMany(); 
+    }
   
   async save(ppp: PPPEntity): Promise<PPPEntity> {
     return await this.pppRepository.save(ppp)

@@ -7,5 +7,6 @@ export abstract class StudentRepository {
     abstract findStudentsProcessEnd(finalRate: number) : Promise< StudentEntity[] >
     abstract save(student: StudentEntity)              : Promise< StudentEntity >
     abstract findOneByCode(codeStudent: string, withRelation?: boolean): Promise< StudentEntity | null >
+    abstract getRatesAndIntershipHoursById(codeStudent: string): Promise< Map<string, object>[] >
     
 }

@@ -2,6 +2,7 @@ import Joi from "joi";
 
 export class ClosePppDto{
 
+  studentID!      : string
   intershipHours! : number
   rate! : number
   status?: boolean
@@ -9,8 +10,9 @@ export class ClosePppDto{
   constructor(){}
 
   static schema = Joi.object({
-    intershipHours : Joi.number(),
-    rate           : Joi.number(),
+    studentID      : Joi.string().required(),
+    intershipHours : Joi.number().required(),
+    rate           : Joi.number().required(),
     status         : Joi.boolean()
   })
 

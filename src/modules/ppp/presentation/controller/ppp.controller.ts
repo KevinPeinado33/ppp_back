@@ -10,25 +10,29 @@ import { ClosePppUsecase, RegisterLetterAceptanceUseCase, SaveCompanyUseCase } f
 import { UpdateIntershipHourUseCase } from "../../domain/use-cases/update-intership-hour.usecase"
 import { UpdateRegisterAceptanceDto } from "../../domain/dtos/update-register-aceptance"
 import { ClosePppDto } from "../../domain/dtos"
+import { StudentRepository } from "../../../student/domain/repositories"
+import { StudentRepositoryImpl } from "../../../student/data/repositories"
 
 export class PPPController{
 
   private pppRepository   : PPPRepository
   private userRepository  : UserRepository
   private companyRepository: CompanyRepositroy
+  private studentRepository: StudentRepository
 
   constructor() {
 
      this.pppRepository = new PPPRepositoryImpl(),
      this.userRepository = new UserRepositoryImpl(),
-     this.companyRepository = new CompanyRepositoryImpl()
+     this.companyRepository = new CompanyRepositoryImpl(),
+     this.studentRepository = new StudentRepositoryImpl()
 
         
         this.updateAssingAdvisor = this.updateAssingAdvisor.bind( this )
         this.postcompanyPPP = this.postcompanyPPP.bind(this)
         this.updateIntershipHours = this.updateIntershipHours.bind(this)
         this.updateRegisterLetterAceptance = this.updateRegisterLetterAceptance.bind(this)
-
+        this.updateClosePpp = this.updateClosePpp.bind(this)
     }
 
     updateAssingAdvisor(req: Request, res: Response) {
@@ -83,14 +87,19 @@ export class PPPController{
         usecase.execute()
     }
 
-    updateClosePpp( req: Request, res: Response){
+    updateClosePpp( req: Request, res: Response) {
+
         const { id } = req.params
         const payload = req.body as ClosePppDto
+
         const usecase = new ClosePppUsecase(
             res,
             this.pppRepository,
             id,
-            payload
+            payload,
+            this.studentRepository
         )
+        usecase.execute()
+        
     }
 }

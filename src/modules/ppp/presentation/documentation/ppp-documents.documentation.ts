@@ -1,5 +1,17 @@
 /**
  * @swagger
+ * components:
+ *  schemas:
+ *      CommentDocumentPPP:
+ *          type: object
+ *          properties:
+ *              comment: 
+ *                  type: string
+ *                  description: Algun comentario de las personas.
+ */
+
+/**
+ * @swagger
  * /api/ppp/get-documents-ppp/{idPPP}:
  *   get:
  *     summary: Obtener documentos de PPP por ID del Proceso de Prácticas Pre Profesionales (PPP).
@@ -12,6 +24,8 @@
  *           format: uuid
  *         required: true
  *         description: ID del Proceso de Prácticas Pre Profesionales (PPP) para filtrar los documentos asociados.
+ *     security:
+ *          - bearerAuth:[] #aqui metemos el token pe crrano
  *     responses:
  *       200:
  *         description: Documentos de Prácticas Pre Profesionales (PPP) obtenidos exitosamente.
@@ -72,4 +86,36 @@
  *           type: string
  *         required: true
  *         description: Token de autenticación JWT en el formato "Bearer {token}".
+ */
+
+/**
+ * @swagger
+ * /api/ppp/insert-comment-document/:idDocumentPPP:
+ *  post:
+ *      summary: Insercción de comentarios en el documento
+ *      description: Insercción de comentarios en el documento y tambien cambio de estado del documento.
+ *      tags: [PPP Document]
+ *      parameters:
+ *          - in: path
+ *            name: idDocumentPPP
+ *            schema:
+ *              type: string
+ *              format: uuid
+ *            required: true
+ *            description: ID del documento de PPP subidos por el estudiante.
+ *      security:
+ *          - bearerAuth:[] #aqui metemos el token pe crrano
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/CommentDocumentPPP'
+ *      responses:
+ *          200:
+ *              description: Comentario o estado del documento terminado.
+ *          401:
+ *              description: No autorizado, el token ta mal pe.
+ *          500:
+ *              description: Error en el servidor.
  */
