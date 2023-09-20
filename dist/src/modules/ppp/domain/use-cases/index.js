@@ -25,4 +25,5 @@ __exportStar(require("./assing-advisor-ppp.usecases"), exports);
 __exportStar(require("./update-intership-hour.usecase"), exports);
 __exportStar(require("./create-evaluation.usecase"), exports);
 __exportStar(require("./create-question-answer.usecase"), exports);
+__exportStar(require("./insert-comment.usecase"), exports);
 //# sourceMappingURL=index.js.map

@@ -13,6 +13,7 @@ class EvaluationController {
         this.getResultSatisfaction = this.getResultSatisfaction.bind(this);
         this.getDocumentsPPP = this.getDocumentsPPP.bind(this);
         this.postCreateEvaluation = this.postCreateEvaluation.bind(this);
+        this.postCreateQuestionAnswer = this.postCreateQuestionAnswer.bind(this);
     }
     getEvaluationHistory(req, res) {
         const { idPPP } = req.params;
@@ -32,6 +33,11 @@ class EvaluationController {
     postCreateEvaluation(req, res) {
         const createEvaluationDto = req.body;
         const usecase = new use_cases_1.CreateEvaluationUseCase(res, createEvaluationDto, this.evaluationRepository, this.PPPRepository);
+        usecase.execute();
+    }
+    postCreateQuestionAnswer(req, res) {
+        const createQuestionAnswerDto = req.body;
+        const usecase = new use_cases_1.CreateQuestionAnswerUseCase(res, createQuestionAnswerDto, this.questionAnswerRepository, this.evaluationRepository);
         usecase.execute();
     }
 }

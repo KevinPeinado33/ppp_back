@@ -18,6 +18,7 @@ const plan_route_1 = __importDefault(require("../../modules/plan/presentation/ro
 const user_route_1 = __importDefault(require("../../modules/auth/presentation/routes/user.route"));
 const ppp_route_1 = __importDefault(require("../../modules/ppp/presentation/routes/ppp.route"));
 const notification_router_1 = __importDefault(require("../../modules/notificactions/presentation/routers/notification.router"));
+const controllers_1 = require("../../modules/notificactions/presentation/controllers");
 class AppServer {
     constructor() {
         this.paths = {
@@ -33,6 +34,10 @@ class AppServer {
         this.dbConnection();
         this.middlewares();
         this.routes();
+        this.cronSchedule();
+    }
+    cronSchedule() {
+        (0, controllers_1.scheduleController)();
     }
     listen() {
         this.app.listen(this.port, () => {

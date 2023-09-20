@@ -132,11 +132,13 @@
  */
 /**
  * @swagger
- * /api/ppp/update-close-ppp:
+ * /api/ppp/update-close-ppp/{id}:
  *   put:
  *     summary: Actualizar el estado de cierre de un PPP (Proyecto de Prácticas Profesionales).
  *     description: Actualiza el estado de cierre de un PPP.
  *     tags: [PPP]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -160,4 +162,60 @@
  *       500:
  *         description: Error interno del servidor.
  */
+/**
+ * @swagger
+ * /api/ppp/create-evaluation:
+ *   post:
+ *     summary: Crea una nueva evaluación para un plan PPP.
+ *     tags: [PPP Evaluation]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - type
+ *               - score
+ *               - createdAt
+ *               - dateEnd
+ *               - status
+ *               - directedTo
+ *               - numberAttempts
+ *               - ppp
+ *             example:
+ *               type: "Final"
+ *               score: "17"
+ *               observationAdvisor: "nada"
+ *               observationBusinessMentor: "ninguna"
+ *               createdAt: "2023-08-25T12:00:00Z"
+ *               dateEnd: "2023-08-30T18:00:00Z"
+ *               status: true
+ *               directedTo: "201711882"
+ *               numberAttempts: 2
+ *               ppp: "3096059e-7456-4fa5-b029-b6fe0a3be4b2"
+ *     responses:
+ *       201:
+ *         description: Evaluación del plan PPP creada correctamente.
+ *       400:
+ *         description: Error de validación o solicitud incorrecta.
+ *       401:
+ *         description: No autorizado. El token de acceso no fue proporcionado o es inválido.
+ *       500:
+ *         description: Error del servidor al crear la evaluación del plan PPP.
+ *     securitySchemes:
+ *       bearerAuth:
+ *         type: http
+ *         scheme: bearer
+ *         bearerFormat: JWT
+ *     parameters:
+ *       - in: header
+ *         name: Authorization
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Token de autenticación JWT en el formato "Bearer {token}".
+ */ 
 //# sourceMappingURL=ppp.documentation.js.map

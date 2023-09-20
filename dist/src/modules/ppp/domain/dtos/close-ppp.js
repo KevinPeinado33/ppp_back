@@ -10,8 +10,9 @@ class ClosePppDto {
 }
 exports.ClosePppDto = ClosePppDto;
 ClosePppDto.schema = joi_1.default.object({
-    intershipHours: joi_1.default.number(),
-    rate: joi_1.default.number(),
+    studentID: joi_1.default.string().required(),
+    intershipHours: joi_1.default.number().required(),
+    rate: joi_1.default.number().required(),
     status: joi_1.default.boolean()
 });
 //# sourceMappingURL=close-ppp.js.map

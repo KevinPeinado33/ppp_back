@@ -7,6 +7,9 @@ class EvaluationRepositoryImpl {
     constructor() {
         this.repository = database_1.AppDataSource.getRepository(entities_1.EvaluationEntity);
     }
+    getPropertiesEvaluations() {
+        throw new Error('Method not implemented.');
+    }
     async findOneById(id) {
         return await this.repository.findOneBy({ id });
     }

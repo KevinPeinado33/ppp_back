@@ -37,10 +37,15 @@ __decorate([
         default: () => 'CURRENT_TIMESTAMP',
         name: 'date_upload'
     }),
-    __metadata("design:type", Date)
+    __metadata("design:type", Date
+    /**
+     * en string poque tendra al rededor
+     * de 3 estados
+     */
+    )
 ], PPPDocumentsEntity.prototype, "dateUpload", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar' }),
+    (0, typeorm_1.Column)({ type: 'varchar', default: 'en espera' }),
     __metadata("design:type", String)
 ], PPPDocumentsEntity.prototype, "status", void 0);
 __decorate([

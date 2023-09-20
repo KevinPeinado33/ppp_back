@@ -16,6 +16,9 @@ class AreaPlanRepositoryImpl {
     async save(areaPlanCreated) {
         return await this.areaPlanRepository.save(areaPlanCreated);
     }
+    async findAll(idPlan) {
+        return await this.areaPlanRepository.findBy({ plan: { id: idPlan } });
+    }
 }
 exports.AreaPlanRepositoryImpl = AreaPlanRepositoryImpl;
 //# sourceMappingURL=area-plan.repository.js.map
