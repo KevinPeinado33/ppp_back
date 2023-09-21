@@ -44,7 +44,7 @@ class CreateOneSelfStudentUseCase {
             studentFound.urlCv = this.studentCreateDto.urlCv;
             studentFound.user = userCreated;
             await this.studentRepository.save(studentFound);
-            const token = (0, jwt_1.generateKey)(newUser.id);
+            const token = await (0, jwt_1.generateKey)(newUser.id);
             (0, msg_response_1.message)({
                 response: this.response,
                 code: code_status_ok_1.CODE_STATUS.OK,
