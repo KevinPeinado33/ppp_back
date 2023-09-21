@@ -11,13 +11,13 @@ export class EvaluationEntity {
     @Column({type: 'varchar', name: 'type'})
     type!: string
 
-    @Column({type: 'varchar'})
+    @Column({type: 'varchar', nullable: true})
     score!: string
 
-    @Column({type: 'varchar', name: 'observation_advisor'})
+    @Column({type: 'varchar', name: 'observation_advisor', nullable: true})
     observationAdvisor!: string
 
-    @Column({type: 'varchar', name: 'observation_business_mentor'})
+    @Column({type: 'varchar', name: 'observation_business_mentor', nullable: true})
     observationBusinessMentor!: string
 
     @CreateDateColumn({
@@ -39,7 +39,7 @@ export class EvaluationEntity {
     @Column({ type: 'varchar', name: 'directed_to'})
     directedTo!: string
 
-    @Column({ type: 'integer', name: 'number_attempts'})
+    @Column({ type: 'integer', name: 'number_attempts', nullable: true})
     numberAttempts!: number
 
     /**

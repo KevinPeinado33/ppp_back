@@ -11,7 +11,7 @@ export class QuestionAnswerEntity{
     @Column({ type: 'varchar'})
     question!: string
 
-    @Column({ type: 'varchar'})
+    @Column({ type: 'varchar', nullable: true})
     answer!: string
 
     @Column({ type: 'varchar', nullable: true})
