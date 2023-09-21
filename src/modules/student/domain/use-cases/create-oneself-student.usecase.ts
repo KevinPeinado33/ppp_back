@@ -56,7 +56,7 @@ export class CreateOneSelfStudentUseCase {
 
             await this.studentRepository.save( studentFound )
 
-            const token = generateKey( newUser.id! )
+            const token = await generateKey( newUser.id! )
 
             message({
                 response: this.response,
