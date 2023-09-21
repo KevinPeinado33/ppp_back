@@ -10,6 +10,6 @@ router.get('/get-students-by-plan-ppp/:planPPP', jwt_1.validateJWT, getAllStuden
 router.get('/get-students-by-semester/:cycle', jwt_1.validateJWT, getStudentsSemester);
 router.get('/get-students-process-or-end/:finalRate', jwt_1.validateJWT, getStudentsProcessEnd);
 router.post('/create-list-students', jwt_1.validateJWT, postCreateListStudents);
-router.post('/create-student', jwt_1.validateJWT, postCreateStudent);
+router.post('/create-student', postCreateStudent);
 exports.default = router;
 //# sourceMappingURL=student.router.js.map
