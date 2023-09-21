@@ -6,6 +6,7 @@ import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok'
 import { UserRepository } from '../../../auth/domain/repositories'
 import { StudentRepository } from '../repositories'
 import { StudentCreateOneSelfDto } from '../dtos'
+import { generateKey } from '../../../../common/utils/jwt'
 
 export class CreateOneSelfStudentUseCase {
 
@@ -55,10 +56,13 @@ export class CreateOneSelfStudentUseCase {
 
             await this.studentRepository.save( studentFound )
 
+            const token = generateKey( newUser.id! )
+
             message({
                 response: this.response,
                 code: CODE_STATUS.OK,
-                info: `Bienvenido ${ userCreated.firstName }.`
+                info: `Bienvenido ${ userCreated.firstName }.`,
+                data: token
             })
 
         } catch( error ) {
