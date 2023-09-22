@@ -7,12 +7,17 @@ export class CompanyRepositoryImpl implements CompanyRepositroy {
     private companyRepository = AppDataSource.getRepository(CompanyEntity)
 
     constructor() { }
-
+    
     async save(saveCompany: CompanyEntity): Promise<CompanyEntity> {
         return await this.companyRepository.save(saveCompany)
     }
+    
     async create(createCompany: CompanyEntity): Promise<CompanyEntity> {
         return await this.companyRepository.create(createCompany)
+    }
+    
+    getCompaniesByidPPP(idPPP: string): Promise<CompanyEntity[]> {
+        return this.companyRepository.findBy({ ppp: { id: idPPP }})
     }
 
 }

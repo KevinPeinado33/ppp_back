@@ -222,3 +222,32 @@
  *         required: true
  *         description: Token de autenticación JWT en el formato "Bearer {token}".
  */
+
+/**
+ * @swagger
+ * /view-student-profile/{idPPP}:
+ *   get:
+ *     summary: View student profile.
+ *     description: Retrieves the profile of a student based on their PPP (Proyecto de Prácticas Profesionales) ID.
+ *     tags: [PPP]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: idPPP
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the PPP (Proyecto de Prácticas Profesionales) for which you want to view the student profile.
+ *     responses:
+ *       200:
+ *         description: Successful response. Returns the student's profile information.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/StudentProfile' # Replace with the actual schema reference for the student profile
+ *       404:
+ *         description: Not found. No student profile was found for the specified PPP ID.
+ *       500:
+ *         description: Internal server error.
+ */

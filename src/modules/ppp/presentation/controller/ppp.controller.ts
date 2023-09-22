@@ -1,7 +1,7 @@
 import { Response, Request } from "express"
 
-import { CompanyRepositoryImpl, PPPRepositoryImpl } from "../../data/repositories"
-import { CompanyRepositroy, PPPRepository } from "../../domain/repositories"
+import { CompanyRepositoryImpl, EvaluationRepositoryImpl, PPPDocumentsRepositoryImpl, PPPRepositoryImpl } from "../../data/repositories"
+import { CompanyRepositroy, EvaluationRepository, PPPDocumentsRepository, PPPRepository } from "../../domain/repositories"
 import { AssingAdvisorPppUseCase } from "../../domain/use-cases/assing-advisor-ppp.usecases"
 import { UserRepositoryImpl } from "../../../auth/data/repositories"
 import { UserRepository } from "../../../auth/domain/repositories"
@@ -12,6 +12,7 @@ import { UpdateRegisterAceptanceDto } from "../../domain/dtos/update-register-ac
 import { ClosePppDto } from "../../domain/dtos"
 import { StudentRepository } from "../../../student/domain/repositories"
 import { StudentRepositoryImpl } from "../../../student/data/repositories"
+import { ViewStudentProfileUseCase } from "../../domain/use-cases/view-student-profile.usecase"
 
 export class PPPController{
 
@@ -19,13 +20,17 @@ export class PPPController{
   private userRepository  : UserRepository
   private companyRepository: CompanyRepositroy
   private studentRepository: StudentRepository
+  private documentRepository: PPPDocumentsRepository
+  private evaluationRepository: EvaluationRepository
 
   constructor() {
 
-     this.pppRepository = new PPPRepositoryImpl(),
-     this.userRepository = new UserRepositoryImpl(),
-     this.companyRepository = new CompanyRepositoryImpl(),
+     this.pppRepository = new PPPRepositoryImpl()
+     this.userRepository = new UserRepositoryImpl()
+     this.companyRepository = new CompanyRepositoryImpl()
      this.studentRepository = new StudentRepositoryImpl()
+     this.documentRepository = new PPPDocumentsRepositoryImpl()
+     this.evaluationRepository = new EvaluationRepositoryImpl()
 
         
         this.updateAssingAdvisor = this.updateAssingAdvisor.bind( this )
@@ -33,6 +38,7 @@ export class PPPController{
         this.updateIntershipHours = this.updateIntershipHours.bind(this)
         this.updateRegisterLetterAceptance = this.updateRegisterLetterAceptance.bind(this)
         this.updateClosePpp = this.updateClosePpp.bind(this)
+        this.getViewStudentProfile = this.getViewStudentProfile.bind(this)
     }
 
     updateAssingAdvisor(req: Request, res: Response) {
@@ -101,5 +107,22 @@ export class PPPController{
         )
         usecase.execute()
         
+    }
+
+    getViewStudentProfile(req: Request, res: Response){
+
+        const { idPPP } = req.params
+
+        const usecase = new ViewStudentProfileUseCase(
+            res,
+            this.companyRepository,
+            this.documentRepository,
+            this.userRepository,
+            this.evaluationRepository,
+            idPPP
+        );
+
+        usecase.execute()
+
     }
 }

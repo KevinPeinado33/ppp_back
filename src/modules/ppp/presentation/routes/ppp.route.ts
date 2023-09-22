@@ -20,7 +20,8 @@ const {
     postcompanyPPP,
     updateIntershipHours,
     updateRegisterLetterAceptance,
-    updateClosePpp
+    updateClosePpp,
+    getViewStudentProfile
 } = new PPPController()
 
 const {
@@ -34,6 +35,7 @@ route.put('/update-assing-advisor-ppp/:idPPP/:advisorID', validateJWT, updateAss
 route.get('/get-result-evaluation/:idEvaluation', validateJWT, getResultSatisfaction)
 
 route.get('/get-documents-ppp/:idPPP',  validateJWT,getDocumentsPPP)
+route.get("/view-student-profile/:idPPP",validateJWT, getViewStudentProfile);
 
 route.post('/create-company-ppp', validateJWT, postcompanyPPP)
 route.post('/create-ppp-document', validateJWT, postCreatePPPDocument)

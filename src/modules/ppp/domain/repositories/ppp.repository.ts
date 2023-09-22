@@ -6,4 +6,5 @@ export abstract class PPPRepository {
   abstract save(ppp: PPPEntity): Promise<PPPEntity>
   abstract findLastOneWithCompanyByStudent(studentCode: string): Promise< PPPEntity | null >
   abstract getStartDate(): Promise < Map<string, object>[] >
+  
 }
