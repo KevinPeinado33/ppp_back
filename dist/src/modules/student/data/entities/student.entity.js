@@ -24,7 +24,7 @@ __decorate([
     __metadata("design:type", Number)
 ], StudentEntity.prototype, "cycle", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'integer', name: 'intership_hours' }),
+    (0, typeorm_1.Column)({ type: 'integer', name: 'intership_hours', nullable: true }),
     __metadata("design:type", Number)
 ], StudentEntity.prototype, "intershipHours", void 0);
 __decorate([

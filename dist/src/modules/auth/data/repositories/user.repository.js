@@ -24,21 +24,28 @@ class UserRepositoryImpl {
     }
     async findByRol(rolSearch) {
         return await this.userRepository
-            .createQueryBuilder('u')
-            .leftJoin('roles_user', 'ru', 'u.id = ru.userId')
-            .leftJoin('roles', 'r', 'ru.roleId = r.id')
-            .where('r.name = :name', { name: rolSearch })
+            .createQueryBuilder("u")
+            .leftJoin("roles_user", "ru", "u.id = ru.userId")
+            .leftJoin("roles", "r", "ru.roleId = r.id")
+            .where("r.name = :name", { name: rolSearch })
             .getMany();
     }
     async findByIdWithRolesAndAccess(userId) {
         return await this.userRepository
-            .createQueryBuilder('user')
-            .leftJoinAndMapMany('user.roleUser', entities_1.RoleUserEntity, 'roleUser', 'roleUser.userId = user.id')
-            .leftJoinAndMapMany('roleUser.role', entities_1.RolesEntity, 'role', 'role.id = roleUser.roleId')
-            .leftJoinAndMapMany('role.accessRoles', entities_1.AccessRoleEntity, 'accessRole', 'accessRole.roleId = role.id')
-            .leftJoinAndMapMany('accessRole.access', entities_1.AccessEntity, 'access', 'access.id = accessRole.accessId')
-            .where('user.id = :userId', { userId })
-            .orderBy('accessRole.numPosition', 'ASC')
+            .createQueryBuilder("user")
+            .leftJoinAndMapMany("user.roleUser", entities_1.RoleUserEntity, "roleUser", "roleUser.userId = user.id")
+            .leftJoinAndMapMany("roleUser.role", entities_1.RolesEntity, "role", "role.id = roleUser.roleId")
+            .leftJoinAndMapMany("role.accessRoles", entities_1.AccessRoleEntity, "accessRole", "accessRole.roleId = role.id")
+            .leftJoinAndMapMany("accessRole.access", entities_1.AccessEntity, "access", "access.id = accessRole.accessId")
+            .where("user.id = :userId", { userId })
+            .orderBy("accessRole.numPosition", "ASC")
+            .getOne();
+    }
+    findByIdPPP(idPPP) {
+        return this.userRepository
+            .createQueryBuilder("user")
+            .innerJoin("user.ppp", "ppp")
+            .where("ppp.id = :pppId", { pppId: idPPP })
             .getOne();
     }
 }
