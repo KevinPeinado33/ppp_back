@@ -8,6 +8,10 @@ export class QuestionAnswerRepositoryImpl implements QuestionAnswerRepository{
     private repository = AppDataSource.getRepository( QuestionAnswerEntity)
 
     constructor(){}
+    
+    async findOneById(id: string): Promise<QuestionAnswerEntity | null> {
+        return await this.repository.findOneBy({id})
+    }
     async create(createQuestionAnswer: QuestionAnswerEntity): Promise<QuestionAnswerEntity> {
         return await this.repository.create(createQuestionAnswer)
     }

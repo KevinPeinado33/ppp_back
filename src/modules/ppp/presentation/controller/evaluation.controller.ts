@@ -1,10 +1,10 @@
 import { Response, Request } from 'express'
 
-import { FindEvaluationsStudentsUseCase, FindAnswersSatisfactionEvaluationsUseCase, FindDocumentsPPPUseCase, CreateEvaluationUseCase, CreateQuestionAnswerUseCase } from '../../domain/use-cases'
+import { FindEvaluationsStudentsUseCase, FindAnswersSatisfactionEvaluationsUseCase, FindDocumentsPPPUseCase, CreateEvaluationUseCase, CreateQuestionAnswerUseCase, TakeEvaluationUseCase } from '../../domain/use-cases'
 import { EvaluationRepository, PPPDocumentsRepository, PPPRepository, QuestionAnswerRepository } from '../../domain/repositories'
 import { EvaluationRepositoryImpl, PPPDocumentsRepositoryImpl, PPPRepositoryImpl, QuestionAnswerRepositoryImpl } from '../../data/repositories'
 import { CreateEvaluationDto } from '../../domain/dtos/create-evaluation';
-import { CreateQuestionAnswerDto } from '../../domain/dtos';
+import { CreateQuestionAnswerDto, TakeEvaluationDto } from '../../domain/dtos';
 
 export class EvaluationController { 
 
@@ -25,6 +25,7 @@ export class EvaluationController {
         this.getDocumentsPPP            = this.getDocumentsPPP.bind( this )
         this.postCreateEvaluation       = this.postCreateEvaluation.bind( this )
         this.postCreateQuestionAnswer   = this.postCreateQuestionAnswer.bind( this )
+        this.putTakeEvaluation          = this.putTakeEvaluation.bind( this )
         
     }
 
@@ -76,7 +77,8 @@ export class EvaluationController {
             res,
             createEvaluationDto,
             this.evaluationRepository,
-            this.PPPRepository
+            this.PPPRepository,
+            this.questionAnswerRepository
         )
 
         usecase.execute()
@@ -89,6 +91,21 @@ export class EvaluationController {
             createQuestionAnswerDto,
             this.questionAnswerRepository,
             this.evaluationRepository
+        )
+
+        usecase.execute()
+    }
+
+    putTakeEvaluation( req: Request, res: Response ){
+        const { idEvaluation } = req.params
+
+        const takeEvaluationDto = req.body as TakeEvaluationDto
+        const usecase = new TakeEvaluationUseCase(
+            res,
+            takeEvaluationDto,
+            this.evaluationRepository,
+            this.questionAnswerRepository,
+            idEvaluation
         )
 
         usecase.execute()

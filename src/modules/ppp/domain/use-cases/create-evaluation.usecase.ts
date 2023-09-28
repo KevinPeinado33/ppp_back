@@ -2,19 +2,20 @@ import { Response } from "express";
 import { plainToClass } from "class-transformer";
 
 
-import { EvaluationRepository, PPPRepository } from "../repositories";
+import { EvaluationRepository, PPPRepository, QuestionAnswerRepository } from "../repositories";
 import { message } from "../../../../common/responses/msg.response";
 import { CODE_STATUS } from "../../../../common/responses/code/code-status.ok";
-import { EvaluationEntity } from "../../data/entities";
+import { EvaluationEntity, QuestionAnswerEntity } from "../../data/entities";
 import { CreateEvaluationDto } from "../dtos";
 
 export class CreateEvaluationUseCase{
 
     constructor(
-        private readonly response               : Response,
-        private readonly createEvaluationDto    : CreateEvaluationDto, 
-        private readonly repository             : EvaluationRepository,
-        private readonly pppRepository          : PPPRepository
+        private readonly response                   : Response,
+        private readonly createEvaluationDto        : CreateEvaluationDto, 
+        private readonly repository                 : EvaluationRepository,
+        private readonly pppRepository              : PPPRepository,
+        private readonly questionAnswerRepository   : QuestionAnswerRepository,
 
     ){ }
 
@@ -48,6 +49,19 @@ export class CreateEvaluationUseCase{
             newEvaluation.ppp = pppFound
 
             const evaluationCreated = await this.repository.save(newEvaluation)
+
+            
+
+            this.createEvaluationDto.questions.forEach( async x => {
+
+                const questionsInstanced = plainToClass( QuestionAnswerEntity, x)
+                
+                const newQuestion = await this.questionAnswerRepository.create(questionsInstanced)
+                newQuestion.evaluations = evaluationCreated
+                
+                const questionCreated = await this.questionAnswerRepository.save(newQuestion)                
+
+            })
 
             message({
                 response: this.response,
