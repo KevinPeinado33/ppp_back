@@ -15,10 +15,8 @@ export class EvaluationEntity {
     score!: number
 
     @Column({type: 'varchar', name: 'observation_advisor', nullable: true})
-    @Column({type: 'varchar', name: 'observation_advisor', nullable: true})
     observationAdvisor!: string
 
-    @Column({type: 'varchar', name: 'observation_business_mentor', nullable: true})
     @Column({type: 'varchar', name: 'observation_business_mentor', nullable: true})
     observationBusinessMentor!: string
 
@@ -41,7 +39,6 @@ export class EvaluationEntity {
     @Column({ type: 'varchar', name: 'directed_to'})
     directedTo!: string
 
-    @Column({ type: 'integer', name: 'number_attempts', nullable: true})
     @Column({ type: 'integer', name: 'number_attempts', nullable: true})
     numberAttempts!: number
 
