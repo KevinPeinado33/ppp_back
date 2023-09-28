@@ -12,7 +12,7 @@ export class StudentEntity {
     @Column({ type: 'integer' })
     cycle!: number
 
-    @Column({ type: 'integer', name:'intership_hours' })
+    @Column({ type: 'integer', name:'intership_hours', nullable: true })
     intershipHours!: number
 
     @Column({ type: 'varchar', name: 'name_cv' })
