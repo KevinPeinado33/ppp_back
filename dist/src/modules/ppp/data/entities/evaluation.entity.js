@@ -24,8 +24,8 @@ __decorate([
     __metadata("design:type", String)
 ], EvaluationEntity.prototype, "type", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', nullable: true }),
-    __metadata("design:type", String)
+    (0, typeorm_1.Column)({ type: 'integer', nullable: true }),
+    __metadata("design:type", Number)
 ], EvaluationEntity.prototype, "score", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', name: 'observation_advisor', nullable: true }),

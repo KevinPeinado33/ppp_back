@@ -178,24 +178,19 @@
  *             type: object
  *             required:
  *               - type
- *               - score
- *               - createdAt
  *               - dateEnd
- *               - status
  *               - directedTo
- *               - numberAttempts
  *               - ppp
+ *               - questions
  *             example:
- *               type: "Final"
- *               score: "17"
- *               observationAdvisor: "nada"
- *               observationBusinessMentor: "ninguna"
- *               createdAt: "2023-08-25T12:00:00Z"
- *               dateEnd: "2023-08-30T18:00:00Z"
- *               status: true
- *               directedTo: "201711882"
- *               numberAttempts: 2
+ *               type: "Inicio"
+ *               dateEnd: "2023-09-30T12:00:00Z"
+ *               directedTo: "2020221230"
  *               ppp: "3096059e-7456-4fa5-b029-b6fe0a3be4b2"
+ *               questions:
+ *                 - question: "¿Pregunta 1?"
+ *                 - question: "¿Pregunta 2?"
+ *                 - question: "¿Pregunta 3?"
  *     responses:
  *       201:
  *         description: Evaluación del plan PPP creada correctamente.

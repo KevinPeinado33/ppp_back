@@ -7,11 +7,12 @@ const code_status_ok_1 = require("../../../../common/responses/code/code-status.
 const entities_1 = require("../../data/entities");
 const dtos_1 = require("../dtos");
 class CreateEvaluationUseCase {
-    constructor(response, createEvaluationDto, repository, pppRepository) {
+    constructor(response, createEvaluationDto, repository, pppRepository, questionAnswerRepository) {
         this.response = response;
         this.createEvaluationDto = createEvaluationDto;
         this.repository = repository;
         this.pppRepository = pppRepository;
+        this.questionAnswerRepository = questionAnswerRepository;
     }
     async execute() {
         const { error } = dtos_1.CreateEvaluationDto.schema.validate(this.createEvaluationDto);
@@ -35,6 +36,12 @@ class CreateEvaluationUseCase {
             }
             newEvaluation.ppp = pppFound;
             const evaluationCreated = await this.repository.save(newEvaluation);
+            this.createEvaluationDto.questions.forEach(async (x) => {
+                const questionsInstanced = (0, class_transformer_1.plainToClass)(entities_1.QuestionAnswerEntity, x);
+                const newQuestion = await this.questionAnswerRepository.create(questionsInstanced);
+                newQuestion.evaluations = evaluationCreated;
+                const questionCreated = await this.questionAnswerRepository.save(newQuestion);
+            });
             (0, msg_response_1.message)({
                 response: this.response,
                 code: code_status_ok_1.CODE_STATUS.CREATED,

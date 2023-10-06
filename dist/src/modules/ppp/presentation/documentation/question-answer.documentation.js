@@ -29,42 +29,12 @@
  */
 /**
  * @swagger
- * /api/ppp/create-question-answer:
- *   post:
- *     summary: Crea una nueva pregunta y respuesta para una evaluación de PPP.
- *     tags: [PPP]
+ * /api/ppp/take-evaluation/{idEvaluation}:
+ *   put:
+ *     summary: Actualiza una evaluación para un plan PPP específico.
+ *     tags: [PPP Evaluation]
  *     security:
  *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - question
- *               - answer
- *               - puntuation
- *               - evaluations
- *             example:
- *               question: "¿Cuál es tu pregunta?"
- *               answer: "Esta es una respuesta"
- *               puntuation: "10"
- *               evaluations: "22f87cef-5309-49c3-8051-ae63019ddf5f"
- *     responses:
- *       201:
- *         description: Pregunta y respuesta creadas correctamente para la evaluación de PPP.
- *       400:
- *         description: Error de validación o solicitud incorrecta.
- *       401:
- *         description: No autorizado. El token de acceso no fue proporcionado o es inválido.
- *       500:
- *         description: Error del servidor al crear la pregunta y respuesta para la evaluación de PPP.
- *     securitySchemes:
- *       bearerAuth:
- *         type: http
- *         scheme: bearer
- *         bearerFormat: JWT
  *     parameters:
  *       - in: header
  *         name: Authorization
@@ -72,5 +42,52 @@
  *           type: string
  *         required: true
  *         description: Token de autenticación JWT en el formato "Bearer {token}".
+ *       - in: path
+ *         name: idEvaluation
+ *         required: true
+ *         description: ID de la evaluación a actualizar.
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - score
+ *               - observationAdvisor
+ *               - observationBusinessMentor
+ *               - numberAttempts
+ *               - answers
+ *             example:
+ *               score: 18
+ *               observationAdvisor: "Great performance!"
+ *               observationBusinessMentor: "Keep up the good work."
+ *               numberAttempts: 1
+ *               answers:
+ *                 - id: "07266832-6d97-4df9-826b-f7500b8d6174"
+ *                   answer: "Answer1"
+ *                   puntuation: 5
+ *                 - id: "9b320bc4-35b0-476f-ad08-41f464840eac"
+ *                   answer: "Answer2"
+ *                   puntuation: 6
+ *                 - id: "e65957ee-e4fc-44ec-b5d3-a259a51e540d"
+ *                   answer: "Answer3"
+ *                   puntuation: 7
+ *     responses:
+ *       200:
+ *         description: Evaluación del plan PPP actualizada exitosamente.
+ *       400:
+ *         description: Error de validación o solicitud incorrecta.
+ *       401:
+ *         description: No autorizado. El token de acceso no fue proporcionado o es inválido.
+ *       500:
+ *         description: Error del servidor al actualizar la evaluación del plan PPP.
+ *     securitySchemes:
+ *       bearerAuth:
+ *         type: http
+ *         scheme: bearer
+ *         bearerFormat: JWT
  */ 
 //# sourceMappingURL=question-answer.documentation.js.map

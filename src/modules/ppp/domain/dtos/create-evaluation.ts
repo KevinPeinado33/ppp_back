@@ -2,30 +2,37 @@ import Joi from 'joi'
 
 export class CreateEvaluationDto{
 
-    type!: string
-    score!: string
-    observationAdvisor!: string
-    observationBusinessMentor!: string
-    createdAt!: Date
-    dateEnd!: Date
-    status?: boolean
-    directedTo!: string
-    numberAttempts!: number
-    ppp!: string
+    type!           : string
+    createdAt!      : Date
+    dateEnd!        : Date
+    status?         : boolean
+    directedTo!     : string
+    ppp!            : string
+
+    questions!      : IQuestionsAnswersDto[]
 
     constructor(){ }
 
     static schema = Joi.object({
         type                        :Joi.string().required(),
-        score                       :Joi.string().required(),
-        observationAdvisor          :Joi.string(),
-        observationBusinessMentor   :Joi.string(),
-        createdAt                   :Joi.date().required(),
+        createdAt                   :Joi.date(),
         dateEnd                     :Joi.date().required(),
         status                      :Joi.boolean(),
         directedTo                  :Joi.string().required(),
-        numberAttempts              :Joi.number(),
-        ppp                         :Joi.string().uuid().required()
+        ppp                         :Joi.string().uuid().required(),
+
+        questions                   :Joi.array().items(
+
+            Joi.object({
+                question    :Joi.string().required(),
+                evaluations :Joi.string().uuid(),
+            })
+        )
     })
 
+}
+
+interface IQuestionsAnswersDto{
+    question    : string
+    evaluations : string
 }

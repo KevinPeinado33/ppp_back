@@ -27,8 +27,8 @@ __decorate([
     __metadata("design:type", String)
 ], QuestionAnswerEntity.prototype, "answer", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', nullable: true }),
-    __metadata("design:type", String)
+    (0, typeorm_1.Column)({ type: 'integer', nullable: true }),
+    __metadata("design:type", Number)
 ], QuestionAnswerEntity.prototype, "puntuation", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => evaluation_entity_1.EvaluationEntity, (evaluation) => evaluation.questionAnswer),

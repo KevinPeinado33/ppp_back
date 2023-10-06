@@ -11,8 +11,8 @@ export class EvaluationEntity {
     @Column({type: 'varchar', name: 'type'})
     type!: string
 
-    @Column({type: 'varchar', nullable: true})
-    score!: string
+    @Column({type: 'integer', nullable: true})
+    score!: number
 
     @Column({type: 'varchar', name: 'observation_advisor', nullable: true})
     observationAdvisor!: string
