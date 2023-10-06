@@ -39,6 +39,25 @@ class StudentRepositoryImpl {
         }
         return await this.repository.findOneBy({ code: codeStudent });
     }
+    async getRatesAndIntershipHoursById(codeStudent) {
+        const pruebita = [];
+        const qb = await this.repository
+            .createQueryBuilder("student")
+            .leftJoin("student.ppp", "ppp")
+            .where("student.code = :studentCode", { studentCode: codeStudent })
+            .select([
+            "ppp.rate AS ppp_rate",
+            "ppp.intershipHours AS intership_hours",
+        ])
+            .getRawMany();
+        qb.map(x => {
+            const mapita = new Map();
+            mapita.set('rate', x['ppp_rate']);
+            mapita.set('hours', x['intership_hours']);
+            pruebita.push(mapita);
+        });
+        return pruebita;
+    }
 }
 exports.StudentRepositoryImpl = StudentRepositoryImpl;
 //# sourceMappingURL=student.repository.js.map

@@ -132,11 +132,13 @@
  */
 /**
  * @swagger
- * /api/ppp/update-close-ppp:
+ * /api/ppp/update-close-ppp/{id}:
  *   put:
  *     summary: Actualizar el estado de cierre de un PPP (Proyecto de Prácticas Profesionales).
  *     description: Actualiza el estado de cierre de un PPP.
  *     tags: [PPP]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -159,5 +161,84 @@
  *         description: No se encontró el PPP con el ID proporcionado.
  *       500:
  *         description: Error interno del servidor.
+ */
+/**
+ * @swagger
+ * /api/ppp/create-evaluation:
+ *   post:
+ *     summary: Crea una nueva evaluación para un plan PPP.
+ *     tags: [PPP Evaluation]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - type
+ *               - dateEnd
+ *               - directedTo
+ *               - ppp
+ *               - questions
+ *             example:
+ *               type: "Inicio"
+ *               dateEnd: "2023-09-30T12:00:00Z"
+ *               directedTo: "2020221230"
+ *               ppp: "3096059e-7456-4fa5-b029-b6fe0a3be4b2"
+ *               questions:
+ *                 - question: "¿Pregunta 1?"
+ *                 - question: "¿Pregunta 2?"
+ *                 - question: "¿Pregunta 3?"
+ *     responses:
+ *       201:
+ *         description: Evaluación del plan PPP creada correctamente.
+ *       400:
+ *         description: Error de validación o solicitud incorrecta.
+ *       401:
+ *         description: No autorizado. El token de acceso no fue proporcionado o es inválido.
+ *       500:
+ *         description: Error del servidor al crear la evaluación del plan PPP.
+ *     securitySchemes:
+ *       bearerAuth:
+ *         type: http
+ *         scheme: bearer
+ *         bearerFormat: JWT
+ *     parameters:
+ *       - in: header
+ *         name: Authorization
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Token de autenticación JWT en el formato "Bearer {token}".
+ */
+/**
+ * @swagger
+ * /view-student-profile/{idPPP}:
+ *   get:
+ *     summary: View student profile.
+ *     description: Retrieves the profile of a student based on their PPP (Proyecto de Prácticas Profesionales) ID.
+ *     tags: [PPP]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: idPPP
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the PPP (Proyecto de Prácticas Profesionales) for which you want to view the student profile.
+ *     responses:
+ *       200:
+ *         description: Successful response. Returns the student's profile information.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/StudentProfile' # Replace with the actual schema reference for the student profile
+ *       404:
+ *         description: Not found. No student profile was found for the specified PPP ID.
+ *       500:
+ *         description: Internal server error.
  */
 //# sourceMappingURL=ppp.documentation.js.map

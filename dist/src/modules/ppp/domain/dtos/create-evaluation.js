@@ -11,14 +11,14 @@ class CreateEvaluationDto {
 exports.CreateEvaluationDto = CreateEvaluationDto;
 CreateEvaluationDto.schema = joi_1.default.object({
     type: joi_1.default.string().required(),
-    score: joi_1.default.string().required(),
-    observationAdvisor: joi_1.default.string(),
-    observationBusinessMentor: joi_1.default.string(),
-    createdAt: joi_1.default.date().required(),
+    createdAt: joi_1.default.date(),
     dateEnd: joi_1.default.date().required(),
     status: joi_1.default.boolean(),
     directedTo: joi_1.default.string().required(),
-    numberAttempts: joi_1.default.number(),
-    ppp: joi_1.default.string().uuid().required()
+    ppp: joi_1.default.string().uuid().required(),
+    questions: joi_1.default.array().items(joi_1.default.object({
+        question: joi_1.default.string().required(),
+        evaluations: joi_1.default.string().uuid(),
+    }))
 });
 //# sourceMappingURL=create-evaluation.js.map

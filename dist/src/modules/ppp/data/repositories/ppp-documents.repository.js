@@ -17,8 +17,11 @@ class PPPDocumentsRepositoryImpl {
     async create(newDocument) {
         return await this.repository.create(newDocument);
     }
-    async save(documentCreated) {
-        return await this.repository.save(documentCreated);
+    save(documentCreated) {
+        return this.repository.save(documentCreated);
+    }
+    findById(id) {
+        return this.repository.findOneBy({ id });
     }
 }
 exports.PPPDocumentsRepositoryImpl = PPPDocumentsRepositoryImpl;

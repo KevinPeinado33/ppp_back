@@ -20,4 +20,5 @@ __exportStar(require("./create-area-plan.usecase"), exports);
 __exportStar(require("./create-question-evaluation.usecase"), exports);
 __exportStar(require("./create-plan-documnent.usecase"), exports);
 __exportStar(require("./get-all-type-documents.usecase"), exports);
+__exportStar(require("./get-area-by-plan.usecase"), exports);
 //# sourceMappingURL=index.js.map

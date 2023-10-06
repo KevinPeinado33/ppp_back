@@ -15,4 +15,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./notification.controller"), exports);
+__exportStar(require("./cron-schedule.controller"), exports);
 //# sourceMappingURL=index.js.map

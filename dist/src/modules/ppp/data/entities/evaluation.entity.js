@@ -24,15 +24,15 @@ __decorate([
     __metadata("design:type", String)
 ], EvaluationEntity.prototype, "type", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar' }),
-    __metadata("design:type", String)
+    (0, typeorm_1.Column)({ type: 'integer', nullable: true }),
+    __metadata("design:type", Number)
 ], EvaluationEntity.prototype, "score", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', name: 'observation_advisor' }),
+    (0, typeorm_1.Column)({ type: 'varchar', name: 'observation_advisor', nullable: true }),
     __metadata("design:type", String)
 ], EvaluationEntity.prototype, "observationAdvisor", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', name: 'observation_business_mentor' }),
+    (0, typeorm_1.Column)({ type: 'varchar', name: 'observation_business_mentor', nullable: true }),
     __metadata("design:type", String)
 ], EvaluationEntity.prototype, "observationBusinessMentor", void 0);
 __decorate([
@@ -59,7 +59,7 @@ __decorate([
     __metadata("design:type", String)
 ], EvaluationEntity.prototype, "directedTo", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'integer', name: 'number_attempts' }),
+    (0, typeorm_1.Column)({ type: 'integer', name: 'number_attempts', nullable: true }),
     __metadata("design:type", Number)
 ], EvaluationEntity.prototype, "numberAttempts", void 0);
 __decorate([

@@ -13,6 +13,9 @@ class CompanyRepositoryImpl {
     async create(createCompany) {
         return await this.companyRepository.create(createCompany);
     }
+    getCompaniesByidPPP(idPPP) {
+        return this.companyRepository.findBy({ ppp: { id: idPPP } });
+    }
 }
 exports.CompanyRepositoryImpl = CompanyRepositoryImpl;
 //# sourceMappingURL=company.repository.js.map

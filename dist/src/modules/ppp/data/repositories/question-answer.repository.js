@@ -7,6 +7,9 @@ class QuestionAnswerRepositoryImpl {
     constructor() {
         this.repository = database_1.AppDataSource.getRepository(entities_1.QuestionAnswerEntity);
     }
+    async findOneById(id) {
+        return await this.repository.findOneBy({ id });
+    }
     async create(createQuestionAnswer) {
         return await this.repository.create(createQuestionAnswer);
     }

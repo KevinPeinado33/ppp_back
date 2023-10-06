@@ -365,5 +365,24 @@
  *         description: Lista de todas las bases PPP obtenidas exitosamente.
  *       500:
  *         description: Error del servidor al obtener las bases PPP.
+ */
+/**
+ * @swagger
+ * /api/plan/get-areas-plan/{idPlan}:
+ *   get:
+ *     summary: Obtener áreas por ID de plan
+ *     tags: [Area Plan]
+ *     parameters:
+ *       - in: path
+ *         name: idPlan
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID del plan para el que se desean obtener las áreas.
+ *     responses:
+ *       200:
+ *         description: Éxito. Devuelve las áreas relacionadas con el plan especificado.
+ *       404:
+ *         description: No se encontraron áreas para el plan especificado.
  */ 
 //# sourceMappingURL=plan.documentation.js.map

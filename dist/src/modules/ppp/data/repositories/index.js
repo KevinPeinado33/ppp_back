@@ -19,4 +19,5 @@ __exportStar(require("./evaluation.repository"), exports);
 __exportStar(require("./question-answer.repository"), exports);
 __exportStar(require("./ppp-documents.repository"), exports);
 __exportStar(require("./company.repository"), exports);
+__exportStar(require("./comment-document.repository"), exports);
 //# sourceMappingURL=index.js.map

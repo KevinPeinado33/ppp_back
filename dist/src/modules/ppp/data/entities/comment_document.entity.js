@@ -19,6 +19,10 @@ __decorate([
     __metadata("design:type", String)
 ], CommentDocumentEntity.prototype, "id", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ type: 'varchar', length: 500 }),
+    __metadata("design:type", String)
+], CommentDocumentEntity.prototype, "comment", void 0);
+__decorate([
     (0, typeorm_1.OneToMany)(() => _1.PPPDocumentsEntity, (pppDocument) => pppDocument.comments),
     __metadata("design:type", _1.PPPDocumentsEntity)
 ], CommentDocumentEntity.prototype, "pppDocument", void 0);

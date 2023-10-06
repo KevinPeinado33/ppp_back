@@ -20,6 +20,7 @@ class PlanController {
         this.postCreateDocument = this.postCreateDocument.bind(this);
         this.getTypesDocuments = this.getTypesDocuments.bind(this);
         this.getBasesPPP = this.getBasesPPP.bind(this);
+        this.getAreaPlanByPlan = this.getAreaPlanByPlan.bind(this);
     }
     getAllPlans(req, res) {
         const usecase = new use_cases_1.FindAllUseCase(res, this.planRepository);
@@ -51,6 +52,11 @@ class PlanController {
     }
     getBasesPPP(req, res) {
         const usecase = new get_bases_ppp_usecase_1.GetBasesPPPUseCase(res, this.planRepository);
+        usecase.execute();
+    }
+    getAreaPlanByPlan(req, res) {
+        const { idPlan } = req.params;
+        const usecase = new use_cases_1.GetAreaByPlanUsecas(res, this.areaPlanRepository, idPlan);
         usecase.execute();
     }
 }
