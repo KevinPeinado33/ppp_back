@@ -12,6 +12,7 @@ export class CreateUserDto {
     numStudents? : number
     urlProfile!  : string
     status?      : boolean
+    rolId?       : string
 
     constructor() { }
 
@@ -25,7 +26,8 @@ export class CreateUserDto {
         area        : Joi.string().required(),
         numStudents : Joi.number(),
         urlProfile  : Joi.string().uri().required(),
-        status      : Joi.boolean()
+        status      : Joi.boolean(),
+        rolId       : Joi.string().optional()
     })
 
 }
