@@ -5,6 +5,7 @@ import { UserRepository } from '../../domain/repositories'
 import { AccessEntity, AccessRoleEntity, RoleUserEntity, RolesEntity, UserEntity } from '../entities'
 
 export class UserRepositoryImpl implements UserRepository {
+
   private userRepository = AppDataSource.getRepository(UserEntity);
 
   constructor() {}
@@ -77,4 +78,23 @@ export class UserRepositoryImpl implements UserRepository {
       .where("ppp.id = :pppId", { pppId: idPPP })
       .getOne();
   }
+
+  async saveRol(rolId: string, userId: string): Promise<boolean> {
+
+    try {
+
+      const query = `INSERT INTO roles_user(roleId, userId) VALUES(${ rolId }, ${ userId })`
+
+      const data = await this.userRepository.query( query )
+
+      console.log({ data })
+
+      return true
+
+    } catch ( error ) {
+      throw error
+    }
+
+  }
+
 }

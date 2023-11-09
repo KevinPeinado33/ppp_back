@@ -33,7 +33,11 @@ export class CreateUserUseCase {
 
             const newUser     = await this.repository.create( this.createUserDto )
             newUser.password  = await bcrypt.hash( newUser.password, this.HASH_SALT_MAX )
-            await this.repository.save( newUser )
+            const userCreated = await this.repository.save( newUser )
+
+            if ( this.createUserDto.rolId ) {
+                await this.repository.saveRol(this.createUserDto.rolId, userCreated.id!)
+            }
             
             message({
                 response: this.response,
