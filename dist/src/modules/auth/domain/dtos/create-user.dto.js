@@ -19,6 +19,7 @@ CreateUserDto.schema = joi_1.default.object({
     area: joi_1.default.string().required(),
     numStudents: joi_1.default.number(),
     urlProfile: joi_1.default.string().uri().required(),
-    status: joi_1.default.boolean()
+    status: joi_1.default.boolean(),
+    rolId: joi_1.default.string().optional()
 });
 //# sourceMappingURL=create-user.dto.js.map

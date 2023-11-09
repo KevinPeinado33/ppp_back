@@ -48,6 +48,17 @@ class UserRepositoryImpl {
             .where("ppp.id = :pppId", { pppId: idPPP })
             .getOne();
     }
+    async saveRol(rolId, userId) {
+        try {
+            const query = `INSERT INTO roles_user(roleId, userId) VALUES(${rolId}, ${userId})`;
+            const data = await this.userRepository.query(query);
+            console.log({ data });
+            return true;
+        }
+        catch (error) {
+            throw error;
+        }
+    }
 }
 exports.UserRepositoryImpl = UserRepositoryImpl;
 //# sourceMappingURL=user.repository.js.map

@@ -27,7 +27,10 @@ class CreateUserUseCase {
         try {
             const newUser = await this.repository.create(this.createUserDto);
             newUser.password = await bcrypt_1.default.hash(newUser.password, this.HASH_SALT_MAX);
-            await this.repository.save(newUser);
+            const userCreated = await this.repository.save(newUser);
+            if (this.createUserDto.rolId) {
+                await this.repository.saveRol(this.createUserDto.rolId, userCreated.id);
+            }
             (0, msg_response_1.message)({
                 response: this.response,
                 code: code_status_ok_1.CODE_STATUS.CREATED,
