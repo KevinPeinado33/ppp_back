@@ -4,9 +4,10 @@ exports.GetProfileByIdUseCase = void 0;
 const msg_response_1 = require("../../../../common/responses/msg.response");
 const code_status_ok_1 = require("../../../../common/responses/code/code-status.ok");
 class GetProfileByIdUseCase {
-    constructor(response, repository, pppRepository, idUser) {
+    constructor(response, repository, userRepository, pppRepository, idUser) {
         this.response = response;
         this.repository = repository;
+        this.userRepository = userRepository;
         this.pppRepository = pppRepository;
         this.idUser = idUser;
     }
@@ -29,6 +30,7 @@ class GetProfileByIdUseCase {
                     info: `No se encontró un PPP para estudiando con codigo #${studentFound.code}`
                 });
             }
+            const advisorPPP = await this.userRepository.findByIdPPP(pppFound.id);
             const { user, ...restStudent } = studentFound;
             const { student, ...restPPP } = pppFound;
             (0, msg_response_1.message)({
@@ -37,7 +39,7 @@ class GetProfileByIdUseCase {
                 data: {
                     ...restStudent,
                     ...user,
-                    ppp: restPPP
+                    ppp: { ...restPPP, advisor: { ...advisorPPP } }
                 }
             });
         }

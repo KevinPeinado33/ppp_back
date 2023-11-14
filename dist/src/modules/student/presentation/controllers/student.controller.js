@@ -26,7 +26,7 @@ class StudentController {
     }
     getStudentBId(req, res) {
         const { id } = req.params;
-        const usecase = new use_cases_1.GetProfileByIdUseCase(res, this.studentRepository, this.pppRepository, id);
+        const usecase = new use_cases_1.GetProfileByIdUseCase(res, this.studentRepository, this.userRepository, this.pppRepository, id);
         usecase.execute();
     }
     getAllStudents(req, res) {

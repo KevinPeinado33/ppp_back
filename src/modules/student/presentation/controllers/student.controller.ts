@@ -55,6 +55,7 @@ export class StudentController {
         const usecase = new GetProfileByIdUseCase(
             res,
             this.studentRepository,
+            this.userRepository,
             this.pppRepository,
             id
         )
