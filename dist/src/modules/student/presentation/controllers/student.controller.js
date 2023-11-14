@@ -17,10 +17,16 @@ class StudentController {
         this.postCreateListStudents = this.postCreateListStudents.bind(this);
         this.getStudentsProcessEnd = this.getStudentsProcessEnd.bind(this);
         this.postCreateStudent = this.postCreateStudent.bind(this);
+        this.getStudentBId = this.getStudentBId.bind(this);
     }
     getStudentByCode(req, res) {
         const { codeStudent } = req.params;
         const usecase = new use_cases_1.FindStudentUseCase(res, this.studentRepository, this.pppRepository, codeStudent);
+        usecase.execute();
+    }
+    getStudentBId(req, res) {
+        const { id } = req.params;
+        const usecase = new use_cases_1.GetProfileByIdUseCase(res, this.studentRepository, this.pppRepository, id);
         usecase.execute();
     }
     getAllStudents(req, res) {

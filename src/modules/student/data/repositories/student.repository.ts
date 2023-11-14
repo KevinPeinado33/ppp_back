@@ -10,6 +10,17 @@ export class StudentRepositoryImpl implements StudentRepository {
     private readonly repository = AppDataSource.getRepository( StudentEntity )
 
     constructor() { }   
+
+    async findCodeStudenById(userId: string): Promise<string> {
+        const studentCode = await this
+                                    .repository
+                                    .createQueryBuilder('student')
+                                    .innerJoinAndSelect('student.user', 'user')
+                                    .where('user.id = :userId', { userId })
+                                    .getRawOne()
+
+        return studentCode
+    }
     
     async getAllStudents(planPPP: string): Promise< StudentEntity[] > {
         return await this.repository.find({ where: { planPPP }, relations: ['user'] })

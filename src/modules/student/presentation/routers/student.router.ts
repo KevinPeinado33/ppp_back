@@ -12,11 +12,13 @@ const {
     getStudentsSemester,
     getStudentsProcessEnd,
     postCreateListStudents,
-    postCreateStudent
+    postCreateStudent,
+    getStudentBId
         
 } = new StudentController()
 
 router.get('/get-by-code/:codeStudent', validateJWT, getStudentByCode)
+router.get('/get-by-id-profile/:id', getStudentBId)
 router.get('/get-students-by-plan-ppp/:planPPP', validateJWT , getAllStudents)
 router.get('/get-students-by-semester/:cycle', validateJWT, getStudentsSemester)
 router.get('/get-students-process-or-end/:finalRate', validateJWT, getStudentsProcessEnd)

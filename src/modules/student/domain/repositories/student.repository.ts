@@ -8,5 +8,6 @@ export abstract class StudentRepository {
     abstract save(student: StudentEntity)              : Promise< StudentEntity >
     abstract findOneByCode(codeStudent: string, withRelation?: boolean): Promise< StudentEntity | null >
     abstract getRatesAndIntershipHoursById(codeStudent: string): Promise< Map<string, object>[] >
-    
+    abstract findCodeStudenById(userId: string)    : Promise< string >
+        
 }

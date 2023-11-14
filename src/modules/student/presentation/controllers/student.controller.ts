@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 
-import { FindAllStudentUseCase, CreateListStudentsUseCase, FindStudentsSemesterUseCase, FindStudentsProcessOrEnd, FindStudentUseCase } from '../../domain/use-cases'
+import { FindAllStudentUseCase, CreateListStudentsUseCase, FindStudentsSemesterUseCase, FindStudentsProcessOrEnd, FindStudentUseCase, GetProfileByIdUseCase } from '../../domain/use-cases'
 import { StudentRepository } from '../../domain/repositories'
 import { StudentRepositoryImpl } from '../../data/repositories'
 import { StudentCreateDto, StudentCreateOneSelfDto } from '../../domain/dtos'
@@ -29,6 +29,7 @@ export class StudentController {
         this.postCreateListStudents = this.postCreateListStudents.bind(this)
         this.getStudentsProcessEnd  = this.getStudentsProcessEnd.bind( this )
         this.postCreateStudent      = this.postCreateStudent.bind( this )
+        this.getStudentBId = this.getStudentBId.bind( this )
 
     }
 
@@ -41,6 +42,21 @@ export class StudentController {
             this.studentRepository,
             this.pppRepository,
             codeStudent
+        )
+
+        usecase.execute()
+
+    }
+
+    getStudentBId(req: Request, res: Response) {
+
+        const { id } = req.params
+
+        const usecase = new GetProfileByIdUseCase(
+            res,
+            this.studentRepository,
+            this.pppRepository,
+            id
         )
 
         usecase.execute()

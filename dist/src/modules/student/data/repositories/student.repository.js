@@ -8,6 +8,15 @@ class StudentRepositoryImpl {
         this.STUDENT_PROCESS_END = 0;
         this.repository = database_1.AppDataSource.getRepository(entities_1.StudentEntity);
     }
+    async findCodeStudenById(userId) {
+        const studentCode = await this
+            .repository
+            .createQueryBuilder('student')
+            .innerJoinAndSelect('student.user', 'user')
+            .where('user.id = :userId', { userId })
+            .getRawOne();
+        return studentCode;
+    }
     async getAllStudents(planPPP) {
         return await this.repository.find({ where: { planPPP }, relations: ['user'] });
     }
