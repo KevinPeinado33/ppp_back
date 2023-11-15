@@ -10,11 +10,12 @@ const code_status_ok_1 = require("../../../../common/responses/code/code-status.
 const dtos_1 = require("../dtos");
 const jwt_1 = require("../../../../common/utils/jwt");
 class CreateOneSelfStudentUseCase {
-    constructor(response, studentRepository, userRepository, studentCreateDto) {
+    constructor(response, studentRepository, userRepository, studentCreateDto, roleRepository) {
         this.response = response;
         this.studentRepository = studentRepository;
         this.userRepository = userRepository;
         this.studentCreateDto = studentCreateDto;
+        this.roleRepository = roleRepository;
         this.HASH_SALT_MAX = 10;
     }
     async execute() {
@@ -44,6 +45,9 @@ class CreateOneSelfStudentUseCase {
             studentFound.urlCv = this.studentCreateDto.urlCv;
             studentFound.user = userCreated;
             await this.studentRepository.save(studentFound);
+            const roleSelected = 'ebeef04c-2e09-4da1-841a-4015d18aa968';
+            const roleFound = await this.roleRepository.getRolById(roleSelected);
+            await this.userRepository.saveRol(roleFound, userCreated);
             const token = await (0, jwt_1.generateKey)(newUser.id);
             (0, msg_response_1.message)({
                 response: this.response,

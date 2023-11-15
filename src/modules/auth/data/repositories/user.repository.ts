@@ -7,6 +7,7 @@ import { AccessEntity, AccessRoleEntity, RoleUserEntity, RolesEntity, UserEntity
 export class UserRepositoryImpl implements UserRepository {
 
   private userRepository = AppDataSource.getRepository(UserEntity);
+  private rolesUserRepository = AppDataSource.getRepository( RoleUserEntity )
 
   constructor() {}
 
@@ -79,13 +80,20 @@ export class UserRepositoryImpl implements UserRepository {
       .getOne();
   }
 
-  async saveRol(rolId: string, userId: string): Promise<boolean> {
+  async saveRol(rolId: RolesEntity, userId: UserEntity): Promise<boolean> {
 
     try {
-
-      const query = `INSERT INTO roles_user(roleId, userId) VALUES(${ rolId }, ${ userId })`
-
-      const data = await this.userRepository.query( query )
+      
+      const data = await this
+                          .rolesUserRepository
+                          .createQueryBuilder()
+                          .insert()
+                          .into( RoleUserEntity )
+                          .values({
+                            role:rolId,
+                            user: userId
+                          })
+                          .execute()
 
       console.log({ data })
 

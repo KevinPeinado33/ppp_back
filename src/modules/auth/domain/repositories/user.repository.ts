@@ -1,4 +1,4 @@
-import { UserEntity } from '../../data/entities'
+import { RolesEntity, UserEntity } from '../../data/entities'
 
 import { CreateUserDto } from '../dtos'
 
@@ -12,5 +12,5 @@ export abstract class UserRepository {
     abstract findByRol(rolSearch: string)          : Promise< UserEntity[] >
     abstract findByIdWithRolesAndAccess(id: string): Promise< UserEntity | null >
     abstract findByIdPPP(idPPP: string)            : Promise< UserEntity | null>
-    abstract saveRol(rolId: string, userId: string): Promise< boolean >    
+    abstract saveRol(rolId: RolesEntity, userId: UserEntity): Promise< boolean >    
 }

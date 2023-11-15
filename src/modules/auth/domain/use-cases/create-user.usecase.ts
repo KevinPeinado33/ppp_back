@@ -6,6 +6,7 @@ import { CODE_STATUS } from '../../../../common/responses/code/code-status.ok'
 
 import { UserRepository } from '../repositories'
 import { CreateUserDto }  from '../dtos'
+import { RolRepository } from '../repositories/rol.repository'
 
 export class CreateUserUseCase {
 
@@ -14,7 +15,8 @@ export class CreateUserUseCase {
     constructor(
         private readonly response      : Response,
         private readonly createUserDto : CreateUserDto,
-        private readonly repository    : UserRepository
+        private readonly repository    : UserRepository,
+        private readonly rolRepository : RolRepository
     ) { }
 
     async execute() {
@@ -31,13 +33,21 @@ export class CreateUserUseCase {
 
         try {
 
+            let roleSelected = ''
+
             const newUser     = await this.repository.create( this.createUserDto )
             newUser.password  = await bcrypt.hash( newUser.password, this.HASH_SALT_MAX )
             const userCreated = await this.repository.save( newUser )
 
-            if ( this.createUserDto.rolId ) {
-                await this.repository.saveRol(this.createUserDto.rolId, userCreated.id!)
+            if ( !this.createUserDto.rolId ) {
+                roleSelected = '3ecd30a8-837d-42a7-86b7-7a4ffe115371'
+            } else {
+                roleSelected = this.createUserDto.rolId
             }
+
+            const roleFound = await this.rolRepository.getRolById( roleSelected )
+
+            await this.repository.saveRol(roleFound!, userCreated)
             
             message({
                 response: this.response,

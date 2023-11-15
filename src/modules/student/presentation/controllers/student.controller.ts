@@ -9,12 +9,15 @@ import { PPPRepositoryImpl } from '../../../ppp/data/repositories'
 import { CreateOneSelfStudentUseCase } from '../../domain/use-cases/create-oneself-student.usecase'
 import { UserRepository } from '../../../auth/domain/repositories'
 import { UserRepositoryImpl } from '../../../auth/data/repositories'
+import { RolRepository } from '../../../auth/domain/repositories/rol.repository';
+import { RolRepositoryImpl } from '../../../auth/data/repositories/rol.repository'
 
 export class StudentController {
 
     private studentRepository : StudentRepository
     private pppRepository     : PPPRepository
     private userRepository    : UserRepository
+    private rolRepository: RolRepository
 
 
     constructor() {
@@ -22,6 +25,7 @@ export class StudentController {
         this.studentRepository = new StudentRepositoryImpl()
         this.pppRepository     = new PPPRepositoryImpl()
         this.userRepository    = new UserRepositoryImpl()
+        this.rolRepository     = new RolRepositoryImpl()
 
         this.getStudentByCode       = this.getStudentByCode.bind(this)
         this.getAllStudents         = this.getAllStudents.bind(this)
@@ -126,7 +130,8 @@ export class StudentController {
             res,
             this.studentRepository,
             this.userRepository,
-            createStudentDto
+            createStudentDto,
+            this.rolRepository
         )
 
         usecase.execute()

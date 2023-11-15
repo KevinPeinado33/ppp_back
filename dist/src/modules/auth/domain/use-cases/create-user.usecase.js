@@ -9,10 +9,11 @@ const msg_response_1 = require("../../../../common/responses/msg.response");
 const code_status_ok_1 = require("../../../../common/responses/code/code-status.ok");
 const dtos_1 = require("../dtos");
 class CreateUserUseCase {
-    constructor(response, createUserDto, repository) {
+    constructor(response, createUserDto, repository, rolRepository) {
         this.response = response;
         this.createUserDto = createUserDto;
         this.repository = repository;
+        this.rolRepository = rolRepository;
         this.HASH_SALT_MAX = 10;
     }
     async execute() {
@@ -25,12 +26,18 @@ class CreateUserUseCase {
             });
         }
         try {
+            let roleSelected = '';
             const newUser = await this.repository.create(this.createUserDto);
             newUser.password = await bcrypt_1.default.hash(newUser.password, this.HASH_SALT_MAX);
             const userCreated = await this.repository.save(newUser);
-            if (this.createUserDto.rolId) {
-                await this.repository.saveRol(this.createUserDto.rolId, userCreated.id);
+            if (!this.createUserDto.rolId) {
+                roleSelected = '3ecd30a8-837d-42a7-86b7-7a4ffe115371';
             }
+            else {
+                roleSelected = this.createUserDto.rolId;
+            }
+            const roleFound = await this.rolRepository.getRolById(roleSelected);
+            await this.repository.saveRol(roleFound, userCreated);
             (0, msg_response_1.message)({
                 response: this.response,
                 code: code_status_ok_1.CODE_STATUS.CREATED,

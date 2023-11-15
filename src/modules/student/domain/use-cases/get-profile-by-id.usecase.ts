@@ -31,20 +31,24 @@ export class GetProfileByIdUseCase {
                     info: `No existe estudiante con codigo #${ codeStudent }`
                 })
             }
+
+            const { user, ...restStudent } = studentFound
             
             const pppFound = await this.pppRepository.findLastOneWithCompanyByStudent( studentFound.code )
 
             if ( !pppFound ) {
                 return message({
                     response: this.response,
-                    code: CODE_STATUS.NOT_FOUND,
-                    info: `No se encontró un PPP para estudiando con codigo #${ studentFound.code }`
+                    code: CODE_STATUS.OK,
+                    data: {
+                        ...restStudent,
+                        ...user,
+                    }
                 })
             }
 
             const advisorPPP = await this.userRepository.findByIdPPP( pppFound.id )
             
-            const { user, ...restStudent } = studentFound
             const { student, ...restPPP }  = pppFound
 
             message({

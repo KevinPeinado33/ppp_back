@@ -7,6 +7,7 @@ import { UserRepository } from '../../../auth/domain/repositories'
 import { StudentRepository } from '../repositories'
 import { StudentCreateOneSelfDto } from '../dtos'
 import { generateKey } from '../../../../common/utils/jwt'
+import { RolRepository } from '../../../auth/domain/repositories/rol.repository';
 
 export class CreateOneSelfStudentUseCase {
 
@@ -16,7 +17,8 @@ export class CreateOneSelfStudentUseCase {
         private readonly response          : Response,
         private readonly studentRepository : StudentRepository,
         private readonly userRepository    : UserRepository,
-        private readonly studentCreateDto  : StudentCreateOneSelfDto
+        private readonly studentCreateDto  : StudentCreateOneSelfDto,
+        private readonly roleRepository: RolRepository
     ) { }
 
     async execute() {
@@ -55,6 +57,12 @@ export class CreateOneSelfStudentUseCase {
             studentFound.user   = userCreated
 
             await this.studentRepository.save( studentFound )
+
+            const roleSelected = 'ebeef04c-2e09-4da1-841a-4015d18aa968'
+            
+            const roleFound = await this.roleRepository.getRolById( roleSelected )
+
+            await this.userRepository.saveRol(roleFound!, userCreated)
 
             const token = await generateKey( newUser.id! )
 

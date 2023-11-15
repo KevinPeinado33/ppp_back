@@ -6,6 +6,7 @@ const entities_1 = require("../entities");
 class UserRepositoryImpl {
     constructor() {
         this.userRepository = database_1.AppDataSource.getRepository(entities_1.UserEntity);
+        this.rolesUserRepository = database_1.AppDataSource.getRepository(entities_1.RoleUserEntity);
     }
     findUserByEmail(userName) {
         return this.userRepository.findOneBy({ userName });
@@ -50,8 +51,16 @@ class UserRepositoryImpl {
     }
     async saveRol(rolId, userId) {
         try {
-            const query = `INSERT INTO roles_user(roleId, userId) VALUES(${rolId}, ${userId})`;
-            const data = await this.userRepository.query(query);
+            const data = await this
+                .rolesUserRepository
+                .createQueryBuilder()
+                .insert()
+                .into(entities_1.RoleUserEntity)
+                .values({
+                role: rolId,
+                user: userId
+            })
+                .execute();
             console.log({ data });
             return true;
         }
