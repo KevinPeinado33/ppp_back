@@ -27,7 +27,8 @@ const {
 
 const {
     postCreatePPPDocument, 
-    postInsertCommentDocument
+    postInsertCommentDocument,
+    deleteDocumentPPP
 } = new PPPDocumentController()
 
 route.get('/get-evaluation-by-ppp/:idPPP', validateJWT, getEvaluationHistory)
@@ -49,6 +50,8 @@ route.post('/create-question-answer', validateJWT, postCreateQuestionAnswer)
 route.post('/insert-comment-document/:idDocumentPPP', validateJWT, postInsertCommentDocument)
 
 route.put('/take-evaluation/:idEvaluation', putTakeEvaluation)
+
+route.post('/delete-document-ppp/:idPPPDocument', validateJWT, deleteDocumentPPP)
 
 
 export default route 

@@ -4,6 +4,7 @@ import { CommentDocumentRepositoryImpl, PPPDocumentsRepositoryImpl, PPPRepositor
 import { CreateCommentDocumentDto, CreatePPPDocumentDto } from "../../domain/dtos";
 import { CommentDocumentRepository, PPPDocumentsRepository, PPPRepository } from "../../domain/repositories";
 import { CreatePPPDocumentUseCase, InsertCommentUseCase } from "../../domain/use-cases";
+import { DeleteDocumentPPPUsecas } from '../../domain/use-cases/delete-document-ppp.usecase';
 
 export class PPPDocumentController{
 
@@ -44,6 +45,20 @@ export class PPPDocumentController{
             this.commentDocumentRepository,
             idDocumentPPP,
             this.PPPDocumentRepository
+        )
+
+        usecase.execute()
+
+    }
+
+    deleteDocumentPPP(req: Request, res: Response) {
+        
+        const { idPPPDocument } = req.params
+
+        const usecase = new DeleteDocumentPPPUsecas(
+            res,
+            this.PPPDocumentRepository,
+            idPPPDocument
         )
 
         usecase.execute()

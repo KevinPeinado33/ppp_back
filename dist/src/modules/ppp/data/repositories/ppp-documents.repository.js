@@ -7,6 +7,9 @@ class PPPDocumentsRepositoryImpl {
     constructor() {
         this.repository = database_1.AppDataSource.getRepository(entities_1.PPPDocumentsEntity);
     }
+    async deleteById(id) {
+        this.repository.delete(id);
+    }
     async getDocumentsByPPP(idPPP) {
         return await this
             .repository

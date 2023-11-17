@@ -8,6 +8,10 @@ export class PPPDocumentsRepositoryImpl implements PPPDocumentsRepository{
     
     constructor(){ }
 
+    async deleteById(id: string): Promise<void> {
+        this.repository.delete( id )
+    }
+
     async getDocumentsByPPP(idPPP: string): Promise<PPPDocumentsEntity[]> {
         
         return await this

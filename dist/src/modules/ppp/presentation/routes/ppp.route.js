@@ -6,7 +6,7 @@ const jwt_1 = require("../../../../common/middlewares/jwt");
 const route = (0, express_1.Router)();
 const { getEvaluationHistory, getResultSatisfaction, getDocumentsPPP, postCreateEvaluation, postCreateQuestionAnswer, putTakeEvaluation } = new controller_1.EvaluationController();
 const { updateAssingAdvisor, postcompanyPPP, updateIntershipHours, updateRegisterLetterAceptance, updateClosePpp, getViewStudentProfile } = new controller_1.PPPController();
-const { postCreatePPPDocument, postInsertCommentDocument } = new controller_1.PPPDocumentController();
+const { postCreatePPPDocument, postInsertCommentDocument, deleteDocumentPPP } = new controller_1.PPPDocumentController();
 route.get('/get-evaluation-by-ppp/:idPPP', jwt_1.validateJWT, getEvaluationHistory);
 route.put('/update-assing-advisor-ppp/:idPPP/:advisorID', jwt_1.validateJWT, updateAssingAdvisor);
 route.get('/get-result-evaluation/:idEvaluation', jwt_1.validateJWT, getResultSatisfaction);
@@ -21,5 +21,6 @@ route.post('/create-evaluation', postCreateEvaluation);
 route.post('/create-question-answer', jwt_1.validateJWT, postCreateQuestionAnswer);
 route.post('/insert-comment-document/:idDocumentPPP', jwt_1.validateJWT, postInsertCommentDocument);
 route.put('/take-evaluation/:idEvaluation', putTakeEvaluation);
+route.post('/delete-document-ppp/:idPPPDocument', jwt_1.validateJWT, deleteDocumentPPP);
 exports.default = route;
 //# sourceMappingURL=ppp.route.js.map

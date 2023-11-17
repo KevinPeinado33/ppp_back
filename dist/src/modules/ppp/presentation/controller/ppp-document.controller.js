@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PPPDocumentController = void 0;
 const repositories_1 = require("../../data/repositories");
 const use_cases_1 = require("../../domain/use-cases");
+const delete_document_ppp_usecase_1 = require("../../domain/use-cases/delete-document-ppp.usecase");
 class PPPDocumentController {
     constructor() {
         this.PPPDocumentRepository = new repositories_1.PPPDocumentsRepositoryImpl();
@@ -20,6 +21,11 @@ class PPPDocumentController {
         const { idDocumentPPP } = req.params;
         const payload = req.body;
         const usecase = new use_cases_1.InsertCommentUseCase(res, payload, this.commentDocumentRepository, idDocumentPPP, this.PPPDocumentRepository);
+        usecase.execute();
+    }
+    deleteDocumentPPP(req, res) {
+        const { idPPPDocument } = req.params;
+        const usecase = new delete_document_ppp_usecase_1.DeleteDocumentPPPUsecas(res, this.PPPDocumentRepository, idPPPDocument);
         usecase.execute();
     }
 }

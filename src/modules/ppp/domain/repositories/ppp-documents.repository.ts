@@ -6,5 +6,6 @@ export abstract class PPPDocumentsRepository {
     abstract create(newDocument: PPPDocumentsEntity)    : Promise< PPPDocumentsEntity >
     abstract save(documentCreated: PPPDocumentsEntity)  : Promise< PPPDocumentsEntity >
     abstract findById(id: string)                       : Promise< PPPDocumentsEntity | null >
+    abstract deleteById(id: string): Promise< void >
 
 } 
