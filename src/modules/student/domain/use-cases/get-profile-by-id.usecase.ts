@@ -43,6 +43,7 @@ export class GetProfileByIdUseCase {
                     data: {
                         ...restStudent,
                         ...user,
+                        ppp: null
                     }
                 })
             }
