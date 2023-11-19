@@ -7,12 +7,14 @@ const repositories_2 = require("../../../ppp/data/repositories");
 const create_oneself_student_usecase_1 = require("../../domain/use-cases/create-oneself-student.usecase");
 const repositories_3 = require("../../../auth/data/repositories");
 const rol_repository_1 = require("../../../auth/data/repositories/rol.repository");
+const repositories_4 = require("../../../plan/data/repositories");
 class StudentController {
     constructor() {
         this.studentRepository = new repositories_1.StudentRepositoryImpl();
         this.pppRepository = new repositories_2.PPPRepositoryImpl();
         this.userRepository = new repositories_3.UserRepositoryImpl();
         this.rolRepository = new rol_repository_1.RolRepositoryImpl();
+        this.planPPPRepository = new repositories_4.PlanPPPRepositoryImpl();
         this.getStudentByCode = this.getStudentByCode.bind(this);
         this.getAllStudents = this.getAllStudents.bind(this);
         this.getStudentsSemester = this.getStudentsSemester.bind(this);
@@ -53,7 +55,7 @@ class StudentController {
     }
     postCreateStudent(req, res) {
         const createStudentDto = req.body;
-        const usecase = new create_oneself_student_usecase_1.CreateOneSelfStudentUseCase(res, this.studentRepository, this.userRepository, createStudentDto, this.rolRepository);
+        const usecase = new create_oneself_student_usecase_1.CreateOneSelfStudentUseCase(res, this.studentRepository, this.userRepository, createStudentDto, this.rolRepository, this.pppRepository, this.planPPPRepository);
         usecase.execute();
     }
 }

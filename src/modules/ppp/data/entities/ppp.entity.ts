@@ -27,7 +27,8 @@ export class PPPEntity {
 
     @CreateDateColumn({
         type: 'timestamptz',
-        name: 'finished_date'
+        name: 'finished_date',
+        nullable: true
     })
     finishedDate!: Date
 
@@ -56,11 +57,11 @@ export class PPPEntity {
         () => UserEntity,
         (advisor) => advisor.ppp
     )
-    advisor!: UserEntity
+    advisor!: UserEntity 
 
     @OneToMany(
         () => EvaluationEntity,
-        ( evaluation ) => evaluation.ppp
+        ( evaluation ) => evaluation.ppp,
     )
     evaluations!: EvaluationEntity[]
 

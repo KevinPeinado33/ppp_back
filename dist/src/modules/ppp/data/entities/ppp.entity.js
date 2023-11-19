@@ -42,7 +42,8 @@ __decorate([
 __decorate([
     (0, typeorm_1.CreateDateColumn)({
         type: 'timestamptz',
-        name: 'finished_date'
+        name: 'finished_date',
+        nullable: true
     }),
     __metadata("design:type", Date)
 ], PPPEntity.prototype, "finishedDate", void 0);

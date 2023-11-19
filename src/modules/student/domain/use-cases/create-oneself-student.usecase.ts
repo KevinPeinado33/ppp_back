@@ -8,6 +8,10 @@ import { StudentRepository } from '../repositories'
 import { StudentCreateOneSelfDto } from '../dtos'
 import { generateKey } from '../../../../common/utils/jwt'
 import { RolRepository } from '../../../auth/domain/repositories/rol.repository';
+import { PPPRepository } from '../../../ppp/domain/repositories'
+import { PPPEntity } from '../../../ppp/data/entities'
+import { PlanPPPRepository } from '../../../plan/domain/repositories'
+import { plainToClass } from 'class-transformer'
 
 export class CreateOneSelfStudentUseCase {
 
@@ -18,7 +22,9 @@ export class CreateOneSelfStudentUseCase {
         private readonly studentRepository : StudentRepository,
         private readonly userRepository    : UserRepository,
         private readonly studentCreateDto  : StudentCreateOneSelfDto,
-        private readonly roleRepository: RolRepository
+        private readonly roleRepository    : RolRepository,
+        private readonly pppRepository     : PPPRepository,
+        private readonly planPPPRepository : PlanPPPRepository
     ) { }
 
     async execute() {
@@ -63,6 +69,20 @@ export class CreateOneSelfStudentUseCase {
             const roleFound = await this.roleRepository.getRolById( roleSelected )
 
             await this.userRepository.saveRol(roleFound!, userCreated)
+
+            // TODO: buscando el plan ppp al que se suscribe
+            const planPPPFound = await this.planPPPRepository.findById( this.studentCreateDto.planPPP )
+
+            // TODO: agregar el nuevo ppp autocreado por parte del estudiante
+            const newPPP = new PPPEntity()
+
+            newPPP.area = this.studentCreateDto.user.area
+            newPPP.intershipHours = 0
+            newPPP.rate = 0.0
+            newPPP.student = studentFound
+            newPPP.plan = planPPPFound!
+
+            await this.pppRepository.save( newPPP )
 
             const token = await generateKey( newUser.id! )
 

@@ -9,13 +9,16 @@ const msg_response_1 = require("../../../../common/responses/msg.response");
 const code_status_ok_1 = require("../../../../common/responses/code/code-status.ok");
 const dtos_1 = require("../dtos");
 const jwt_1 = require("../../../../common/utils/jwt");
+const entities_1 = require("../../../ppp/data/entities");
 class CreateOneSelfStudentUseCase {
-    constructor(response, studentRepository, userRepository, studentCreateDto, roleRepository) {
+    constructor(response, studentRepository, userRepository, studentCreateDto, roleRepository, pppRepository, planPPPRepository) {
         this.response = response;
         this.studentRepository = studentRepository;
         this.userRepository = userRepository;
         this.studentCreateDto = studentCreateDto;
         this.roleRepository = roleRepository;
+        this.pppRepository = pppRepository;
+        this.planPPPRepository = planPPPRepository;
         this.HASH_SALT_MAX = 10;
     }
     async execute() {
@@ -48,6 +51,16 @@ class CreateOneSelfStudentUseCase {
             const roleSelected = 'ebeef04c-2e09-4da1-841a-4015d18aa968';
             const roleFound = await this.roleRepository.getRolById(roleSelected);
             await this.userRepository.saveRol(roleFound, userCreated);
+            // TODO: buscando el plan ppp al que se suscribe
+            const planPPPFound = await this.planPPPRepository.findById(this.studentCreateDto.planPPP);
+            // TODO: agregar el nuevo ppp autocreado por parte del estudiante
+            const newPPP = new entities_1.PPPEntity();
+            newPPP.area = this.studentCreateDto.user.area;
+            newPPP.intershipHours = 0;
+            newPPP.rate = 0.0;
+            newPPP.student = studentFound;
+            newPPP.plan = planPPPFound;
+            await this.pppRepository.save(newPPP);
             const token = await (0, jwt_1.generateKey)(newUser.id);
             (0, msg_response_1.message)({
                 response: this.response,

@@ -11,13 +11,16 @@ import { UserRepository } from '../../../auth/domain/repositories'
 import { UserRepositoryImpl } from '../../../auth/data/repositories'
 import { RolRepository } from '../../../auth/domain/repositories/rol.repository';
 import { RolRepositoryImpl } from '../../../auth/data/repositories/rol.repository'
+import { PlanPPPRepository } from '../../../plan/domain/repositories'
+import { PlanPPPRepositoryImpl } from '../../../plan/data/repositories'
 
 export class StudentController {
 
     private studentRepository : StudentRepository
     private pppRepository     : PPPRepository
     private userRepository    : UserRepository
-    private rolRepository: RolRepository
+    private rolRepository     : RolRepository
+    private planPPPRepository : PlanPPPRepository
 
 
     constructor() {
@@ -26,6 +29,7 @@ export class StudentController {
         this.pppRepository     = new PPPRepositoryImpl()
         this.userRepository    = new UserRepositoryImpl()
         this.rolRepository     = new RolRepositoryImpl()
+        this.planPPPRepository = new PlanPPPRepositoryImpl()
 
         this.getStudentByCode       = this.getStudentByCode.bind(this)
         this.getAllStudents         = this.getAllStudents.bind(this)
@@ -131,7 +135,9 @@ export class StudentController {
             this.studentRepository,
             this.userRepository,
             createStudentDto,
-            this.rolRepository
+            this.rolRepository,
+            this.pppRepository,
+            this.planPPPRepository
         )
 
         usecase.execute()
