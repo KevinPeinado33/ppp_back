@@ -24,6 +24,8 @@ export class GetAreaByPlanUsecas {
                 })
             }
 
+            console.log({ areasFound })
+
             message({
                 response: this.response,
                 code: CODE_STATUS.OK,

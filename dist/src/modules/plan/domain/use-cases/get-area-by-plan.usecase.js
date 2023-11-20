@@ -19,6 +19,7 @@ class GetAreaByPlanUsecas {
                     info: `No encontramos areas con plan id #${this.idPlan}`
                 });
             }
+            console.log({ areasFound });
             (0, msg_response_1.message)({
                 response: this.response,
                 code: code_status_ok_1.CODE_STATUS.OK,

@@ -21,6 +21,6 @@ route.post('/create-evaluation', postCreateEvaluation);
 route.post('/create-question-answer', jwt_1.validateJWT, postCreateQuestionAnswer);
 route.post('/insert-comment-document/:idDocumentPPP', jwt_1.validateJWT, postInsertCommentDocument);
 route.put('/take-evaluation/:idEvaluation', putTakeEvaluation);
-route.post('/delete-document-ppp/:idPPPDocument', jwt_1.validateJWT, deleteDocumentPPP);
+route.delete('/delete-document-ppp/:idPPPDocument', jwt_1.validateJWT, deleteDocumentPPP);
 exports.default = route;
 //# sourceMappingURL=ppp.route.js.map

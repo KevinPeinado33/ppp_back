@@ -51,7 +51,7 @@ route.post('/insert-comment-document/:idDocumentPPP', validateJWT, postInsertCom
 
 route.put('/take-evaluation/:idEvaluation', putTakeEvaluation)
 
-route.post('/delete-document-ppp/:idPPPDocument', validateJWT, deleteDocumentPPP)
+route.delete('/delete-document-ppp/:idPPPDocument', validateJWT, deleteDocumentPPP)
 
 
 export default route 
