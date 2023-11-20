@@ -11,6 +11,7 @@ class PPPDocumentController {
         this.commentDocumentRepository = new repositories_1.CommentDocumentRepositoryImpl();
         this.postCreatePPPDocument = this.postCreatePPPDocument.bind(this);
         this.postInsertCommentDocument = this.postInsertCommentDocument.bind(this);
+        this.deleteDocumentPPP = this.deleteDocumentPPP.bind(this);
     }
     postCreatePPPDocument(req, res) {
         const createPPPDocumentDto = req.body;

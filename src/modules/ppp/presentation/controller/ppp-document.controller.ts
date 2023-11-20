@@ -17,8 +17,9 @@ export class PPPDocumentController{
         this.PPPRepository           = new PPPRepositoryImpl()
         this.commentDocumentRepository = new CommentDocumentRepositoryImpl()
 
-        this.postCreatePPPDocument  = this.postCreatePPPDocument.bind( this )
+        this.postCreatePPPDocument = this.postCreatePPPDocument.bind( this )
         this.postInsertCommentDocument = this.postInsertCommentDocument.bind( this )
+        this.deleteDocumentPPP = this.deleteDocumentPPP.bind(this)
     }
 
     postCreatePPPDocument( req: Request, res: Response){
